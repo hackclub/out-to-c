@@ -18,6 +18,7 @@
 
     <div id="no-existing-voyage" <% if @voyage != nil %> style="visibility: hidden;"<% end %>>
         <button onclick="newVoyage();" id="new-voyage">New Voyage</button>
+        <button onclick="backVoyage();" id="new-voyage-back"><%= image_tag "graphics/back.png" ,:alt=>"Back" %></button>
         <div id="new-voyage-div" class="page">
             <h1>New Voyage</h1>
             <%= form_with(url: voyage_new_path, id: "new-voyage-form") do |form| %>

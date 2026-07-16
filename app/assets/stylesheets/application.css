@@ -13,6 +13,16 @@
     margin-left: 10px;
 }
 
+img {
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    image-rendering: optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
 #pfp {
     width: 64px;
     /* border-radius: 64px; */
@@ -66,13 +76,11 @@ body {
 }
 
 .fade-out {
-    transition: 0.1s;
     opacity: 0.0 !important;
     visibility: hidden !important;
 }
 
 .fade-in {
-    transition: 0.1s;
     opacity: 1.0 !important;
     visibility: unset !important;
 }
@@ -105,6 +113,7 @@ form>button:hover {
 }
 
 #new-voyage-div {
+    transition: 0.1s;
     visibility: hidden;
     opacity: 0.0;
     width: 100%;
@@ -114,7 +123,23 @@ form>button:hover {
     right: 20px;
 }
 
+#new-voyage-back {
+    transition: 0.1s;
+    background-color: #00000000;
+    border: none;
+    visibility: hidden;
+}
+
+#new-voyage-back>img {
+    width: 80px;
+}
+
+#new-voyage-back:hover {
+    filter: saturate(1.2) brightness(1.2)
+}
+
 #new-voyage {
+    transition: 0.1s;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
