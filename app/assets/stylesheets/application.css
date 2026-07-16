@@ -15,11 +15,11 @@
 
 #pfp {
     width: 64px;
-    border-radius: 64px;
+    /* border-radius: 64px; */
     position: absolute;
     top: 10px;
     right: 10px;
-    border: 2px black solid;
+    border: 4px inset #9c6a3d;
 }
 
 body {
