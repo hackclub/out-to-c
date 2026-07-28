@@ -1,6 +1,6 @@
 class VoyageController < ApplicationController
   # require all routes of the voyage controller to be logged in to an account
-  before_action :check_logged_in
+  before_action :require_logged_in
   # require dev endpoints to be in development environment
   before_action :dev_check, only: %i[ delete add_hour ]
 
@@ -21,6 +21,22 @@ class VoyageController < ApplicationController
   def new
     if @voyage != nil
       render json: { "error": "This user already has an active voyage!" }
+      return
+    end
+    if params["name"].strip.empty?
+      render json: { "error": "Name required." }
+      return
+    end
+    hackatime_project_exists = false
+    get_hackatime_projects
+    for project in @projects
+      if project["name"] == params["hackatime"]
+        hackatime_project_exists = true
+        break
+      end
+    end
+    if not hackatime_project_exists or params["hackatime"].strip.empty?
+      render json: { "error": "Hackatime project doesn't exist" }
       return
     end
     data = {
@@ -45,14 +61,7 @@ class VoyageController < ApplicationController
         redirect_to root_path
       end
     end
-    def check_logged_in
-      loggedin = session[:user_id] != nil and session[:user_id]["uid"] != nil
-      if not loggedin
-        redirect_to root_path
-      end
-      @user = User.find(session[:user_id]["id"])
-      if @user.voyage != nil
-        @voyage = Voyage.find(@user.voyage)
-      end
+    def require_logged_in
+      set_logged_in
     end
 end
