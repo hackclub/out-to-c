@@ -1,6 +1,3 @@
-require "net/http"
-require "json"
-
 class HomeController < ApplicationController
     before_action :set_logged_in
     def index
