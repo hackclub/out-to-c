@@ -6,7 +6,8 @@ class HomeController < ApplicationController
     def index
       if not @loggedin
         render "guest"
+      else
+        get_hackatime_projects
       end
-      get_hackatime_projects
     end
 end
