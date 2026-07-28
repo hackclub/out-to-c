@@ -76,13 +76,11 @@ body {
 }
 
 .fade-out {
-    opacity: 0.0 !important;
-    visibility: hidden !important;
+    display: none !important;
 }
 
 .fade-in {
-    opacity: 1.0 !important;
-    visibility: unset !important;
+    display: unset !important;
 }
 
 form>input[type=text],
@@ -113,9 +111,7 @@ form>button:hover {
 }
 
 #new-voyage-div {
-    transition: 0.1s;
-    visibility: hidden;
-    opacity: 0.0;
+    display: none;
     width: 100%;
     max-width: 400px;
     position: absolute;
@@ -124,10 +120,10 @@ form>button:hover {
 }
 
 #new-voyage-back {
-    transition: 0.1s;
     background-color: #00000000;
     border: none;
-    visibility: hidden;
+    display: none;
+    position: absolute;
 }
 
 #new-voyage-back>img {
@@ -138,19 +134,23 @@ form>button:hover {
     filter: saturate(1.2) brightness(1.2)
 }
 
+.surround-border {
+    filter: drop-shadow(2px 2px 0px #583d26) drop-shadow(-2px 2px 0px #583d26) drop-shadow(2px -2px 0px #583d26) drop-shadow(-2px -2px 0px #583d26);
+}
+
 #new-voyage {
-    transition: 0.1s;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     width: fit-content;
     text-wrap: nowrap;
-    top: 120px;
-    font-size: 72px;
-    padding: 20px;
+    top: 190px;
+    font-size: 36px;
+    padding: 6px 100px;
+    background-color: #9c6a3d;
     border: none;
-    background: none;
-    color: #0082E0;
+    --angle: 45%;
+    clip-path: polygon(calc(50% - var(--angle)) 0%, calc(50% + var(--angle)) 0%, 100% 50%, calc(50% + var(--angle)) 100%, calc(50% - var(--angle)) 100%, 0% 50%);
     text-shadow: 0px 1px 0px black;
 }
 
@@ -253,6 +253,7 @@ h2 {
 }
 
 #logo {
+    pointer-events: none;
     margin-left: auto;
     margin-right: auto;
     display: block;

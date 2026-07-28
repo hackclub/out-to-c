@@ -14,12 +14,13 @@
 
 <div id="background"></div>
 <div id="varyingContents">
-    <img id="pfp" src="<%= session[:user_id]["pfp"] %>">
+<img id="pfp" src="<%= session[:user_id]["pfp"] %>">
 
-    <div id="no-existing-voyage" <% if @voyage != nil %> style="visibility: hidden;"<% end %>>
-        <button onclick="newVoyage();" id="new-voyage">New Voyage</button>
+<div id="no-existing-voyage" <% if @voyage != nil %> style="display:none;"<% end %>>
+        <div style="position: absolute;width:100%"><img id="logo" style="width:450px;" src="<%= asset_path("graphics/logo.svg") %>" alt="Out To C"></div>
+        <div class="surround-border"><button onclick="newVoyage();" id="new-voyage">New Voyage</button></div>
         <button onclick="backVoyage();" id="new-voyage-back"><%= image_tag "graphics/back.png", :alt => "Back" %></button>
-        <div id="new-voyage-div" class="page">
+        <div id="new-voyage-div" class="page surround-border">
             <h1>New Voyage</h1>
             <%= form_with(url: voyage_new_path, id: "new-voyage-form") do |form| %>
                 <label for=name>Name: </label><br>
@@ -42,7 +43,7 @@
             <% end %>
         </div>
     </div>
-    <div id="active-voyage" <% if @voyage == nil %> style="visibility: hidden;"<% end %>>
+    <div id="active-voyage" <% if @voyage == nil %> style="display:none;"<% end %>>
         <div class="page">
             <h2>Dev panel</h2>
             <%= form_with(url: voyage_add_hour_path) do |form| %>

@@ -3,11 +3,12 @@ let noExistingVoyageScreen = document.getElementById("no-existing-voyage");
 let newVoyageBtn = document.getElementById("new-voyage");
 let newVoyageDiv = document.getElementById("new-voyage-div");
 let newVoyageBack = document.getElementById("new-voyage-back");
+let logo = document.getElementById("logo");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
     if (element.id) {
-        elementsState[element.id] = (getComputedStyle(element).visibility != "hidden");
+        elementsState[element.id] = (getComputedStyle(element).display != "none");
     }
 }
 
@@ -40,12 +41,14 @@ globalThis.newVoyage = function () {
     fadeOut(newVoyageBtn);
     fadeIn(newVoyageDiv);
     fadeIn(newVoyageBack);
+    fadeOut(logo);
 }
 globalThis.backVoyage = function () {
     setCameraState(0);
     fadeIn(newVoyageBtn);
     fadeOut(newVoyageDiv);
     fadeOut(newVoyageBack);
+    fadeIn(logo);
 }
 
 document.forms['new-voyage-form'].addEventListener('submit', (event) => {
