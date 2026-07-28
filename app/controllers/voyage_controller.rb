@@ -24,7 +24,9 @@ class VoyageController < ApplicationController
       return
     end
     data = {
-      "name": params["name"]
+      "name": params["name"],
+      "desc": params["desc"],
+      "hackatime": params["hackatime"]
     }
     @voyage = Voyage.new(data)
     @voyage.save!
