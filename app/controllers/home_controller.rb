@@ -14,6 +14,9 @@ class HomeController < ApplicationController
     end
     private
       def update_voyage_time
+        if @voyage.hackatime.strip.empty?
+          return
+        end
         token = @user.token
         params = { projects: @voyage.hackatime }
         encoded_query = URI.encode_www_form(params)

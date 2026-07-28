@@ -29,15 +29,22 @@ class VoyageController < ApplicationController
     end
     hackatime_project_exists = false
     time = 0
-    get_hackatime_projects
-    for project in @projects
-      if project["name"] == params["hackatime"]
-        time = project["total_seconds"]
-        hackatime_project_exists = true
-        break
+    if params["hackatime"] == nil
+      params["hackatime"] = ""
+    end
+    if params["hackatime"].strip.empty?
+      hackatime_project_exists = true
+    else
+      get_hackatime_projects
+      for project in @projects
+        if project["name"] == params["hackatime"]
+          time = project["total_seconds"]
+          hackatime_project_exists = true
+          break
+        end
       end
     end
-    if not hackatime_project_exists or params["hackatime"].strip.empty?
+    if not hackatime_project_exists
       render json: { "error": "Hackatime project doesn't exist" }
       return
     end
