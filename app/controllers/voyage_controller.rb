@@ -12,10 +12,10 @@ class VoyageController < ApplicationController
     redirect_to root_path
   end
   def add_hour
-    if @voyage.hours == nil
-      @voyage.hours = 0.0
+    if @voyage.total_seconds == nil
+      @voyage.total_seconds = 0.0
     end
-    @voyage.hours += 1.0
+    @voyage.total_seconds += 60*60
     @voyage.save!
   end
   def new
@@ -28,9 +28,11 @@ class VoyageController < ApplicationController
       return
     end
     hackatime_project_exists = false
+    time = 0
     get_hackatime_projects
     for project in @projects
       if project["name"] == params["hackatime"]
+        time = project["total_seconds"]
         hackatime_project_exists = true
         break
       end
@@ -41,6 +43,7 @@ class VoyageController < ApplicationController
     end
     data = {
       "name": params["name"],
+      "total_seconds": time,
       "desc": params["desc"],
       "hackatime": params["hackatime"]
     }
@@ -52,7 +55,7 @@ class VoyageController < ApplicationController
     @user.save!
     session[:user_id] = @user
 
-    render json: { "id": @voyage.id }
+    render json: { "id": @voyage.id, "total_seconds": @voyage.total_seconds }
   end
 
   private

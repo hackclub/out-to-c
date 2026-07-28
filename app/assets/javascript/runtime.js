@@ -66,7 +66,10 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
         voyage = parseInt(body["id"]);
         fadeOut(noExistingVoyageScreen);
         fadeIn(activeVoyageScreen);
-        setCameraState(2);
+        console.log(body);
+        console.log(body["total_seconds"]);
+        console.log(body["total_seconds"] / 60.0 / 60.0);
+        setTravelDistance(body["total_seconds"] / 60.0 / 60.0);
     }).catch((error) => {
         showNotice("Error: Not success :(");
         console.error(error);
