@@ -18,7 +18,7 @@
 
     <div id="no-existing-voyage" <% if @voyage != nil %> style="visibility: hidden;"<% end %>>
         <button onclick="newVoyage();" id="new-voyage">New Voyage</button>
-        <button onclick="backVoyage();" id="new-voyage-back"><%= image_tag "graphics/back.png" ,:alt=>"Back" %></button>
+        <button onclick="backVoyage();" id="new-voyage-back"><%= image_tag "graphics/back.png", :alt => "Back" %></button>
         <div id="new-voyage-div" class="page">
             <h1>New Voyage</h1>
             <%= form_with(url: voyage_new_path, id: "new-voyage-form") do |form| %>
@@ -29,14 +29,13 @@
                 <input autocomplete="off" name="name" type="text">
 
                 <br>
-                <label for=hackatime>Select Hackatime project: </label><br>
+                <label for=hackatime>Select Hackatime project (optional): </label><br>
 
                 <select autocomplete="off" name="hackatime" id="hackatime">
                     <option value="" disabled selected>Select a Hackatime project</option>
-                    <option value="blurb">blurb</option>
-                    <option value="cool project">cool project</option>
-                    <option value="test">test</option>
-                    <option value="lorem ipsum">lorem ipsum</option>
+                    <% @projects.each do |x| %>
+                        <option value="<%= x["name"] %>>"><%= x["name"] + " (" + (x["total_seconds"].to_f / 60.0 / 60.0).to_i.to_s + " hrs)" %></option>
+                    <% end %>
                 </select>
                 <br>
                 <button>CREATE VOYAGE</button>
