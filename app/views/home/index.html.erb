@@ -53,6 +53,20 @@
                 <button>remove voyage</button>
             <% end %>
         </div>
+        <div id="cargo">
+            <div id="cargo-header">
+                Ship Cargo
+            </div>
+            <div id="cargo-body">
+                <div id="cargo-slots">
+                    <% (0..6*4-1).each do |x| %>
+                        <div class="cargo-slot"></div>
+                    <% end %>
+                </div>
+                <div id="cargo-info">
+                </div>
+            </div>
+        </div>
         <button onclick="" id="cargo-button"><%= image_tag "graphics/cargo.png", :alt => "Cargo" %></button>
     </div>
 </div>
