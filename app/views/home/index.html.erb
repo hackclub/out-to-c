@@ -71,6 +71,7 @@
         <button onclick="toggleCargo()" id="cargo-button"><%= image_tag "graphics/cargo.png", :alt => "Cargo" %></button>
         <div id="island-found">
             <div id="island-found-center">
+                <link rel="preload" as="image" href="<%= image_url("graphics/treasure_chest_open.png")  %>" fetchpriority="high">
                 <%= image_tag "graphics/island_found.png",:id => "island-found-image" , :alt => "Island" %>
                 <div id="island-found-chest"></div>
             </div>
