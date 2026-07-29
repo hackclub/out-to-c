@@ -55,7 +55,8 @@
         </div>
         <div id="cargo">
             <div id="cargo-header">
-                Ship Cargo
+                <span>Ship Cargo</span>
+                <button onclick="toggleCargo()">🞫</button>
             </div>
             <div id="cargo-body">
                 <div id="cargo-slots">
@@ -67,6 +68,6 @@
                 </div>
             </div>
         </div>
-        <button onclick="" id="cargo-button"><%= image_tag "graphics/cargo.png", :alt => "Cargo" %></button>
+        <button onclick="toggleCargo()" id="cargo-button"><%= image_tag "graphics/cargo.png", :alt => "Cargo" %></button>
     </div>
 </div>

@@ -45,7 +45,7 @@ body {
     left: 0;
     width: 100%;
     height: 50vh;
-    background-image: url("/graphics/sky-top.png"), linear-gradient(180deg, rgba(0, 145, 248, 1) 1%, rgba(138, 218, 255, 1) 76%, rgba(255, 255, 255, 1) 100%);
+    background-image: url("/assets/graphics/sky-top-f75e356d.png"), linear-gradient(180deg, rgba(0, 145, 248, 1) 1%, rgba(138, 218, 255, 1) 76%, rgba(255, 255, 255, 1) 100%);
     background-repeat: repeat-x;
     background-position: top, bottom;
     background-size: 67vh, 100vh;
@@ -53,7 +53,7 @@ body {
 
 @font-face {
     font-family: inknut-antiqua;
-    src: url(/InknutAntiqua/InknutAntiqua-Regular.ttf);
+    src: url("/assets/InknutAntiqua/InknutAntiqua-Regular-99f7e23b.ttf");
 
     /* from: https://gomakethings.com/better-font-loading-with-the-font-displayswap-property/
     basically, without this, firefox (not chrome i think), will wait for the font to load before rendering the text,
@@ -64,7 +64,7 @@ body {
 
 @font-face {
     font-family: inknut-antiqua;
-    src: url(/InknutAntiqua/InknutAntiqua-Bold.ttf);
+    src: url("/assets/InknutAntiqua/InknutAntiqua-Bold-5098f7d9.ttf");
     font-weight: bold;
     font-display: swap;
 }
@@ -125,7 +125,7 @@ form>button:hover {
 #cargo {
     display: block;
     margin: 0 auto;
-    max-width: 975px;
+    max-width: 915px;
     width: 100%;
     position: absolute;
     left: 50%;
@@ -133,12 +133,26 @@ form>button:hover {
     transform: translate(-50%, -50%);
 }
 
+#cargo-header>span {
+    padding: 5px 20px;
+}
+
+#cargo-header>button {
+    background-color: #6e4c30;
+    border: none;
+    border-left: 5px solid #9c6a3d;
+    font-size: 19px;
+}
+
+#cargo-header>button:hover {
+    background-color: #7a5537;
+}
+
 #cargo-header {
     background-color: #6e4c30;
     border: 5px solid #9c6a3d;
     width: fit-content;
     border-bottom: none;
-    padding: 5px 20px;
 }
 
 #cargo-body {
@@ -158,8 +172,8 @@ form>button:hover {
 }
 
 .cargo-slot {
-    width: 90px;
-    height: 90px;
+    width: 80px;
+    height: 80px;
     background-color: #563921;
     margin: 2.5px;
 }
@@ -172,7 +186,7 @@ form>button:hover {
     width: 100%;
     background-color: #6e4c30;
     border: 5px solid #9c6a3d;
-    height: 380px;
+    height: 335px;
     margin-left: 27px;
     min-width: 220px;
     max-width: 310px;
