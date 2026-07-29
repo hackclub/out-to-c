@@ -5,6 +5,7 @@ let newVoyageDiv = document.getElementById("new-voyage-div");
 let newVoyageBack = document.getElementById("new-voyage-back");
 let logo = document.getElementById("logo");
 let cargo = document.getElementById("cargo");
+let treasureSelect = document.getElementById("treasure-select");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -35,6 +36,10 @@ function fadeOut(element) {
     } else {
         element.classList.remove("fade-in");
     }
+}
+
+function selectTreasure() {
+    treasureSelect.classList.add("treasure-select-fade");
 }
 
 document.addEventListener("keydown", (event) => {
