@@ -110,6 +110,50 @@ form>button:hover {
     color: white;
 }
 
+#island-found {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: black;
+}
+
+#island-found-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+}
+
+#island-found-chest {
+    position: absolute;
+    top: 0;
+    width: calc(100% * 250 / 1917);
+    left: calc(52% - 100% * 250 / 1917);
+    top: 39%;
+    background: url("graphics/treasure_chest.png") no-repeat center center fixed;
+    aspect-ratio: 1;
+    background-size: cover;
+}
+
+#island-found-chest:hover {
+    background: url("graphics/treasure_chest_open.png") no-repeat center center fixed;
+    background-size: cover;
+}
+
+#island-found-image {
+    width: 100%;
+    pointer-events: none;
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
 #cargo-button {
     background: none;
     border: none;
