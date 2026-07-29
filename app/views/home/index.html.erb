@@ -33,7 +33,7 @@
                 <label for=hackatime>Select Hackatime project (optional): </label><br>
 
                 <select autocomplete="off" name="hackatime" id="hackatime">
-                    <option value="" disabled selected>Select a Hackatime project</option>
+                    <option value="" selected>Select a Hackatime project</option>
                     <% @projects.each do |x| %>
                         <option value="<%= x["name"] %>"><%= x["name"] + " (" + (x["total_seconds"].to_f / 60.0 / 60.0).to_i.to_s + " hrs)" %></option>
                     <% end %>
@@ -53,5 +53,6 @@
                 <button>remove voyage</button>
             <% end %>
         </div>
+        <button onclick="" id="cargo-button"><%= image_tag "graphics/cargo.png", :alt => "Cargo" %></button>
     </div>
 </div>

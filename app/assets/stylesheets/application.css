@@ -110,6 +110,18 @@ form>button:hover {
     color: white;
 }
 
+#cargo-button {
+    background: none;
+    border: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+#cargo-button>img {
+    width: 180px;
+}
+
 #new-voyage-div {
     display: none;
     width: 100%;
@@ -120,7 +132,7 @@ form>button:hover {
 }
 
 #new-voyage-back {
-    background-color: #00000000;
+    background: none;
     border: none;
     display: none;
     position: absolute;
@@ -130,7 +142,8 @@ form>button:hover {
     width: 80px;
 }
 
-#new-voyage-back:hover {
+#new-voyage-back:hover,
+#cargo-button:hover {
     filter: saturate(1.2) brightness(1.2)
 }
 
