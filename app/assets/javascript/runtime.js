@@ -4,6 +4,7 @@ let newVoyageBtn = document.getElementById("new-voyage");
 let newVoyageDiv = document.getElementById("new-voyage-div");
 let newVoyageBack = document.getElementById("new-voyage-back");
 let logo = document.getElementById("logo");
+let cargo = document.getElementById("cargo");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -49,6 +50,16 @@ globalThis.backVoyage = function () {
     fadeOut(newVoyageDiv);
     fadeOut(newVoyageBack);
     fadeIn(logo);
+}
+let cargoShown = elementsState[cargo.id];
+globalThis.toggleCargo = function () {
+    console.log("wa");
+    if (cargoShown) {
+        fadeOut(cargo);
+    } else {
+        fadeIn(cargo);
+    }
+    cargoShown = !cargoShown;
 }
 
 document.forms['new-voyage-form'].addEventListener('submit', (event) => {
