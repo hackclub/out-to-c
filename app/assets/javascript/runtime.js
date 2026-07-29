@@ -37,7 +37,16 @@ function fadeOut(element) {
     }
 }
 
+document.addEventListener("keydown", (event) => {
+    if (event.code == "Escape") {
+        if (inNewVoyage) { backVoyage(); }
+        if (cargoShown) { toggleCargo(); }
+    }
+});
+
+let inNewVoyage = false;
 globalThis.newVoyage = function () {
+    inNewVoyage = true;
     setCameraState(1);
     fadeOut(newVoyageBtn);
     fadeIn(newVoyageDiv);
@@ -45,6 +54,7 @@ globalThis.newVoyage = function () {
     fadeOut(logo);
 }
 globalThis.backVoyage = function () {
+    inNewVoyage = false;
     setCameraState(0);
     fadeIn(newVoyageBtn);
     fadeOut(newVoyageDiv);
