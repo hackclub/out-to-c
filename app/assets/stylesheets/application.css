@@ -318,6 +318,10 @@ form>button:hover {
     display: block;
 }
 
+#price-form {
+    display: none;
+}
+
 .selected-price {
     border: 5px solid #fff;
     filter: brightness(1.3);

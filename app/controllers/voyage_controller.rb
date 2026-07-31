@@ -11,6 +11,28 @@ class VoyageController < ApplicationController
     session[:user_id] = @user
     redirect_to root_path
   end
+  def price
+    get_next_island
+    if not @found_island
+      render json: { "error": "You cant claim this item" }
+      return
+    end
+    price = params["selection"]
+    puts price
+    if not @found_prices.has_key?(price.to_sym)
+      render json: { "error": "You cant claim this item" }
+      return
+    end
+
+    @user.last_island = @next_island
+    @voyage.cargo = @voyage.cargo + price + ","
+    puts @voyage.cargo
+    @voyage.save
+    @user.save
+    get_next_island
+
+    render json: { "ok": 1, "next_island":@next_island }
+  end
   def add_hour
     if @voyage.total_seconds == nil
       @voyage.total_seconds = 0.0
@@ -52,7 +74,8 @@ class VoyageController < ApplicationController
       "name": params["name"],
       "total_seconds": time,
       "desc": params["desc"],
-      "hackatime": params["hackatime"]
+      "hackatime": params["hackatime"],
+      "cargo":""
     }
     @voyage = Voyage.new(data)
     @voyage.save!

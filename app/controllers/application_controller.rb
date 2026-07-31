@@ -14,6 +14,23 @@ class ApplicationController < ActionController::Base
     def get_islands
       @islands = [6,12,24]
     end
+    def get_next_island
+      @next_island = 999
+      @island_indx = 0
+      for island in @islands
+        if island > @user.last_island
+          @next_island = island
+          break
+        end
+        @island_indx += 1
+      end
+      @found_island = false
+      @found_prices = []
+      if @voyage != nil and @voyage.total_seconds >= @next_island * 60 * 60
+        @found_island = true
+        @found_prices = @prices[@island_indx]
+      end
+    end
     def get_prices
       @prices = [
         {

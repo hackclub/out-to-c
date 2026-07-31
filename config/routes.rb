@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post "voyage/new" => "voyage#new"
   post "voyage/delete" => "voyage#delete"
   post "voyage/add_hour" => "voyage#add_hour"
+  post "voyage/price" => "voyage#price"
 
   root "home#index"
 end

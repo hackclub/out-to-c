@@ -14,23 +14,6 @@ class HomeController < ApplicationController
       end
     end
     private
-      def get_next_island
-        @next_island = 999
-        indx = 0
-        for island in @islands
-          if island > @user.last_island
-            @next_island = island
-            break
-          end
-          indx += 1
-        end
-        @found_island = false
-        @found_prices = []
-        if @voyage != nil and @voyage.total_seconds >= @next_island * 60 * 60
-          @found_island = true
-          @found_prices = @prices[indx]
-        end
-      end
       def update_voyage_time
         if @voyage == nil || @voyage.hackatime.strip.empty?
           return

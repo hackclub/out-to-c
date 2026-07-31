@@ -94,6 +94,7 @@
                     <% end %>
                     <br>
                     <button onclick="finalizePriceSelection();" class="confirm-btn">Confirm</button>
+                    <%= form_with(url: voyage_price_path, id: "price-form") do |form| end %>
                     </div>
                 </div>
         </div>

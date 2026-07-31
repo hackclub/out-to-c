@@ -8,6 +8,7 @@ let cargo = document.getElementById("cargo");
 let treasureSelect = document.getElementById("treasure-select");
 let islandFound = document.getElementById("island-found");
 let newVoyageButtons = document.getElementById("new-voyage-buttons");
+let priceForm = document.getElementById("price-form");
 let minimapText = document.getElementById("minimap-text");
 
 let elementsState = {};
@@ -93,11 +94,11 @@ globalThis.finalizePriceSelection = function () {
     if (selectedPriceID == "") {
         return;
     }
-    let data = {
-        "selection": selectedPriceID
-    }
 
-    // a POST request
+    data = {
+        "selection": selectedPriceID,
+        "authenticity_token": priceForm.children[0].value,
+    }
     fetch('voyage/price', {
         method: 'POST',
         headers: {
