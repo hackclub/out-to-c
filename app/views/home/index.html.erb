@@ -17,7 +17,7 @@
 <img id="pfp" src="<%= session[:user_id]["pfp"] %>">
 
 <div id="no-existing-voyage" <% if @voyage != nil %> style="display:none;"<% end %>>
-        <div style="position: absolute;width:100%"><img id="logo" style="width:450px;" src="<%= asset_path("graphics/logo.svg") %>" alt="Out To C"></div>
+        <img id="logo" style="width:450px;" src="<%= asset_path("graphics/logo.svg") %>" alt="Out To C">
         <div id="new-voyage-buttons">
             <div class="surround-border"><a class="voyage-btn" href="https://hackatime.hackclub.com/oauth/authorize?client_id=<%= ENV["HACKATIME_UID"] %>&redirect_uri=<%= CGI.escape(auth_hackatime_callback_url) %>&response_type=code&scope=profile+read" id="link-hackatime">Link Hackatime</a></div>
             <div class="surround-border"><button class="voyage-btn" onclick="newVoyage();" id="new-voyage">New Voyage</button></div>
