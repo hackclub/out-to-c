@@ -14,13 +14,13 @@ class HomeController < ApplicationController
     end
     private
       def update_voyage_time
-        if @voyage.hackatime.strip.empty?
+        if @voyage == nil || @voyage.hackatime.strip.empty?
           return
         end
         token = @user.token
         params = { projects: @voyage.hackatime }
         encoded_query = URI.encode_www_form(params)
-        url = URI("https://hackatime.hackclub.com/api/v1/authenticated/projects?include_archived=false#{encoded_query}&since=&until=&until_date=&start="+ysws_start+"&end=&start_date=&end_date=")
+        url = URI("https://hackatime.hackclub.com/api/v1/authenticated/projects?include_archived=false&#{encoded_query}&since=&until=&until_date=&start="+ysws_start+"&end=&start_date=&end_date=")
         req = Net::HTTP::Get.new(url)
         req["Authorization"] = "Bearer " + token
         res = Net::HTTP.start(url.hostname, url.port, use_ssl: url.scheme == "https") { |http|
@@ -29,5 +29,6 @@ class HomeController < ApplicationController
         data = JSON.parse(res.body)
         p = data["projects"][0]["total_seconds"]
         @voyage.total_seconds = p
+        @voyage.save
       end
 end
