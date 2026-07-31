@@ -6,6 +6,7 @@ let newVoyageBack = document.getElementById("new-voyage-back");
 let logo = document.getElementById("logo");
 let cargo = document.getElementById("cargo");
 let treasureSelect = document.getElementById("treasure-select");
+let newVoyageButtons = document.getElementById("new-voyage-buttons");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -53,7 +54,7 @@ let inNewVoyage = false;
 globalThis.newVoyage = function () {
     inNewVoyage = true;
     setCameraState(1);
-    fadeOut(newVoyageBtn);
+    fadeOut(newVoyageButtons);
     fadeIn(newVoyageDiv);
     fadeIn(newVoyageBack);
     fadeOut(logo);
@@ -61,7 +62,7 @@ globalThis.newVoyage = function () {
 globalThis.backVoyage = function () {
     inNewVoyage = false;
     setCameraState(0);
-    fadeIn(newVoyageBtn);
+    fadeIn(newVoyageButtons);
     fadeOut(newVoyageDiv);
     fadeOut(newVoyageBack);
     fadeIn(logo);

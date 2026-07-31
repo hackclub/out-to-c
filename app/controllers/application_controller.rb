@@ -26,8 +26,18 @@ class ApplicationController < ActionController::Base
 
       date
     end
+    def require_logged_in
+      set_logged_in
+      if not @loggedin
+        redirect_to root_path
+      end
+    end
     def get_hackatime_projects
       token = @user.token
+      if token == nil
+        @projects = []
+        return
+      end
 
       url = URI("https://hackatime.hackclub.com/api/v1/authenticated/projects?include_archived=false&projects=&since=&until=&until_date=&start="+ysws_start+"&end=&start_date=&end_date=")
       req = Net::HTTP::Get.new(url)

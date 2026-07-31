@@ -71,7 +71,4 @@ class VoyageController < ApplicationController
         redirect_to root_path
       end
     end
-    def require_logged_in
-      set_logged_in
-    end
 end

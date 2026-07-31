@@ -4,9 +4,8 @@
     <a href="https://hackclub.com" id="hackclub-flag"><img src="https://assets.hackclub.com/flag-orpheus-top.svg"></a>
     <div style="position: absolute;width:100%"><img id="logo" src="<%= asset_path("graphics/logo.svg") %>" alt="Out To C"></div>
     <%= image_tag "graphics/scroll.svg", id: "scroll-indicator" %>
-    <a class="linkbutton sign-in" href="https://hackatime.hackclub.com/oauth/authorize?client_id=<%= ENV["HACKATIME_UID"] %>&redirect_uri=<%= CGI.escape(auth_callback_url) %>&response_type=code&scope=profile+read"
+    <a class="linkbutton sign-in" href="https://auth.hackclub.com/oauth/authorize?client_id=<%= ENV["HCA_CLIENT_ID"] %>&redirect_uri=<%= CGI.escape(auth_hca_callback_url) %>&response_type=code&scope=email+slack_id+openid"
         title="RSVP form :O">Sign in with Hack Club</a>
-
     <% if Rails.env.development? %>
     <div class="devlogin">
         <span>Dev login:</span>

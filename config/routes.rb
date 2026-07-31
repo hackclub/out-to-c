@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
-  get "auth/callback" => "auth#callback"
+  get "auth/hackatime_callback" => "auth#hackatime_callback"
+  get "auth/hca_callback" => "auth#hca_callback"
   get "auth/test" => "auth#test"
   get "auth/dev" => "auth#dev"
 
