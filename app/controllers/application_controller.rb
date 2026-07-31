@@ -4,7 +4,7 @@ require "json"
 class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
-  before_action :get_islands
+  before_action :get_islands, :get_prices
 
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
@@ -13,6 +13,27 @@ class ApplicationController < ActionController::Base
   private
     def get_islands
       @islands = [6,12,24]
+    end
+    def get_prices
+      @prices = [
+        {
+          "blahaj":{"name":"Blåhaj"},
+          "pinecil":{"name":"Pinecil"},
+          "pizero2w":{"name":"Pi Zero 2W"},
+        },
+      
+        {
+          "pico8":{"name":"Pico-8"},
+          "pipico":{"name":"Pi Pico"},
+          "cloudflare":{"name":"$12 Cloudflare Domain Grant"},
+        },
+      
+        {
+          "tbd":{"name":"To Be Defined..."},
+          "tbd":{"name":"To Be Defined..."},
+          "tbd":{"name":"To Be Defined..."},
+        },
+      ]
     end
     def set_logged_in
       @loggedin = session[:user_id] != nil and session[:user_id]["uid"] != nil

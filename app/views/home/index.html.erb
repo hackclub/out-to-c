@@ -88,9 +88,12 @@
                     <h1>Treasure Chest</h1>
                     <span>Select 1 item to receive.</span>
                     <br>
-                        <button><%= image_tag "prices/blahaj.png" %><hr><span>Blåhaj</span></button>
-                        <button><%= image_tag "prices/pizero2w.png" %><hr><span>Pi Zero 2W</span></button>
-                        <button><%= image_tag "prices/pinecil.png" %><hr><span>Pinecil</span></button>
+                    
+                    <% @found_prices.each_with_index do |x,i| %>
+                        <button class="treasure-select-btn" id="priceButton<%= i %>" onclick="selectPrice(<%= "'" + x[0].to_s + "'," + i.to_s %>)"><%= image_tag "prices/" + x[0].to_s + ".png" %><hr><span><%= x[1][:name] %></span></button>
+                    <% end %>
+                    <br>
+                    <button onclick="finalizePriceSelection();" class="confirm-btn">Confirm</button>
                     </div>
                 </div>
         </div>

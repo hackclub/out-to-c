@@ -6,6 +6,7 @@ let newVoyageBack = document.getElementById("new-voyage-back");
 let logo = document.getElementById("logo");
 let cargo = document.getElementById("cargo");
 let treasureSelect = document.getElementById("treasure-select");
+let islandFound = document.getElementById("island-found");
 let newVoyageButtons = document.getElementById("new-voyage-buttons");
 let minimapText = document.getElementById("minimap-text");
 
@@ -77,6 +78,47 @@ globalThis.toggleCargo = function () {
         fadeIn(cargo);
     }
     cargoShown = !cargoShown;
+}
+let selectedPrice = -1;
+let selectedPriceID = "";
+globalThis.selectPrice = function (id, index) {
+    if (selectedPrice != -1) {
+        document.getElementById("priceButton" + selectedPrice).classList.remove("selected-price");
+    }
+    selectedPriceID = id;
+    selectedPrice = index;
+    document.getElementById("priceButton" + index).classList.add("selected-price");
+}
+globalThis.finalizePriceSelection = function () {
+    if (selectedPriceID == "") {
+        return;
+    }
+    let data = {
+        "selection": selectedPriceID
+    }
+
+    // a POST request
+    fetch('voyage/price', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+        },
+        body: JSON.stringify(data)
+    }).then((response) => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    }).then((body) => {
+        if (body["error"]) {
+            showNotice("Error: " + body["error"]);
+            return;
+        }
+        fadeOut(islandFound);
+    }).catch((error) => {
+        showNotice("Error: Not success :(");
+        console.error(error);
+    });
 }
 
 document.forms['new-voyage-form'].addEventListener('submit', (event) => {

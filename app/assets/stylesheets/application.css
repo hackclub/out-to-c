@@ -281,7 +281,6 @@ form>button:hover {
     background-color: #6e4c30;
     border: 5px solid #9c6a3d;
     padding: 10px;
-    padding-bottom: 20px;
     width: fit-content;
 }
 
@@ -293,19 +292,35 @@ form>button:hover {
     opacity: 1.0 !important;
 }
 
-#treasure-select>button {
+.confirm-btn {
+    width: 100%;
+    background-color: #9c6a3d;
+    border: 2px solid #583d26;
+    margin-top: 10px;
+}
+
+.confirm-btn:hover {
+    filter: saturate(1.1) brightness(1.1);
+}
+
+.treasure-select-btn {
     cursor: pointer;
     background-color: #4d3533;
     border: 5px solid #10121C;
 }
 
-#treasure-select>button:hover {
+.treasure-select-btn:hover {
     scale: 1.1;
 }
 
-#treasure-select>button>img {
+.treasure-select-btn>img {
     width: 200px;
     display: block;
+}
+
+.selected-price {
+    border: 5px solid #fff;
+    filter: brightness(1.3);
 }
 
 #cargo-button {
