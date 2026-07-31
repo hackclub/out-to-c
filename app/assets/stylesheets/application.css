@@ -344,9 +344,8 @@ form>button:hover {
 
 #new-voyage-buttons {
     width: fit-content;
+    margin: 0 auto;
     margin-top: 90px;
-    margin-left: 50%;
-    transform: translateX(-50%);
 }
 
 .voyage-btn {
