@@ -231,3 +231,6 @@ window.addEventListener("resize", () => {
 
     renderer.setSize(width, height);
 });
+
+document.getElementById("loading").remove();
+document.body.classList.remove("hidden");

@@ -38,6 +38,22 @@ body {
     min-height: 100vh;
 }
 
+.hidden {
+    opacity: 0;
+}
+
+#loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9998;
+    background-color: #0091F8;
+    pointer-events: none;
+    overflow: hidden;
+}
+
 #background {
     z-index: -2;
     position: absolute;
