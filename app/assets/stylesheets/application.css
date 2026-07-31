@@ -112,12 +112,15 @@ form>button:hover {
     position: absolute;
     bottom: 10px;
     left: calc(50% - min(50%, 300px));
+    overflow: hidden;
+    background-image: url("graphics/dot.png");
 }
 
 #ship-icon {
     width: 95px;
     position: absolute;
     top: -5px;
+    background-color: #6e4c30;
 }
 
 #treasure-icon {
@@ -125,15 +128,15 @@ form>button:hover {
     position: absolute;
     top: -5px;
     right: 0;
+    background-color: #6e4c30;
 }
 
-.dot {
-    position: relative;
-    top: 0;
-    display: inline-block;
-    height: 100%;
-    margin-right: 8px;
+#minimap-text {
     line-height: 64px;
+    background-color: #6e4c30;
+    margin: 0 auto;
+    display: block;
+    width: fit-content;
 }
 
 .page {
