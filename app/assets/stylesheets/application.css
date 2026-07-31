@@ -111,6 +111,7 @@ form>button:hover {
 }
 
 #island-found {
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
