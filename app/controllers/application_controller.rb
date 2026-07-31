@@ -4,12 +4,16 @@ require "json"
 class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
+  before_action :get_islands
 
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
 
 
   private
+    def get_islands
+      @islands = [6,12,24]
+    end
     def set_logged_in
       @loggedin = session[:user_id] != nil and session[:user_id]["uid"] != nil
       if @loggedin

@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_31_191736) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_31_221600) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "hca_token"
+    t.integer "last_island"
     t.string "name"
     t.string "pfp"
     t.string "token"

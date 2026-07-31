@@ -147,6 +147,27 @@ form>button:hover {
     color: white;
 }
 
+@keyframes fade-in-screen {
+    0% {
+        opacity: 0;
+        filter: brightness(0);
+        pointer-events: none;
+    }
+
+    50% {
+        opacity: 1;
+        filter: brightness(0);
+    }
+
+    99% {
+        filter: brightness(1);
+    }
+
+    100% {
+        pointer-events: none;
+    }
+}
+
 #island-found {
     display: none;
     position: absolute;
@@ -155,6 +176,8 @@ form>button:hover {
     bottom: 0;
     right: 0;
     background-color: black;
+    animation: fade-in-screen 2s;
+    animation-play-state: paused;
 }
 
 #island-found-center {

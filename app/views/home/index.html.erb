@@ -72,27 +72,27 @@
             </div>
         </div>
         <button onclick="toggleCargo()" id="cargo-button"><%= image_tag "graphics/cargo.png", :alt => "Cargo" %></button>
-        <div id="island-found">
+        <div id="minimap" <%= @found_island ? "style=display:none" : "" %>>
+            <%= image_tag "graphics/ship_icon.png",:id => "ship-icon" , :alt => "ship-icon" %>
+            <%= image_tag "graphics/treasure_icon.png",:id => "treasure-icon" , :alt => "treasure-icon" %>
+            <span id="minimap-text"><%= @voyage != nil ? (@next_island - @voyage.total_seconds / 60 / 60 + 0.5).to_i.to_s : "-" %> hours </span>
+        </div>
+        <div id="island-found" style="<%= @found_island ? "display:unset; animation-play-state: running;" : "" %>">
             <div id="island-found-center">
                 <link rel="preload" as="image" href="<%= image_url("graphics/treasure_chest_open.png")  %>" fetchpriority="high">
                 <%= image_tag "graphics/island_found.png",:id => "island-found-image" , :alt => "Island" %>
                 <button onclick="selectTreasure()" id="island-found-chest"></button>
             </div>
             <div id="treasure-select-container">
-            <div id="treasure-select">
-                <h1>Treasure Chest</h1>
-                <span>Select 1 item to receive.</span>
-                <br>
-                    <button><%= image_tag "prices/blahaj.png" %><hr><span>Blåhaj</span></button>
-                    <button><%= image_tag "prices/pizero2w.png" %><hr><span>Pi Zero 2W</span></button>
-                    <button><%= image_tag "prices/pinecil.png" %><hr><span>Pinecil</span></button>
+                <div id="treasure-select">
+                    <h1>Treasure Chest</h1>
+                    <span>Select 1 item to receive.</span>
+                    <br>
+                        <button><%= image_tag "prices/blahaj.png" %><hr><span>Blåhaj</span></button>
+                        <button><%= image_tag "prices/pizero2w.png" %><hr><span>Pi Zero 2W</span></button>
+                        <button><%= image_tag "prices/pinecil.png" %><hr><span>Pinecil</span></button>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div id="minimap">
-            <%= image_tag "graphics/ship_icon.png",:id => "ship-icon" , :alt => "ship-icon" %>
-            <%= image_tag "graphics/treasure_icon.png",:id => "treasure-icon" , :alt => "treasure-icon" %>
-            <span id="minimap-text">5 hours </span>
         </div>
     </div>
 </div>

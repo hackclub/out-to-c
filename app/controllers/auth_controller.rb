@@ -97,7 +97,7 @@ class AuthController < ApplicationController
             slack_data = get_slack_data(slack_id)
             
             # construct the new user :3
-            user = User.new({"uid":slack_id, "hca_token":token, "name":slack_data[:name], "pfp":slack_data[:pfp]})
+            user = User.new({"uid":slack_id, "hca_token":token, "name":slack_data[:name], "pfp":slack_data[:pfp], "last_island":0})
             puts slack_data
             session[:user_id] = user
             user.save

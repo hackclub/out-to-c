@@ -7,6 +7,7 @@ let logo = document.getElementById("logo");
 let cargo = document.getElementById("cargo");
 let treasureSelect = document.getElementById("treasure-select");
 let newVoyageButtons = document.getElementById("new-voyage-buttons");
+let minimapText = document.getElementById("minimap-text");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
