@@ -10,6 +10,7 @@ let islandFound = document.getElementById("island-found");
 let newVoyageButtons = document.getElementById("new-voyage-buttons");
 let priceForm = document.getElementById("price-form");
 let minimapText = document.getElementById("minimap-text");
+let minimap = document.getElementById("minimap");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -116,6 +117,8 @@ globalThis.finalizePriceSelection = function () {
             return;
         }
         fadeOut(islandFound);
+        fadeIn(minimap);
+        minimapText.innerText = body["next_island_remaining"] + " hours";
     }).catch((error) => {
         showNotice("Error: Not success :(");
         console.error(error);

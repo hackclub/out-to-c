@@ -31,7 +31,7 @@ class VoyageController < ApplicationController
     @user.save
     get_next_island
 
-    render json: { "ok": 1, "next_island":@next_island }
+    render json: { "ok": 1, "next_island_remaining":@next_island-@user.last_island }
   end
   def add_hour
     if @voyage.total_seconds == nil
