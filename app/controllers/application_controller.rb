@@ -17,8 +17,12 @@ class ApplicationController < ActionController::Base
     def get_next_island
       @next_island = 999
       @island_indx = 0
+      last = 0
+      if @voyage != nil
+        last=@voyage.last_island
+      end
       for island in @islands
-        if island > @user.last_island
+        if island > last
           @next_island = island
           break
         end

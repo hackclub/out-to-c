@@ -24,11 +24,10 @@ class VoyageController < ApplicationController
       return
     end
 
-    @user.last_island = @next_island
+    @voyage.last_island = @next_island
     @voyage.cargo = @voyage.cargo + price + ","
     puts @voyage.cargo
     @voyage.save
-    @user.save
     get_next_island
 
     render json: { "ok": 1, "next_island_remaining": @next_island - ( @voyage.total_seconds / 60 / 60) }
@@ -75,7 +74,8 @@ class VoyageController < ApplicationController
       "total_seconds": time,
       "desc": params["desc"],
       "hackatime": params["hackatime"],
-      "cargo":""
+      "cargo":"",
+      "last_island":0
     }
     @voyage = Voyage.new(data)
     @voyage.save!
