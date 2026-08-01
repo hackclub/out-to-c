@@ -31,7 +31,7 @@ class VoyageController < ApplicationController
     @user.save
     get_next_island
 
-    render json: { "ok": 1, "next_island_remaining":@next_island-@user.last_island }
+    render json: { "ok": 1, "next_island_remaining": @next_island - ( @voyage.total_seconds / 60 / 60) }
   end
   def add_hour
     if @voyage.total_seconds == nil
@@ -85,7 +85,9 @@ class VoyageController < ApplicationController
     @user.save!
     session[:user_id] = @user
 
-    render json: { "id": @voyage.id, "total_seconds": @voyage.total_seconds }
+    get_next_island()
+
+    render json: { "id": @voyage.id, "total_seconds": @voyage.total_seconds, "next_island_remaining": @next_island - ( @voyage.total_seconds / 60 / 60) }
   end
 
   private

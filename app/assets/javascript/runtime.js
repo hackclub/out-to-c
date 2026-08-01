@@ -147,6 +147,7 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
         console.log(body["total_seconds"]);
         console.log(body["total_seconds"] / 60.0 / 60.0);
         setTravelDistance(body["total_seconds"] / 60.0 / 60.0);
+        minimapText.innerText = body["next_island_remaining"] + " hours";
     }).catch((error) => {
         showNotice("Error: Not success :(");
         console.error(error);
