@@ -11,6 +11,7 @@ let newVoyageButtons = document.getElementById("new-voyage-buttons");
 let priceForm = document.getElementById("price-form");
 let minimapText = document.getElementById("minimap-text");
 let minimap = document.getElementById("minimap");
+let draggingCargoSlot = document.getElementById("cargo-slot-dragging");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -124,6 +125,54 @@ globalThis.finalizePriceSelection = function () {
         console.error(error);
     });
 }
+let selectedCargoSlot = null;
+let dragging = null;
+function selectCargoSlot() {
+    if (selectedCargoSlot != null) {
+        if (selectedCargoSlot == this && this.children[0].src) {
+            dragging = this;
+            draggingCargoSlot.src = this.children[0].src;
+            draggingCargoSlot.style.left = clientX + "px";
+            draggingCargoSlot.style.top = clientY + "px";
+            return;
+        }
+        selectedCargoSlot.classList.remove("selected-slot");
+    }
+    selectedCargoSlot = this;
+    this.classList.add("selected-slot");
+}
+function releaseCargoSlot() {
+    if (dragging != null) {
+        if (selectedCargoSlot == this) {
+            dragging = null;
+            return;
+        }
+        this.children[0].src = draggingCargoSlot.src;
+        selectedCargoSlot.children[0].src = "";
+        dragging = null;
+        selectCargoSlot.bind(this)();
+    }
+}
+
+for (let i = 0; i < 6 * 4; i++) {
+    let element = document.getElementById("cargoSlot" + i);
+    element.addEventListener("mousedown", selectCargoSlot.bind(element));
+    element.addEventListener("mouseup", releaseCargoSlot.bind(element));
+}
+let clientX = 0;
+let clientY = 0;
+document.body.addEventListener("mousemove", (event) => {
+    clientX = event.clientX;
+    clientY = event.clientY;
+    if (dragging != null) {
+        draggingCargoSlot.style.left = clientX + "px";
+        draggingCargoSlot.style.top = clientY + "px";
+    }
+});
+document.body.addEventListener("mouseup", (_event) => {
+    dragging = null;
+    draggingCargoSlot.src = "";
+});
 
 document.forms['new-voyage-form'].addEventListener('submit', (event) => {
     event.preventDefault();

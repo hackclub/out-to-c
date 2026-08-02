@@ -4,6 +4,8 @@
     _travelDistance = (parseFloat('<%= @voyage && @voyage.total_seconds %>') / 60.0 / 60.0 || 0.0);
 
     _activeCameraStateIndex = voyage == null ? 0 : 2;
+
+    prices = "<%= @voyage && @voyage.cargo %>"
 </script>
 
 <style>
@@ -15,6 +17,8 @@
 <div id="background"></div>
 <div id="varyingContents">
 <img id="pfp" src="<%= session[:user_id]["pfp"] %>">
+
+<div id="cargo-slot-dragging-container"><img id="cargo-slot-dragging"></div>
 
 <div id="no-existing-voyage" <% if @voyage != nil %> style="display:none;"<% end %>>
         <img id="logo" style="width:450px;" src="<%= asset_path("graphics/logo.svg") %>" alt="Out To C">
@@ -63,8 +67,21 @@
             </div>
             <div id="cargo-body">
                 <div id="cargo-slots">
+                    <% 
+                    pcs = []
+                    if @voyage != nil
+                        pcs = @voyage.cargo.split(",",-1)
+                    end
+                    %>
                     <% (0..6*4-1).each do |x| %>
-                        <div class="cargo-slot"></div>
+                        <div class="cargo-slot" id="cargoSlot<%= x %>">
+                            <%= if pcs[x] != nil && pcs[x] != ""
+                            puts (image_tag "prices/"+ pcs[x] + ".png").class
+                            image_tag "prices/"+ pcs[x] + ".png"
+                            else
+                            ActiveSupport::SafeBuffer.new("<img>")
+                            end %>
+                        </div>
                     <% end %>
                 </div>
                 <div id="cargo-info">

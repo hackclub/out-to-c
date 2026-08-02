@@ -391,12 +391,53 @@ form>button:hover {
 .cargo-slot {
     width: 80px;
     height: 80px;
+    border: none;
     background-color: #563921;
     margin: 2.5px;
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.selected-slot {
+    background-color: #745033 !important;
 }
 
 .cargo-slot:hover {
     background-color: #49321e;
+}
+
+#cargo-slot-dragging-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+#cargo-slot-dragging {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 55;
+    width: 100px;
+    transform: translate(-50%, -50%);
+}
+
+.cargo-slot>img {
+    width: 100%;
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    pointer-events: none;
 }
 
 #cargo-info {
