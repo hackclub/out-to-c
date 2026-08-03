@@ -14,6 +14,12 @@ class ApplicationController < ActionController::Base
     def get_islands
       @islands = [6,12,24]
     end
+    def generate_hackatime_text()
+      p1 = ((@voyage != nil && @voyage.hackatime != nil && @voyage.hackatime != "") ? @voyage.hackatime : "Not linked" )
+      p2 = " (" + ((@voyage != nil && @voyage.total_seconds != nil) ? (@voyage.total_seconds / 60 / 60).to_i.to_s : "") + "h)"
+      
+      @hackatime_text = p1+p2
+    end
     def get_next_island
       @next_island = 999
       @island_indx = 0

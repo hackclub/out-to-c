@@ -67,12 +67,7 @@
                 <div style="height:15px"></div>
                 <span class="light">Hackatime:</span><br>
                 <span id="voyage-info-hackatime">
-                    <%= 
-                    p1 = ((@voyage != nil && @voyage.hackatime != nil && @voyage.hackatime != "") ? @voyage.hackatime : "Not linked" )
-                    p2 = " (" + ((@voyage != nil && @voyage.total_seconds != nil) ? (@voyage.total_seconds / 60 / 60).to_i.to_s : "") + "h)"
-                    
-                    p1+p2
-                    %>
+                    <%= @hackatime_text %>
                 </span><br>
                 <div style="height:15px"></div>
                 <button id="edit-voyage" href="">Edit Details</button>

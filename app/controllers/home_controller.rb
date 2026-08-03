@@ -10,6 +10,7 @@ class HomeController < ApplicationController
           @projects = []
           update_voyage_time
         end
+        generate_hackatime_text
         get_next_island
       end
     end
