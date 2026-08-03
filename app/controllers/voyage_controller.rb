@@ -87,7 +87,12 @@ class VoyageController < ApplicationController
 
     get_next_island()
 
-    render json: { "id": @voyage.id, "total_seconds": @voyage.total_seconds, "next_island_remaining": @next_island - ( @voyage.total_seconds / 60 / 60) }
+    p1 = ((@voyage != nil && @voyage.hackatime != nil && @voyage.hackatime != "") ? @voyage.hackatime : "Not linked" )
+    p2 = " (" + ((@voyage != nil && @voyage.total_seconds != nil) ? (@voyage.total_seconds / 60 / 60).to_i.to_s : "") + "h)"
+    
+    hackatime_text = p1+p2
+
+    render json: { "name": @voyage.name, "hackatime-text": hackatime_text, "id": @voyage.id, "total_seconds": @voyage.total_seconds, "next_island_remaining": @next_island - ( @voyage.total_seconds / 60 / 60) }
   end
 
   private
