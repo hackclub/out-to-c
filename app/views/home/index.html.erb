@@ -62,14 +62,12 @@
         </div>
         <div id="voyage-info">
             <div id="voyage-info-contents">
-                <span class="light">Voyage name:</span><br>
-                <span id="voyage-info-name"><%= @voyage != nil && @voyage.name %></span><br>
-                <div style="height:15px"></div>
+                <span class="light">Voyage name:</span>
+                <span id="voyage-info-name"><%= @voyage_name_trim %></span><br>
+                <span class="light">Desc:</span>
+                <span id="voyage-info-desc"><%= @voyage_desc_trim %></span><br>
                 <span class="light">Hackatime:</span><br>
-                <span id="voyage-info-hackatime">
-                    <%= @hackatime_text %>
-                </span><br>
-                <div style="height:15px"></div>
+                <span id="voyage-info-hackatime"> <%= @hackatime_text %> </span><br>
                 <button id="edit-voyage" href="">Edit Details</button>
             </div>
         </div>

@@ -16,6 +16,7 @@ let cargoInfoContents = document.getElementById("cargo-info-contents");
 let cargoInfoImg = document.getElementById("cargo-info-img");
 let cargoInfoText = document.getElementById("cargo-info-text");
 let voyageInfoName = document.getElementById("voyage-info-name");
+let voyageInfoDesc = document.getElementById("voyage-info-desc");
 let voyageInfoHackatime = document.getElementById("voyage-info-hackatime");
 
 let elementsState = {};
@@ -207,6 +208,7 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
         setTravelDistance(body["total_seconds"] / 60.0 / 60.0);
         minimapText.innerText = body["next_island_remaining"] + " hours";
         voyageInfoName.innerText = body["name"];
+        voyageInfoDesc.innerText = body["desc"];
         voyageInfoHackatime.innerText = body["hackatime-text"];
     }).catch((error) => {
         showNotice("Error: Not success :(");

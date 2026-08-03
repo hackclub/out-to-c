@@ -12,6 +12,7 @@ class HomeController < ApplicationController
         end
         generate_hackatime_text
         get_next_island
+        generate_desc_trimmed
       end
     end
     private

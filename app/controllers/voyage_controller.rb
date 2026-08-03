@@ -87,9 +87,10 @@ class VoyageController < ApplicationController
 
     get_next_island()
 
+    generate_desc_trimmed()
     generate_hackatime_text()
 
-    render json: { "name": @voyage.name, "hackatime-text": @hackatime_text, "id": @voyage.id, "total_seconds": @voyage.total_seconds, "next_island_remaining": @next_island - ( @voyage.total_seconds / 60 / 60) }
+    render json: { "name": @voyage_name_trim, "desc": @voyage_desc_trim, "hackatime-text": @hackatime_text, "id": @voyage.id, "total_seconds": @voyage.total_seconds, "next_island_remaining": @next_island - ( @voyage.total_seconds / 60 / 60) }
   end
 
   private

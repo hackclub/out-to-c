@@ -20,6 +20,20 @@ class ApplicationController < ActionController::Base
       
       @hackatime_text = p1+p2
     end
+    def trim_length(t)
+      max_length = 25
+      if t.length > max_length
+        t = t.slice(0,max_length-3)+"..."
+      end
+      t
+    end
+    def generate_desc_trimmed
+      t = (@voyage != nil && @voyage.desc != nil) ? @voyage.desc : ""
+      @voyage_desc_trim = trim_length(t)
+
+      t = (@voyage != nil && @voyage.name != nil) ? @voyage.name : ""
+      @voyage_name_trim = trim_length(t)
+    end
     def get_next_island
       @next_island = 999
       @island_indx = 0
