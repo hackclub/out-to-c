@@ -51,7 +51,7 @@
         </div>
     </div>
     <div id="active-voyage" <% if @voyage == nil %> style="display:none;"<% end %>>
-        <div class="page">
+        <div class="page" id="devpanel">
             <h2>Dev panel</h2>
             <%= form_with(url: voyage_add_hour_path) do |form| %>
                 <button onclick="setTravelDistance(travelDistance+1)">add 1 Hour</button>
@@ -59,6 +59,24 @@
             <%= form_with(url: voyage_delete_path) do |form| %>
                 <button>remove voyage</button>
             <% end %>
+        </div>
+        <div id="voyage-info">
+            <div id="voyage-info-contents">
+                <span class="light">Voyage name:</span><br>
+                <span id="voyage-info-name"><%= @voyage != nil && @voyage.name %></span><br>
+                <div style="height:15px"></div>
+                <span class="light">Hackatime:</span><br>
+                <span id="voyage-info-hackatime">
+                    <%= 
+                    p1 = ((@voyage != nil && @voyage.hackatime != nil && @voyage.hackatime != "") ? @voyage.hackatime : "Not linked" )
+                    p2 = " (" + ((@voyage != nil && @voyage.total_seconds != nil) ? (@voyage.total_seconds / 60 / 60).to_i.to_s : "") + "h)"
+                    
+                    p1+p2
+                    %>
+                </span><br>
+                <div style="height:15px"></div>
+                <button id="edit-voyage" href="">Edit Details</button>
+            </div>
         </div>
         <div id="cargo">
             <div id="cargo-header">

@@ -537,6 +537,55 @@ form>button:hover {
     filter: brightness(0.8);
 }
 
+.light {
+    font-weight: lighter;
+    font-size: smaller;
+}
+
+#edit-voyage {
+    border: none;
+    background: none;
+    width: fit-content;
+    display: block;
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+#voyage-info {
+    width: 245px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    aspect-ratio: 133/167;
+    background: url("graphics/parchment.png");
+    background-size: cover;
+
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    image-rendering: optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+#voyage-info>img {
+    width: 100%;
+    width: 245px;
+}
+
+#voyage-info-contents {
+    padding-top: 52px;
+    padding-left: 27px;
+    width: calc(100% - 70px);
+}
+
+#devpanel {
+    position: absolute;
+    bottom: 0;
+}
+
 .devlogin {
     position: absolute;
     background-color: #6e4c30;
