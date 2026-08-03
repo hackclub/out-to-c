@@ -450,6 +450,23 @@ form>button:hover {
     max-width: 310px;
 }
 
+#cargo-info-contents {
+    display: block;
+    width: fit-content;
+    margin: auto auto;
+}
+
+#cargo-info-text {
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    font-size: 26px;
+}
+
+#cargo-info-img {
+    width: 255px;
+}
+
 #new-voyage-div {
     display: none;
     width: 100%;

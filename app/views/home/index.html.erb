@@ -67,17 +67,26 @@
             </div>
             <div id="cargo-body">
                 <div id="cargo-slots">
-                    <% 
+                    <%=
                     pcs = []
                     if @voyage != nil
-                        pcs = @voyage.cargo.split(",",-1)
+                        for pc in @voyage.cargo.split(",",-1)
+                            # find item details from @prices
+                            for a in @prices
+                                g = a[pc.to_sym]
+                                if g != nil
+                                    pcs.append([pc,g[:name]])
+                                end
+                            end
+                        end
                     end
+                    ActiveSupport::SafeBuffer.new("<script>pcs="+pcs.to_json+"</script>")
                     %>
                     <% (0..6*4-1).each do |x| %>
                         <div class="cargo-slot" id="cargoSlot<%= x %>">
                             <%= if pcs[x] != nil && pcs[x] != ""
-                            puts (image_tag "prices/"+ pcs[x] + ".png").class
-                            image_tag "prices/"+ pcs[x] + ".png"
+                            puts (image_tag "prices/"+ pcs[x][0] + ".png").class
+                            image_tag "prices/"+ pcs[x][0] + ".png"
                             else
                             ActiveSupport::SafeBuffer.new("<img>")
                             end %>
@@ -85,6 +94,11 @@
                     <% end %>
                 </div>
                 <div id="cargo-info">
+                    <div id="cargo-info-contents" style="display:none">
+                        <img id="cargo-info-img" src="">
+                        <hr>
+                        <span id="cargo-info-text">Blahaj</span>
+                    </div>
                 </div>
             </div>
         </div>

@@ -12,6 +12,9 @@ let priceForm = document.getElementById("price-form");
 let minimapText = document.getElementById("minimap-text");
 let minimap = document.getElementById("minimap");
 let draggingCargoSlot = document.getElementById("cargo-slot-dragging");
+let cargoInfoContents = document.getElementById("cargo-info-contents");
+let cargoInfoImg = document.getElementById("cargo-info-img");
+let cargoInfoText = document.getElementById("cargo-info-text");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -129,7 +132,7 @@ let selectedCargoSlot = null;
 let dragging = null;
 function selectCargoSlot() {
     if (selectedCargoSlot != null) {
-        if (selectedCargoSlot == this && this.children[0].src) {
+        if (selectedCargoSlot == this && this.children[0].src.includes(".png")) {
             dragging = this;
             draggingCargoSlot.src = this.children[0].src;
             draggingCargoSlot.style.left = clientX + "px";
@@ -140,6 +143,13 @@ function selectCargoSlot() {
     }
     selectedCargoSlot = this;
     this.classList.add("selected-slot");
+    cargoInfoContents.style.display = this.children[0].src.includes(".png") ? "block" : "none";
+    cargoInfoImg.src = this.children[0].src;
+    pcs.forEach(element => {
+        if (this.children[0].src.includes("/assets/prices/" + element[0] + "-")) {
+            cargoInfoText.innerText = element[1];
+        }
+    });
 }
 function releaseCargoSlot() {
     if (dragging != null) {
