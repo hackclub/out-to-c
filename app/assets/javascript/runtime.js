@@ -65,7 +65,7 @@ function selectTreasure() {
 
 document.addEventListener("keydown", (event) => {
     if (event.code == "Escape") {
-        if (inNewVoyage) { backVoyage(); }
+        if (inNewVoyage || editingVoyage) { backVoyage(); }
         else if (cargoShown) { toggleCargo(); }
         else if (notice.display != "none") { hideNotice(); }
     }
@@ -255,6 +255,7 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
             showNotice("Error: " + body["error"]);
             return;
         }
+        inNewVoyage = false;
         voyage = parseInt(body["id"]);
         fadeOut(newVoyageDiv);
         fadeOut(newVoyageBack);
