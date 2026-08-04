@@ -20,7 +20,7 @@
     <div id="new-voyage-div" class="page surround-border">
         <% new_or_edit = @voyage == nil ? "New" : "Edit" %>
         <% create_or_save = @voyage == nil ? "CREATE VOYAGE" : "SAVE CHANGES" %>
-        <h1><%= new_or_edit %> Voyage</h1>
+        <h1 id="new-voyage-title"><%= new_or_edit %> Voyage</h1>
         <%= form_with(url: voyage_new_path, id: "new-voyage-form") do |form| %>
             <label for=name>Name: </label><br>
             <input autocomplete="off" name="name" type="text" value="<%= @voyage != nil && @voyage.name != nil ? @voyage.name : "" %>">

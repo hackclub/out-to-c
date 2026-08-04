@@ -3,6 +3,7 @@ let noExistingVoyageScreen = document.getElementById("no-existing-voyage");
 let newVoyageBtn = document.getElementById("new-voyage");
 let newVoyageDiv = document.getElementById("new-voyage-div");
 let newVoyageBack = document.getElementById("new-voyage-back");
+let newVoyageTitle = document.getElementById("new-voyage-title");
 let newVoyageSubmitBtn = document.getElementById("new-voyage-form-submit");
 let logo = document.getElementById("logo");
 let cargo = document.getElementById("cargo");
@@ -273,6 +274,8 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
             fadeIn(islandFound);
             islandFound.style.animationPlayState = "running";
         }
+        newVoyageTitle.innerText = "Edit Voyage";
+        newVoyageSubmitBtn.innerText = "SAVE CHANGES";
     }).catch((error) => {
         showNotice("Error: Not success :(");
         console.error(error);
