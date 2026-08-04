@@ -98,7 +98,6 @@ globalThis.backVoyage = function () {
 }
 let cargoShown = elementsState[cargo.id];
 globalThis.toggleCargo = function () {
-    console.log("wa");
     if (cargoShown) {
         fadeOut(cargo);
         if (selectedCargoSlot != null) {
@@ -273,7 +272,6 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
         voyageInfoRepo.href = body["repo_url"];
         voyageInfoHackatime.innerText = body["hackatime-text"];
         if (body["fp"]) {
-            console.log("fp", body["fp"]);
             loadPrices(body["fp"]);
             fadeIn(islandFound);
             islandFound.style.animationPlayState = "running";
