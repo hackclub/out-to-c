@@ -170,13 +170,13 @@ function selectCargoSlot() {
         }
         selectedCargoSlot.classList.remove("selected-slot");
     }
+    cargoInfoContents.style.display = this.children[0].src.includes(".png") ? "block" : "none";
     if (!this.children[0].src.includes(".png")) {
         selectedCargoSlot = null;
         return;
     }
     selectedCargoSlot = this;
     this.classList.add("selected-slot");
-    cargoInfoContents.style.display = this.children[0].src.includes(".png") ? "block" : "none";
     cargoInfoImg.src = this.children[0].src;
     pcs.forEach(element => {
         if (this.children[0].src.includes("/assets/prices/" + element[0] + "-")) {
