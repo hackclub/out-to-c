@@ -66,7 +66,7 @@ class ApplicationController < ActionController::Base
         {
           "pico8":{"name":"Pico-8"},
           "pipico":{"name":"Pi Pico"},
-          "cloudflare":{"name":"$12 Cloudflare Domain Grant"},
+          "cloudflare":{"name":"$12 Domain Grant"},
         },
       
         {
