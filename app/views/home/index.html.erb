@@ -27,6 +27,9 @@
             <br>
             <label for=desc>Description (optional): </label><br>
             <input autocomplete="off" name="desc" type="text"  value="<%= @voyage != nil && @voyage.desc != nil ? @voyage.desc : "" %>">
+            <br>
+            <label for=repo>Github Repository URL (optional): </label><br>
+            <input autocomplete="off" name="repo" type="url"  value="<%= @voyage != nil && @voyage.repo != nil ? @voyage.repo : "" %>">
 
             <br>
             <label for=hackatime>Select Hackatime project (optional): </label><br>
@@ -70,6 +73,8 @@
                 <span id="voyage-info-name"><%= @voyage_name_trim %></span><br>
                 <span class="light">Desc:</span>
                 <span id="voyage-info-desc"><%= @voyage_desc_trim %></span><br>
+                <span class="light">Repository URL:</span><br>
+                <a id="voyage-info-repo" href="<%= @voyage != nil && @voyage.repo != nil ? @voyage.repo : "" %>"><%= @voyage_repo_trim %></a><br>
                 <span class="light">Hackatime:</span><br>
                 <span id="voyage-info-hackatime"> <%= @hackatime_text %> </span><br>
                 <button id="edit-voyage" onclick="editVoyage()">Edit Details</button>

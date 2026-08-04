@@ -33,6 +33,9 @@ class ApplicationController < ActionController::Base
 
       t = (@voyage != nil && @voyage.name != nil) ? @voyage.name : ""
       @voyage_name_trim = trim_length(t)
+
+      t = (@voyage != nil && @voyage.repo != nil) ? @voyage.repo : ""
+      @voyage_repo_trim = trim_length(t)
     end
     def get_next_island
       @next_island = 999

@@ -21,6 +21,7 @@ let cargoInfoText = document.getElementById("cargo-info-text");
 let voyageInfo = document.getElementById("voyage-info");
 let voyageInfoName = document.getElementById("voyage-info-name");
 let voyageInfoDesc = document.getElementById("voyage-info-desc");
+let voyageInfoRepo = document.getElementById("voyage-info-repo");
 let voyageInfoHackatime = document.getElementById("voyage-info-hackatime");
 let notice = document.getElementById("notice");
 let pricesButtons = document.getElementById("prices-buttons");
@@ -268,6 +269,8 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
         minimapText.innerText = body["next_island_remaining"] + " hours";
         voyageInfoName.innerText = body["name"];
         voyageInfoDesc.innerText = body["desc"];
+        voyageInfoRepo.innerText = body["repo"];
+        voyageInfoRepo.href = body["repo_url"];
         voyageInfoHackatime.innerText = body["hackatime-text"];
         if (body["fp"]) {
             console.log("fp", body["fp"]);

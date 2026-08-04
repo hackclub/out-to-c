@@ -100,6 +100,7 @@ body {
 }
 
 form>input[type=text],
+form>input[type=url],
 form>button,
 form>select {
     width: calc(100% - 10px);
@@ -550,11 +551,6 @@ form>button:hover:not([disabled]) {
     filter: brightness(0.8);
 }
 
-.light {
-    font-weight: lighter;
-    font-size: 11px;
-}
-
 #edit-voyage {
     border: none;
     background: none;
@@ -566,8 +562,7 @@ form>button:hover:not([disabled]) {
 }
 
 #voyage-info {
-    line-height: 16px;
-    width: 245px;
+    width: 268px;
     position: absolute;
     top: 0;
     left: 0;
@@ -595,9 +590,20 @@ form>button:hover:not([disabled]) {
     width: calc(100% - 70px);
 }
 
-#voyage-info-contents>span,
-#voyage-info-contents>br {
-    line-height: 12px;
+#voyage-info-contents,
+#voyage-info-contents>* {
+    line-height: 29px;
+    font-size: 14px;
+}
+
+#voyage-info-contents>a {
+    font-size: 12px;
+    color: black;
+}
+
+.light {
+    font-weight: lighter;
+    font-size: 11px !important;
 }
 
 #devpanel {

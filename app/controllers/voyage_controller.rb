@@ -76,6 +76,7 @@ class VoyageController < ApplicationController
       "name": params["name"],
       "total_seconds": time,
       "desc": params["desc"],
+      "repo": params["repo"],
       "hackatime": params["hackatime"],
       "cargo":"",
       "last_island":0
@@ -109,7 +110,7 @@ class VoyageController < ApplicationController
     generate_desc_trimmed()
     generate_hackatime_text()
 
-    render json: { "name": @voyage_name_trim, "fp":fp, "desc": @voyage_desc_trim, "hackatime-text": @hackatime_text, "id": @voyage.id, "total_seconds": @voyage.total_seconds, "next_island_remaining": @next_island - ( @voyage.total_seconds / 60 / 60) }
+    render json: { "name": @voyage_name_trim, "fp":fp, "desc": @voyage_desc_trim, "repo": @voyage_repo_trim, "repo_url": @voyage.repo, "hackatime-text": @hackatime_text, "id": @voyage.id, "total_seconds": @voyage.total_seconds, "next_island_remaining": @next_island - ( @voyage.total_seconds / 60 / 60) }
   end
 
   private
