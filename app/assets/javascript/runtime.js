@@ -21,6 +21,7 @@ let voyageInfoName = document.getElementById("voyage-info-name");
 let voyageInfoDesc = document.getElementById("voyage-info-desc");
 let voyageInfoHackatime = document.getElementById("voyage-info-hackatime");
 let notice = document.getElementById("notice");
+let pricesButtons = document.getElementById("prices-buttons");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -261,3 +262,33 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
         console.error(error);
     });
 });
+
+function loadPrices(found_prices) {
+    if (pricesButtons.children.length > 0) {
+        showNotice("Error: couldn't load prices");
+        return;
+    }
+    let i = 0;
+    for (let [key, value] of Object.entries(found_prices)) {
+        let img = document.createElement("img");
+        img.src = value["src"];
+        let hr = document.createElement("hr");
+        let span = document.createElement("span");
+        span.innerText = value["name"];
+        let button = document.createElement("button");
+        button.classList.add("treasure-select-btn");
+        button.id = "priceButton" + i;
+        button.onclick = selectPrice.bind(null, key, i);
+        button.appendChild(img);
+        button.appendChild(hr);
+        button.appendChild(span);
+        pricesButtons.appendChild(button);
+        pricesButtons.appendChild(document.createTextNode(" "));
+        i += 1;
+    }
+}
+loadPrices(found_prices)
+
+//                     <% @found_prices.each_with_index do | x, i | %>
+// <button class="treasure-select-btn" id="priceButton<%= i %>" onclick="selectPrice(<%= "'" + x[0].to_s + "', " + i.to_s %>)" ><%= image_tag "prices/" + x[0].to_s + ".png" %><hr><span><%= x[1][:name] %></span></button>
+//                     <% end %>
