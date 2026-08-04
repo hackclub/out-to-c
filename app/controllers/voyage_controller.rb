@@ -14,23 +14,24 @@ class VoyageController < ApplicationController
   def price
     get_next_island
     if not @found_island
-      render json: { "error": "You cant claim this item" }
+      render json: { "error": "You cant claim this item, @found_island not found" }
       return
     end
     price = params["selection"]
-    puts price
     if not @found_prices.has_key?(price.to_sym)
-      render json: { "error": "You cant claim this item" }
+      render json: { "error": "You cant claim this item, @found_prices doesn't include this item" }
       return
     end
 
+    details = [price, @found_prices[price.to_sym][:name]]
+    img = ActionController::Base.helpers.asset_path("prices/"+ price + ".png")
     @voyage.last_island = @next_island
     @voyage.cargo = @voyage.cargo + price + ","
     puts @voyage.cargo
     @voyage.save
     get_next_island
 
-    render json: { "ok": 1, "next_island_remaining": @next_island - ( @voyage.total_seconds / 60 / 60) }
+    render json: { "ok": 1, "price":details, "img": img, "next_island_remaining": @next_island - ( @voyage.total_seconds / 60 / 60) }
   end
   def add_hour
     if @voyage.total_seconds == nil

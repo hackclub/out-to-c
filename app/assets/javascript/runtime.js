@@ -11,6 +11,7 @@ let newVoyageButtons = document.getElementById("new-voyage-buttons");
 let priceForm = document.getElementById("price-form");
 let minimapText = document.getElementById("minimap-text");
 let minimap = document.getElementById("minimap");
+let cargoSlots = document.getElementById("cargo-slots");
 let draggingCargoSlot = document.getElementById("cargo-slot-dragging");
 let cargoInfoContents = document.getElementById("cargo-info-contents");
 let cargoInfoImg = document.getElementById("cargo-info-img");
@@ -138,6 +139,18 @@ globalThis.finalizePriceSelection = function () {
         fadeOut(islandFound);
         fadeIn(minimap);
         minimapText.innerText = body["next_island_remaining"] + " hours";
+        pcs.push(body["price"]);
+
+        var children = cargoSlots.children;
+        for (var i = 0; i < children.length; i++) {
+            if (children[i].tagName != "DIV") {
+                continue;
+            }
+            if (!children[i].children[0].src.includes(".png")) {
+                children[i].children[0].src = body["img"];
+                break;
+            }
+        }
     }).catch((error) => {
         showNotice("Error: Not success :(");
         console.error(error);
