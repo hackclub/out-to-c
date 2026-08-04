@@ -41,8 +41,8 @@ class VoyageController < ApplicationController
   end
   def new
     if @voyage != nil
-      render json: { "error": "This user already has an active voyage!" }
-      return
+      # editing voyage !
+      # todo: back up old version?
     end
     if params["name"].strip.empty?
       render json: { "error": "Name required." }
@@ -56,7 +56,9 @@ class VoyageController < ApplicationController
     if params["hackatime"].strip.empty?
       hackatime_project_exists = true
     else
-      get_hackatime_projects
+      if @projects == nil or @projects.length == 0
+        get_hackatime_projects
+      end
       for project in @projects
         if project["name"] == params["hackatime"]
           time = project["total_seconds"]
@@ -77,7 +79,14 @@ class VoyageController < ApplicationController
       "cargo":"",
       "last_island":0
     }
-    @voyage = Voyage.new(data)
+    if @voyage != nil
+      # keep voyage data
+      data["cargo"] = @voyage["cargo"]
+      data["last_island"] = @voyage["last_island"]
+      @voyage.update(data)
+    else
+      @voyage = Voyage.new(data)
+    end
     @voyage.save!
 
     # set user's voyage to this voyage!
