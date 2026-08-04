@@ -65,17 +65,21 @@ function fadeOut(element) {
 }
 
 let confirmationCallback = null;
+let confirmationOpen = false;
 function showConfirmation(text, callback) {
     confirmationCallback = callback;
     confirmationText.innerText = text;
     fadeIn(confirmationContainer);
+    confirmationOpen = true;
 }
 function confirmConfirmation() {
     fadeOut(confirmationContainer);
     confirmationCallback();
+    confirmationOpen = false;
 }
 function cancelConfirmation() {
     fadeOut(confirmationContainer);
+    confirmationOpen = false;
 }
 
 function tryDeleteVoyage() {
@@ -90,9 +94,10 @@ function selectTreasure() {
 
 document.addEventListener("keydown", (event) => {
     if (event.code == "Escape") {
-        if (inNewVoyage || editingVoyage) { backVoyage(); }
+        if (confirmationOpen) { cancelConfirmation(); }
+        else if (inNewVoyage || editingVoyage) { backVoyage(); }
         else if (cargoShown) { toggleCargo(); }
-        else if (notice.display != "none") { hideNotice(); }
+        else if (getComputedStyle(notice).display != "none") { hideNotice(); }
     }
 });
 
