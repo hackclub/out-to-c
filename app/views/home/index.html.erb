@@ -73,8 +73,8 @@
                 <span id="voyage-info-name"><%= @voyage_name_trim %></span><br>
                 <span class="light">Desc:</span>
                 <span id="voyage-info-desc"><%= @voyage_desc_trim %></span><br>
-                <span class="light">Repository URL:</span><br>
-                <a id="voyage-info-repo" href="<%= @voyage != nil && @voyage.repo != nil ? @voyage.repo : "" %>"><%= @voyage_repo_trim %></a><br>
+                <span class="light">Repository URL:</span>
+                <a id="voyage-info-repo" style="white-space: nowrap;" href="<%= @voyage != nil && @voyage.repo != nil ? @voyage.repo : "" %>"><%= @voyage_repo_trim %></a><br>
                 <span class="light">Hackatime:</span><br>
                 <span id="voyage-info-hackatime"> <%= @hackatime_text %> </span><br>
                 <button id="edit-voyage" onclick="editVoyage()">Edit Details</button>
