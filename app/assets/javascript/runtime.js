@@ -168,8 +168,12 @@ function releaseCargoSlot() {
             dragging = null;
             return;
         }
+        let thisOld = this.children[0].src;
+        if (!thisOld.includes(".png")) {
+            thisOld = "";
+        }
         this.children[0].src = draggingCargoSlot.src;
-        selectedCargoSlot.children[0].src = "";
+        selectedCargoSlot.children[0].src = thisOld;
         dragging = null;
         selectCargoSlot.bind(this)();
     }
