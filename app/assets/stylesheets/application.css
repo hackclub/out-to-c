@@ -497,6 +497,38 @@ form>button:hover:not([disabled]) {
     position: absolute;
 }
 
+#confirmation-container {
+    position: absolute;
+    z-index: 15;
+    width: 100%;
+    height: fit-content;
+    overflow: hidden;
+    background-color: #000000b0;
+}
+
+#confirmation-box {
+    background-color: #6e4c30;
+    border: 5px solid #9c6a3d;
+    padding: 10px;
+    width: fit-content;
+    min-width: 400px;
+    height: fit-content;
+    margin: 50vh auto;
+    color: white;
+    transform: translateY(-50%);
+}
+
+#delete-voyage-button {
+    color: #f60000;
+    border: none;
+    background: none;
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+    margin: 0 auto;
+    text-decoration: underline;
+}
+
 #new-voyage-back>img {
     width: 80px;
 }

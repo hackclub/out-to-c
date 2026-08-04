@@ -5,6 +5,7 @@ let newVoyageDiv = document.getElementById("new-voyage-div");
 let newVoyageBack = document.getElementById("new-voyage-back");
 let newVoyageTitle = document.getElementById("new-voyage-title");
 let newVoyageSubmitBtn = document.getElementById("new-voyage-form-submit");
+let deleteVoyageBtn = document.getElementById("delete-voyage-button");
 let logo = document.getElementById("logo");
 let cargo = document.getElementById("cargo");
 let treasureSelect = document.getElementById("treasure-select");
@@ -26,6 +27,9 @@ let voyageInfoHackatime = document.getElementById("voyage-info-hackatime");
 let notice = document.getElementById("notice");
 let pricesButtons = document.getElementById("prices-buttons");
 let priceSubmitBtn = document.getElementById("price-submit-btn");
+let confirmationContainer = document.getElementById("confirmation-container");
+let confirmationText = document.getElementById("confirmation-text");
+let deleteVoyageForm = document.getElementById("delete-voyage-form");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -58,6 +62,26 @@ function fadeOut(element) {
     } else {
         element.classList.remove("fade-in");
     }
+}
+
+let confirmationCallback = null;
+function showConfirmation(text, callback) {
+    confirmationCallback = callback;
+    confirmationText.innerText = text;
+    fadeIn(confirmationContainer);
+}
+function confirmConfirmation() {
+    fadeOut(confirmationContainer);
+    confirmationCallback();
+}
+function cancelConfirmation() {
+    fadeOut(confirmationContainer);
+}
+
+function tryDeleteVoyage() {
+    showConfirmation("Are you sure you want to delete the active Voyage?", () => {
+        deleteVoyageForm.submit();
+    });
 }
 
 function selectTreasure() {
@@ -271,6 +295,7 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
         voyageInfoRepo.innerText = body["repo"];
         voyageInfoRepo.href = body["repo_url"];
         voyageInfoHackatime.innerText = body["hackatime-text"];
+        deleteVoyageBtn.style.display = "block";
         if (body["fp"]) {
             loadPrices(body["fp"]);
             fadeIn(islandFound);

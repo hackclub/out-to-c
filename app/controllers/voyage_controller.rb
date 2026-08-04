@@ -2,7 +2,7 @@ class VoyageController < ApplicationController
   # require all routes of the voyage controller to be logged in to an account
   before_action :require_logged_in
   # require dev endpoints to be in development environment
-  before_action :dev_check, only: %i[ delete add_hour ]
+  before_action :dev_check, only: %i[ add_hour ]
 
   def delete
     @voyage.delete()
