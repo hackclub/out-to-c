@@ -53,6 +53,7 @@
         </div>
     </div>
     <div id="active-voyage" <% if @voyage == nil %> style="display:none;"<% end %>>
+        <% if Rails.env.development? %>
         <div class="page" id="devpanel">
             <h2>Dev panel</h2>
             <%= form_with(url: voyage_add_hour_path) do |form| %>
@@ -62,6 +63,7 @@
                 <button>remove voyage</button>
             <% end %>
         </div>
+        <% end %>
         <div id="voyage-info">
             <div id="voyage-info-contents">
                 <span class="light">Voyage name:</span>
