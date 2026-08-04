@@ -16,38 +16,40 @@
 
 <div id="background"></div>
 <div id="varyingContents">
-<img id="pfp" src="<%= session[:user_id]["pfp"] %>">
+    <button onclick="backVoyage();" id="new-voyage-back"><%= image_tag "graphics/back.png", :alt => "Back" %></button>
+    <div id="new-voyage-div" class="page surround-border">
+        <% new_or_edit = @voyage == nil ? "New" : "Edit" %>
+        <% create_or_save = @voyage == nil ? "CREATE VOYAGE" : "SAVE CHANGES" %>
+        <h1><%= new_or_edit %> Voyage</h1>
+        <%= form_with(url: voyage_new_path, id: "new-voyage-form") do |form| %>
+            <label for=name>Name: </label><br>
+            <input autocomplete="off" name="name" type="text" value="<%= @voyage != nil && @voyage.name != nil ? @voyage.name : "" %>">
+            <br>
+            <label for=desc>Description (optional): </label><br>
+            <input autocomplete="off" name="desc" type="text"  value="<%= @voyage != nil && @voyage.desc != nil ? @voyage.desc : "" %>">
 
-<div id="cargo-slot-dragging-container"><img id="cargo-slot-dragging"></div>
+            <br>
+            <label for=hackatime>Select Hackatime project (optional): </label><br>
 
-<div id="no-existing-voyage" <% if @voyage != nil %> style="display:none;"<% end %>>
+            <select autocomplete="off" name="hackatime" id="hackatime">
+                <option value="" <%= @voyage == nil ? "selected" : "" %>>Select a Hackatime project</option>
+                <% @projects.each do |x| %>
+                    <% sel = @voyage != nil && @voyage.hackatime == x["name"] ? "selected" : "" %>
+                    <option <%= sel %> value="<%= x["name"] %>"><%= x["name"] + " (" + (x["total_seconds"].to_f / 60.0 / 60.0).to_i.to_s + " hrs)" %></option>
+                <% end %>
+            </select>
+            <br>
+            <button><%= create_or_save %></button>
+        <% end %>
+    </div>
+
+    <img id="pfp" src="<%= session[:user_id]["pfp"] %>">
+    <div id="cargo-slot-dragging-container"><img id="cargo-slot-dragging"></div>
+    <div id="no-existing-voyage" <% if @voyage != nil %> style="display:none;"<% end %>>
         <img id="logo" style="width:450px;" src="<%= asset_path("graphics/logo.svg") %>" alt="Out To C">
         <div id="new-voyage-buttons">
             <div class="surround-border"><a <%= @user.token != nil ? "disabled" : "" %> class="voyage-btn" href="https://hackatime.hackclub.com/oauth/authorize?client_id=<%= ENV["HACKATIME_UID"] %>&redirect_uri=<%= CGI.escape(auth_hackatime_callback_url) %>&response_type=code&scope=profile+read" id="link-hackatime">Link Hackatime</a></div>
             <div class="surround-border"><button <%= @user.token == nil ? "disabled" : "" %> class="voyage-btn" onclick="newVoyage();" id="new-voyage">New Voyage</button></div>
-        </div>
-        <button onclick="backVoyage();" id="new-voyage-back"><%= image_tag "graphics/back.png", :alt => "Back" %></button>
-        <div id="new-voyage-div" class="page surround-border">
-            <h1>New Voyage</h1>
-            <%= form_with(url: voyage_new_path, id: "new-voyage-form") do |form| %>
-                <label for=name>Name: </label><br>
-                <input autocomplete="off" name="name" type="text">
-                <br>
-                <label for=desc>Description (optional): </label><br>
-                <input autocomplete="off" name="desc" type="text">
-
-                <br>
-                <label for=hackatime>Select Hackatime project (optional): </label><br>
-
-                <select autocomplete="off" name="hackatime" id="hackatime">
-                    <option value="" selected>Select a Hackatime project</option>
-                    <% @projects.each do |x| %>
-                        <option value="<%= x["name"] %>"><%= x["name"] + " (" + (x["total_seconds"].to_f / 60.0 / 60.0).to_i.to_s + " hrs)" %></option>
-                    <% end %>
-                </select>
-                <br>
-                <button>CREATE VOYAGE</button>
-            <% end %>
         </div>
     </div>
     <div id="active-voyage" <% if @voyage == nil %> style="display:none;"<% end %>>
@@ -68,7 +70,7 @@
                 <span id="voyage-info-desc"><%= @voyage_desc_trim %></span><br>
                 <span class="light">Hackatime:</span><br>
                 <span id="voyage-info-hackatime"> <%= @hackatime_text %> </span><br>
-                <button id="edit-voyage" href="">Edit Details</button>
+                <button id="edit-voyage" onclick="editVoyage()">Edit Details</button>
             </div>
         </div>
         <div id="cargo">

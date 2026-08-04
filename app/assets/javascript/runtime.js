@@ -15,6 +15,7 @@ let draggingCargoSlot = document.getElementById("cargo-slot-dragging");
 let cargoInfoContents = document.getElementById("cargo-info-contents");
 let cargoInfoImg = document.getElementById("cargo-info-img");
 let cargoInfoText = document.getElementById("cargo-info-text");
+let voyageInfo = document.getElementById("voyage-info");
 let voyageInfoName = document.getElementById("voyage-info-name");
 let voyageInfoDesc = document.getElementById("voyage-info-desc");
 let voyageInfoHackatime = document.getElementById("voyage-info-hackatime");
@@ -75,6 +76,13 @@ globalThis.newVoyage = function () {
     fadeOut(logo);
 }
 globalThis.backVoyage = function () {
+    if (editingVoyage) {
+        editingVoyage = false;
+        fadeOut(newVoyageDiv);
+        fadeOut(newVoyageBack);
+        fadeIn(voyageInfo);
+        return;
+    }
     inNewVoyage = false;
     setCameraState(0);
     fadeIn(newVoyageButtons);
@@ -199,6 +207,14 @@ document.body.addEventListener("mouseup", (_event) => {
     draggingCargoSlot.src = "";
 });
 
+let editingVoyage = false;
+globalThis.editVoyage = function () {
+    fadeIn(newVoyageDiv);
+    fadeIn(newVoyageBack);
+    fadeOut(voyageInfo);
+    editingVoyage = true;
+};
+
 document.forms['new-voyage-form'].addEventListener('submit', (event) => {
     event.preventDefault();
     fetch(event.target.action, {
@@ -215,6 +231,8 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
             return;
         }
         voyage = parseInt(body["id"]);
+        fadeOut(newVoyageDiv);
+        fadeOut(newVoyageBack);
         fadeOut(noExistingVoyageScreen);
         fadeIn(activeVoyageScreen);
         setTravelDistance(body["total_seconds"] / 60.0 / 60.0);
