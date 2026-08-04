@@ -112,9 +112,16 @@ form>button {
     margin: 0 auto;
     margin-top: 10px;
     display: block;
+    color: black;
 }
 
-form>button:hover {
+form>button[disabled] {
+    cursor: default;
+    filter: brightness(0.7) contrast(0.7);
+    pointer-events: none;
+}
+
+form>button:hover:not([disabled]) {
     filter: saturate(1.1) brightness(1.1);
 }
 
@@ -299,7 +306,13 @@ form>button:hover {
     margin-top: 10px;
 }
 
-.confirm-btn:hover {
+.confirm-btn[disabled] {
+    cursor: default;
+    filter: brightness(0.7) contrast(0.7);
+    pointer-events: none;
+}
+
+.confirm-btn:hover:not([disabled]) {
     filter: saturate(1.1) brightness(1.1);
 }
 

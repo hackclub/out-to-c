@@ -3,6 +3,7 @@ let noExistingVoyageScreen = document.getElementById("no-existing-voyage");
 let newVoyageBtn = document.getElementById("new-voyage");
 let newVoyageDiv = document.getElementById("new-voyage-div");
 let newVoyageBack = document.getElementById("new-voyage-back");
+let newVoyageSubmitBtn = document.getElementById("new-voyage-form-submit");
 let logo = document.getElementById("logo");
 let cargo = document.getElementById("cargo");
 let treasureSelect = document.getElementById("treasure-select");
@@ -22,6 +23,7 @@ let voyageInfoDesc = document.getElementById("voyage-info-desc");
 let voyageInfoHackatime = document.getElementById("voyage-info-hackatime");
 let notice = document.getElementById("notice");
 let pricesButtons = document.getElementById("prices-buttons");
+let priceSubmitBtn = document.getElementById("price-submit-btn");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -120,6 +122,7 @@ globalThis.finalizePriceSelection = function () {
     if (selectedPriceID == "") {
         return;
     }
+    priceSubmitBtn.setAttribute("disabled", "");
 
     data = {
         "selection": selectedPriceID,
@@ -137,6 +140,7 @@ globalThis.finalizePriceSelection = function () {
         }
         return response.json();
     }).then((body) => {
+        priceSubmitBtn.removeAttribute("disabled");
         if (body["error"]) {
             showNotice("Error: " + body["error"]);
             return;
@@ -235,6 +239,7 @@ globalThis.editVoyage = function () {
 
 document.forms['new-voyage-form'].addEventListener('submit', (event) => {
     event.preventDefault();
+    newVoyageSubmitBtn.setAttribute("disabled", "");
     fetch(event.target.action, {
         method: 'POST',
         body: new URLSearchParams(new FormData(event.target))
@@ -244,6 +249,7 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
         }
         return response.json();
     }).then((body) => {
+        newVoyageSubmitBtn.removeAttribute("disabled");
         if (body["error"]) {
             showNotice("Error: " + body["error"]);
             return;

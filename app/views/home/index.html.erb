@@ -39,7 +39,7 @@
                 <% end %>
             </select>
             <br>
-            <button><%= create_or_save %></button>
+            <button id="new-voyage-form-submit"><%= create_or_save %></button>
         <% end %>
     </div>
 
@@ -143,8 +143,7 @@
                     %>
                     <div id="prices-buttons">
                     </div>
-                    <br>
-                    <button onclick="finalizePriceSelection();" class="confirm-btn">Confirm</button>
+                    <button id="price-submit-btn" onclick="finalizePriceSelection();" class="confirm-btn">Confirm</button>
                     <%= form_with(url: voyage_price_path, id: "price-form") do |form| end %>
                     </div>
                 </div>
