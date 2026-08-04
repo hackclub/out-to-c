@@ -18,6 +18,7 @@ let cargoInfoText = document.getElementById("cargo-info-text");
 let voyageInfoName = document.getElementById("voyage-info-name");
 let voyageInfoDesc = document.getElementById("voyage-info-desc");
 let voyageInfoHackatime = document.getElementById("voyage-info-hackatime");
+let notice = document.getElementById("notice");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -26,11 +27,13 @@ for (let element of document.getElementsByTagName("*")) {
     }
 }
 
-let notice = document.getElementById("notice");
-
 function showNotice(text) {
     notice.children[0].innerText = text;
     notice.style.display = "unset";
+}
+
+function hideNotice() {
+    notice.style.display = "none";
 }
 
 function fadeIn(element) {
@@ -57,7 +60,8 @@ function selectTreasure() {
 document.addEventListener("keydown", (event) => {
     if (event.code == "Escape") {
         if (inNewVoyage) { backVoyage(); }
-        if (cargoShown) { toggleCargo(); }
+        else if (cargoShown) { toggleCargo(); }
+        else if (notice.display != "none") { hideNotice(); }
     }
 });
 
