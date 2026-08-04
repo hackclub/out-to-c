@@ -97,10 +97,19 @@ class VoyageController < ApplicationController
 
     get_next_island()
 
+    fp = 0
+    if @found_prices.length > 0
+      fp = []
+      fp = JSON.parse(@found_prices.to_json)
+      fp.each_with_index do | x, i |
+          x[1]["src"] = ActionController::Base.helpers.asset_path("prices/"+x[0].to_s+".png")
+      end
+    end
+
     generate_desc_trimmed()
     generate_hackatime_text()
 
-    render json: { "name": @voyage_name_trim, "desc": @voyage_desc_trim, "hackatime-text": @hackatime_text, "id": @voyage.id, "total_seconds": @voyage.total_seconds, "next_island_remaining": @next_island - ( @voyage.total_seconds / 60 / 60) }
+    render json: { "name": @voyage_name_trim, "fp":fp, "desc": @voyage_desc_trim, "hackatime-text": @hackatime_text, "id": @voyage.id, "total_seconds": @voyage.total_seconds, "next_island_remaining": @next_island - ( @voyage.total_seconds / 60 / 60) }
   end
 
   private

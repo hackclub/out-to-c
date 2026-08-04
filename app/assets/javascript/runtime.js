@@ -257,6 +257,12 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
         voyageInfoName.innerText = body["name"];
         voyageInfoDesc.innerText = body["desc"];
         voyageInfoHackatime.innerText = body["hackatime-text"];
+        if (body["fp"]) {
+            console.log("fp", body["fp"]);
+            loadPrices(body["fp"]);
+            fadeIn(islandFound);
+            islandFound.style.animationPlayState = "running";
+        }
     }).catch((error) => {
         showNotice("Error: Not success :(");
         console.error(error);
@@ -264,9 +270,8 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
 });
 
 function loadPrices(found_prices) {
-    if (pricesButtons.children.length > 0) {
-        showNotice("Error: couldn't load prices");
-        return;
+    while (pricesButtons.children[0]) {
+        pricesButtons.children[0].remove();
     }
     let i = 0;
     for (let [key, value] of Object.entries(found_prices)) {
