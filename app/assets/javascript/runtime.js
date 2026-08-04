@@ -97,6 +97,10 @@ globalThis.toggleCargo = function () {
     console.log("wa");
     if (cargoShown) {
         fadeOut(cargo);
+        if (selectedCargoSlot != null) {
+            cargoInfoContents.style.display = "none";
+            selectedCargoSlot.classList.remove("selected-slot");
+        }
     } else {
         fadeIn(cargo);
     }
