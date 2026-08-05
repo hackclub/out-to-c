@@ -30,4 +30,4 @@ users:read
 ## Running in production
 For production, a minified version of the JS needs to be built.
 * Make sure Node.js and npm are installed, then run `npm install three esbuild`
-* Then, to build the minified js code, run `npx esbuild --bundle app/assets/javascript/main.js --format=esm --minify > public/min.js`
+* Then, to build the minified js code, run `npx esbuild --bundle app/assets/javascript/main.js --format=esm --minify > app/assets/javascript/min.js`
