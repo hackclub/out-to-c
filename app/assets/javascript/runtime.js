@@ -90,11 +90,16 @@ function tryDeleteVoyage() {
 
 function tryShipVoyage() {
     showConfirmation(
-        `Are you sure you want to ship this project?<br>
-        <span class="light">
+        `<h2>Are you sure you want to ship this project?</h2>
+        <span class="lightish">
         Only do this once your project is finished!<br>
-        After you ship, you will no longer be able to make changes to the project.<br>
-        Your project will be reviewed, after which you will received all prizes you have claimed so far!
+        Your project will be reviewed, after which you will receive all prizes you have claimed so far!<br>
+        Requirements for shipping:
+        <ul style="margin:0">
+            <li>Valid project name, description and repository</li>
+            <li>README.md file which explains your project and how to use it</li>
+            <li>A project made with C/C++</li>
+        </ul>
         </span>`,
         () => { });
 }
