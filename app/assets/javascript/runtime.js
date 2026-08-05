@@ -118,6 +118,7 @@ function tryShipVoyage() {
                 return response.json();
             }).then((body) => {
                 if (body["error"]) {
+                    shipButton.removeAttribute("disabled");
                     showNotice("Error: " + body["error"]);
                     return;
                 }
