@@ -114,7 +114,7 @@
                     end
                     ActiveSupport::SafeBuffer.new("<script>pcs="+pcs.to_json+"</script>")
                     %>
-                    <% (0..6*4-1).each do |x| %>
+                    <% (0..4*3-1).each do |x| %>
                         <div class="cargo-slot" id="cargoSlot<%= x %>">
                             <%= if pcs[x] != nil && pcs[x] != ""
                             puts (image_tag "prices/"+ pcs[x][0] + ".png").class

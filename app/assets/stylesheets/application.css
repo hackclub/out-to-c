@@ -396,15 +396,14 @@ form>button:hover:not([disabled]) {
 
 #cargo-slots {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     background-color: black;
     padding: 2.5px;
 }
 
 .cargo-slot {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     border: none;
     background-color: #563921;
     margin: 2.5px;
@@ -458,7 +457,6 @@ form>button:hover:not([disabled]) {
     width: 100%;
     background-color: #6e4c30;
     border: 5px solid #9c6a3d;
-    height: 335px;
     margin-left: 27px;
     min-width: 220px;
     max-width: 310px;
@@ -478,7 +476,7 @@ form>button:hover:not([disabled]) {
 }
 
 #cargo-info-img {
-    width: 255px;
+    width: 290px;
 }
 
 #new-voyage-div {

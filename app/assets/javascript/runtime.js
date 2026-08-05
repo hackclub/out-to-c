@@ -259,7 +259,7 @@ function releaseCargoSlot() {
     }
 }
 
-for (let i = 0; i < 6 * 4; i++) {
+for (let i = 0; i < 4 * 3; i++) {
     let element = document.getElementById("cargoSlot" + i);
     element.addEventListener("mousedown", selectCargoSlot.bind(element));
     element.addEventListener("mouseup", releaseCargoSlot.bind(element));
