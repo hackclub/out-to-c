@@ -5,6 +5,7 @@
 <div id="admin-users">
     <% for u in @users %>
         <div class="admin-user-entry">
+            <p style="float:right"><%= u.voyage %></p>
             <p><%= u.name %></p>
             <img src="<%= u.pfp %>">
         </div>
@@ -23,6 +24,7 @@
                     <p><%= v.desc %></p>
                     <p><%= v.hackatime + " (" + (v.total_seconds / 60 / 60).to_i.to_s + "h)"%></p>
                     <p><a href="<%= v.repo %>"><%= v.repo %></a></p>
+                    <span style="position:absolute;right:5px;bottom:5px;width:fit-content;"><%= v.id %></span>
                 </div>
             <% end%>
         </div>

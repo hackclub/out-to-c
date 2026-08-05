@@ -970,10 +970,13 @@ canvas {
     width: fit-content;
     color: white;
     min-width: 450px;
+    position: relative;
+    margin-right: 15px;
 }
 
 .admin-user-entry {
     min-width: 0;
+    max-width: 125px;
 }
 
 .admin-user-entry>p {
