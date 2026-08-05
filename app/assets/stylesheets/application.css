@@ -636,11 +636,32 @@ form>button:hover:not([disabled]) {
 .light {
     font-weight: lighter;
     font-size: 11px !important;
+    line-height: 13px;
 }
 
 #devpanel {
     position: absolute;
-    bottom: 0;
+    top: 0;
+    left: 400px;
+}
+
+#ship-container {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+#ship-button {
+    background-color: #399739;
+    border: 2px solid #78e56c;
+    margin-top: 10px;
+    color: white;
+    min-width: 150px;
+    text-align: center;
+}
+
+#ship-button:hover {
+    filter: saturate(1.1) brightness(1.1);
 }
 
 .devlogin {

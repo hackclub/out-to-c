@@ -68,7 +68,7 @@ let confirmationCallback = null;
 let confirmationOpen = false;
 function showConfirmation(text, callback) {
     confirmationCallback = callback;
-    confirmationText.innerText = text;
+    confirmationText.innerHTML = text;
     fadeIn(confirmationContainer);
     confirmationOpen = true;
 }
@@ -86,6 +86,17 @@ function tryDeleteVoyage() {
     showConfirmation("Are you sure you want to delete the active Voyage?", () => {
         deleteVoyageForm.submit();
     });
+}
+
+function tryShipVoyage() {
+    showConfirmation(
+        `Are you sure you want to ship this project?<br>
+        <span class="light">
+        Only do this once your project is finished!<br>
+        After you ship, you will no longer be able to make changes to the project.<br>
+        Your project will be reviewed, after which you will received all prizes you have claimed so far!
+        </span>`,
+        () => { });
 }
 
 function selectTreasure() {
