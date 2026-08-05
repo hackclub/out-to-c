@@ -33,7 +33,9 @@ class VoyageController < ApplicationController
       return
     end
     # valid ship probably !
-    
+    id = slack_open_conversation(@user.uid)
+    slack_send_message_conversation(id, "hiya! :yay:")
+    render json: { "ok": "yay" }
   end
   def price
     get_next_island

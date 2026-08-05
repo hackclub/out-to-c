@@ -78,6 +78,7 @@
         <% end %>
         <div id="ship-container">
             <button onclick="tryShipVoyage()" id="ship-button">Ship Project</button>
+            <%= form_with(url: voyage_ship_path, id: "ship-form") do |form| end %>
         </div>
         <div id="voyage-info">
             <div id="voyage-info-contents">

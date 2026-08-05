@@ -30,6 +30,8 @@ let priceSubmitBtn = document.getElementById("price-submit-btn");
 let confirmationContainer = document.getElementById("confirmation-container");
 let confirmationText = document.getElementById("confirmation-text");
 let deleteVoyageForm = document.getElementById("delete-voyage-form");
+let shipVoyageForm = document.getElementById("ship-form");
+let shipButton = document.getElementById("ship-button");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -101,7 +103,27 @@ function tryShipVoyage() {
             <li>A project made with C/C++</li>
         </ul>
         </span>`,
-        () => { });
+        () => {
+            shipButton.setAttribute("disabled", "");
+            fetch(shipVoyageForm.action, {
+                method: 'POST',
+                body: new URLSearchParams(new FormData(shipVoyageForm))
+            }).then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            }).then((body) => {
+                shipButton.removeAttribute("disabled");
+                if (body["error"]) {
+                    showNotice("Error: " + body["error"]);
+                    return;
+                }
+            }).catch((error) => {
+                showNotice("Error: Not success :(");
+                console.error(error);
+            });
+        });
 }
 
 function selectTreasure() {

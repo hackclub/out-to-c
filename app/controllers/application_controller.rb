@@ -11,6 +11,32 @@ class ApplicationController < ActionController::Base
 
 
   private
+    def slack_open_conversation(user)
+      puts "opening convo with: " + user
+      if ENV["SLACK_BOT_TOKEN"] == nil || ENV["SLACK_BOT_TOKEN"].blank?
+        puts "error: no slack bot token set !!"
+        return
+      end
+      url = URI("https://slack.com/api/conversations.open")
+      body = { "users": user }
+      headers = { 'Content-Type': 'application/json', "Authorization": "Bearer " + ENV["SLACK_BOT_TOKEN"]  }
+      res = Net::HTTP.post(url, body.to_json, headers)
+      puts res.body
+      data = JSON.parse(res.body)
+      return data["channel"]["id"]
+    end
+    def slack_send_message_conversation(dm_id,text)
+      if ENV["SLACK_BOT_TOKEN"] == nil || ENV["SLACK_BOT_TOKEN"].blank?
+        puts "error: no slack bot token set !!"
+        return
+      end
+      url = URI("https://slack.com/api/chat.postMessage")
+      body = { "channel": dm_id, "text":text }
+      headers = { 'Content-Type': 'application/json', "Authorization": "Bearer " + ENV["SLACK_BOT_TOKEN"]  }
+      res = Net::HTTP.post(url, body.to_json, headers)
+      puts res.body
+      data = JSON.parse(res.body)
+    end
     def get_islands
       @islands = [6,12,24]
     end
