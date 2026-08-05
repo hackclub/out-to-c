@@ -68,6 +68,8 @@ class VoyageController < ApplicationController
       return
     end
     # valid ship probably !
+    aid = slack_open_conversation(ENV["ADMIN_SLACK_ID"])
+    id = slack_open_conversation(@user.uid)
 
     @voyage.ship_status = 1
     @voyage.save
@@ -76,11 +78,9 @@ class VoyageController < ApplicationController
     if @voyage_name_trim == nil or @voyage_name_trim.blank?
       generate_desc_trimmed()
     end
-    aid = slack_open_conversation(ENV["ADMIN_SLACK_ID"])
     slack_send_message_conversation(aid, ":shipitparrot: New ship alert !!\n<@" + @user.uid + "> just shipped `"+ @voyage_name_trim + "`, " + (@voyage.total_seconds / 60 / 60).to_i.to_s + " hours.\nPrices: `" + @voyage.cargo + "`")
 
     # send message to user!
-    id = slack_open_conversation(@user.uid)
     slack_send_message_conversation(id, "Good work captain !! Your project has been shipped! :yay::yay:\n\nYour project will be reviewed soon and after that you will receive your prices! :sos-heidi-treasure::3c:\nDM <@" + ENV["ADMIN_SLACK_ID"] + "> if you have any questions!\n\n/pirate orph' <3")
 
     render json: { "ok": "yay" }
