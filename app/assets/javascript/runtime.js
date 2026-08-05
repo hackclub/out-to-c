@@ -151,6 +151,9 @@ globalThis.toggleCargo = function () {
         }
     } else {
         fadeIn(cargo);
+        if (editingVoyage) {
+            backVoyage();
+        }
     }
     cargoShown = !cargoShown;
 }
@@ -281,6 +284,9 @@ document.body.addEventListener("mouseup", (_event) => {
 
 let editingVoyage = false;
 globalThis.editVoyage = function () {
+    if (cargoShown) {
+        toggleCargo();
+    }
     fadeIn(newVoyageDiv);
     fadeIn(newVoyageBack);
     fadeOut(voyageInfo);
