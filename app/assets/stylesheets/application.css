@@ -939,3 +939,51 @@ canvas {
     z-index: -3;
     background: linear-gradient(180deg, rgb(5, 130, 233) 00%, rgb(0, 114, 208) 80%, rgb(11, 0, 89) 96%);
 }
+
+.admin-body {
+    background-color: #1c1c1c;
+    color: white;
+    margin: 5px;
+}
+
+.admin-body a {
+    color: rgb(164, 131, 255);
+}
+
+.admin-body h1,
+.admin-body h2 {
+    margin: 20px;
+}
+
+.admin-body h2 {
+    text-align: left;
+}
+
+/* .admin-voyage-list {} */
+
+.admin-voyage-entry,
+.admin-user-entry {
+    display: inline-block;
+    background-color: #161616;
+    border: 3px solid #303030;
+    padding: 10px;
+    width: fit-content;
+    color: white;
+    min-width: 450px;
+}
+
+.admin-user-entry {
+    min-width: 0;
+}
+
+.admin-user-entry>p {
+    margin: 0;
+}
+
+.admin-user-entry>img {
+    width: 100px;
+}
+
+.admin-voyage-entry>p {
+    margin: 0;
+}

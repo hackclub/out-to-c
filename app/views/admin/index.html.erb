@@ -1,0 +1,31 @@
+<h1>Admin Panel</h1>
+
+<hr>
+<h1>Users:</h1>
+<div id="admin-users">
+    <% for u in @users %>
+        <div class="admin-user-entry">
+            <p><%= u.name %></p>
+            <img src="<%= u.pfp %>">
+        </div>
+    <% end%>
+</div>
+<hr>
+<h1>Voyages:</h1>
+<div id="admin-voyages">
+    <% for section in @sections %>
+        <h2><%= section[0] %>:</h2>
+        <div class="admin-voyage-list">
+            <% for v in section[1] %>
+                <div class="admin-voyage-entry">
+                    <a style="float: right" href="edit/<%= v.id %>">edit</a>
+                    <p><b><%= v.name %></b></p>
+                    <p><%= v.desc %></p>
+                    <p><%= v.hackatime + " (" + (v.total_seconds / 60 / 60).to_i.to_s + "h)"%></p>
+                    <p><a href="<%= v.repo %>"><%= v.repo %></a></p>
+                </div>
+            <% end%>
+        </div>
+    <% end%>
+</div>
+<hr>
