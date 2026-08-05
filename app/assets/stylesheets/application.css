@@ -61,7 +61,7 @@ body {
     left: 0;
     width: 100%;
     height: 50vh;
-    background-image: url("/assets/graphics/sky-top.png"), linear-gradient(180deg, rgba(0, 145, 248, 1) 1%, rgba(138, 218, 255, 1) 76%, rgba(255, 255, 255, 1) 100%);
+    background-image: url("graphics/sky-top.png"), linear-gradient(180deg, rgba(0, 145, 248, 1) 1%, rgba(138, 218, 255, 1) 76%, rgba(255, 255, 255, 1) 100%);
     background-repeat: repeat-x;
     background-position: top, bottom;
     background-size: 67vh, 100vh;
@@ -69,7 +69,7 @@ body {
 
 @font-face {
     font-family: inknut-antiqua;
-    src: url("/assets/InknutAntiqua/InknutAntiqua-Regular.ttf");
+    src: url("InknutAntiqua/InknutAntiqua-Regular.ttf");
 
     /* from: https://gomakethings.com/better-font-loading-with-the-font-displayswap-property/
 
@@ -81,7 +81,7 @@ body {
 
 @font-face {
     font-family: inknut-antiqua;
-    src: url("/assets/InknutAntiqua/InknutAntiqua-Bold.ttf");
+    src: url("InknutAntiqua/InknutAntiqua-Bold.ttf");
     font-weight: bold;
     font-display: swap;
 }
