@@ -23,6 +23,7 @@
                     <a style="float: right" href="edit/<%= v.id %>">edit</a>
                     <p><b><%= v.name %></b></p>
                     <p><%= v.desc %></p>
+                    <p><%= v.cargo.blank? ? "<no-cargo>" : v.cargo %></p>
                     <p><%= v.hackatime + " (" + (v.total_seconds / 60 / 60).to_i.to_s + "h)"%></p>
                     <p><a href="<%= v.repo %>"><%= v.repo %></a></p>
                     <span style="position:absolute;right:5px;bottom:5px;width:fit-content;"><%= v.id %></span>
