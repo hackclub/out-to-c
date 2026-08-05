@@ -11,6 +11,30 @@ class VoyageController < ApplicationController
     session[:user_id] = @user
     redirect_to root_path
   end
+  def ship
+    if @voyage == nil
+      render json: { "error": "No voyage to ship" }
+      return
+    end
+    if @voyage.name == nil or @voyage.name.blank?
+      render json: { "error": "Voyage name is empty" }
+      return
+    end
+    if @voyage.desc == nil or @voyage.desc.blank?
+      render json: { "error": "Voyage description is empty" }
+      return
+    end
+    if @voyage.repo == nil or @voyage.repo.blank?
+      render json: { "error": "Voyage repository is unset" }
+      return
+    end
+    if @voyage.hackatime == nil or @voyage.hackatime.blank?
+      render json: { "error": "Voyage is not linked to any hackatime project" }
+      return
+    end
+    # valid ship probably !
+    
+  end
   def price
     get_next_island
     if not @found_island
