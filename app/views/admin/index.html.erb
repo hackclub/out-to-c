@@ -5,9 +5,10 @@
 <div id="admin-users">
     <% for u in @users %>
         <div class="admin-user-entry">
-            <p style="float:right"><%= u.voyage %></p>
+            <p style="float:right"><%= u.id %></p>
             <p><%= u.name %></p>
             <img src="<%= u.pfp %>">
+            <span style="position:absolute;right:5px;bottom:5px;width:fit-content;"><%= u.voyage %></span>
         </div>
     <% end%>
 </div>

@@ -985,6 +985,7 @@ canvas {
 
 .admin-user-entry>img {
     width: 100px;
+    margin-bottom: 10px;
 }
 
 .admin-voyage-entry>p {
