@@ -206,6 +206,10 @@ globalThis.finalizePriceSelection = function () {
                 break;
             }
         }
+        if (body["fp"]) {
+            loadPrices(body["fp"]);
+            fadeIn(islandFound);
+        }
     }).catch((error) => {
         showNotice("Error: Not success :(");
         console.error(error);
@@ -354,7 +358,3 @@ function loadPrices(found_prices) {
     }
 }
 loadPrices(found_prices)
-
-//                     <% @found_prices.each_with_index do | x, i | %>
-// <button class="treasure-select-btn" id="priceButton<%= i %>" onclick="selectPrice(<%= "'" + x[0].to_s + "', " + i.to_s %>)" ><%= image_tag "prices/" + x[0].to_s + ".png" %><hr><span><%= x[1][:name] %></span></button>
-//                     <% end %>

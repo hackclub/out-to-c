@@ -54,8 +54,17 @@ class VoyageController < ApplicationController
     puts @voyage.cargo
     @voyage.save
     get_next_island
+    
+    fp = 0
+    if @found_island
+      fp = JSON.parse(@found_prices.to_json)
+      fp.each_with_index do | x, i |
+          x[1]["src"] = ActionController::Base.helpers.asset_path("prices/"+x[0].to_s+".png")
+      end
+    end
 
-    render json: { "ok": 1, "price":details, "img": img, "next_island_remaining": @next_island - ( @voyage.total_seconds / 60 / 60) }
+
+    render json: { "ok": 1, "price":details, "img": img, "next_island_remaining": @next_island - ( @voyage.total_seconds / 60 / 60), "fp": fp }
   end
   def add_hour
     if @voyage.total_seconds == nil
