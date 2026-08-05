@@ -69,15 +69,7 @@
             <div class="surround-border"><button <%= @user.token == nil ? "disabled" : "" %> class="voyage-btn" onclick="newVoyage();" id="new-voyage">New Voyage</button></div>
         </div>
     </div>
-    <div id="active-voyage" <% if @voyage == nil %> style="display:none;"<% end %>>
-        <% if Rails.env.development? %>
-        <div class="page" id="devpanel">
-            <h2>Dev panel</h2>
-            <%= form_with(url: voyage_add_hour_path) do |form| %>
-                <button onclick="setTravelDistance(travelDistance+1)">add 1 Hour</button>
-            <% end %>
-        </div>
-        <% end %>
+    <div id="active-voyage" <% if @voyage == nil or @voyage.ship_status != 0 %> style="display:none;"<% end %>>
         <div id="ship-container">
             <button onclick="tryShipVoyage()" id="ship-button">Ship Project</button>
             <%= form_with(url: voyage_ship_path, id: "ship-form") do |form| end %>
@@ -95,6 +87,57 @@
                 <button id="edit-voyage" onclick="editVoyage()">Edit Details</button>
             </div>
         </div>
+        <div id="minimap" <%= @found_island ? "style=display:none" : "" %>>
+            <%= image_tag "graphics/ship_icon.png",:id => "ship-icon" , :alt => "ship-icon" %>
+            <%= image_tag "graphics/treasure_icon.png",:id => "treasure-icon" , :alt => "treasure-icon" %>
+            <span id="minimap-text"><%= @voyage != nil ? (@next_island - @voyage.total_seconds / 60 / 60 + 0.5).to_i.to_s : "-" %> hours </span>
+        </div>
+        <div id="island-found" style="<%= @found_island ? "display:unset; animation-play-state: running;" : "" %>">
+            <div id="island-found-center">
+                <link rel="preload" as="image" href="<%= image_url("graphics/treasure_chest_open.png")  %>" fetchpriority="high">
+                <%= image_tag "graphics/island_found.png",:id => "island-found-image" , :alt => "Island" %>
+                <button onclick="selectTreasure()" id="island-found-chest"></button>
+            </div>
+            <div id="treasure-select-container">
+                <div id="treasure-select">
+                    <h1>Treasure Chest</h1>
+                    <span>Select 1 item to receive.</span>
+                    <br>
+                    
+                    <%= 
+                    fp = JSON.parse(@found_prices.to_json)
+                    fp.each_with_index do | x, i |
+                        x[1]["src"] = image_url("prices/"+x[0].to_s+".png")
+                    end
+
+                    ActiveSupport::SafeBuffer.new("<script>found_prices="+fp.to_json+"</script>")
+                    %>
+                    <div id="prices-buttons">
+                    </div>
+                    <button id="price-submit-btn" onclick="finalizePriceSelection();" class="confirm-btn">Confirm</button>
+                    <%= form_with(url: voyage_price_path, id: "price-form") do |form| end %>
+                    </div>
+                </div>
+        </div>
+    </div>
+    
+    <div id="shipped-voyage" <% if @voyage == nil or @voyage.ship_status == 0 %> style="display:none;"<% end %>>
+        <h1>Voyage Shipped!</h1>
+        <h2>Awaiting approval.</h2>
+    </div>
+
+    <div id="shipped-or-active-voyage" <% if @voyage == nil %> style="display:none;"<% end %>>
+        <% if Rails.env.development? %>
+        <div class="page" id="devpanel">
+            <h2>Dev panel</h2>
+            <%= form_with(url: voyage_add_hour_path) do |form| %>
+                <button onclick="setTravelDistance(travelDistance+1)">add 1 Hour</button>
+            <% end %>
+            <%= form_with(url: voyage_delete_force_path) do |form| %>
+                <button>force delete voyage</button>
+            <% end %>
+        </div>
+        <% end %>
         <div id="cargo">
             <div id="cargo-header">
                 <span>Ship Cargo</span>
@@ -138,37 +181,5 @@
             </div>
         </div>
         <button onclick="toggleCargo()" id="cargo-button"><%= image_tag "graphics/cargo.png", :alt => "Cargo" %></button>
-        <div id="minimap" <%= @found_island ? "style=display:none" : "" %>>
-            <%= image_tag "graphics/ship_icon.png",:id => "ship-icon" , :alt => "ship-icon" %>
-            <%= image_tag "graphics/treasure_icon.png",:id => "treasure-icon" , :alt => "treasure-icon" %>
-            <span id="minimap-text"><%= @voyage != nil ? (@next_island - @voyage.total_seconds / 60 / 60 + 0.5).to_i.to_s : "-" %> hours </span>
-        </div>
-        <div id="island-found" style="<%= @found_island ? "display:unset; animation-play-state: running;" : "" %>">
-            <div id="island-found-center">
-                <link rel="preload" as="image" href="<%= image_url("graphics/treasure_chest_open.png")  %>" fetchpriority="high">
-                <%= image_tag "graphics/island_found.png",:id => "island-found-image" , :alt => "Island" %>
-                <button onclick="selectTreasure()" id="island-found-chest"></button>
-            </div>
-            <div id="treasure-select-container">
-                <div id="treasure-select">
-                    <h1>Treasure Chest</h1>
-                    <span>Select 1 item to receive.</span>
-                    <br>
-                    
-                    <%= 
-                    fp = JSON.parse(@found_prices.to_json)
-                    fp.each_with_index do | x, i |
-                        x[1]["src"] = image_url("prices/"+x[0].to_s+".png")
-                    end
-
-                    ActiveSupport::SafeBuffer.new("<script>found_prices="+fp.to_json+"</script>")
-                    %>
-                    <div id="prices-buttons">
-                    </div>
-                    <button id="price-submit-btn" onclick="finalizePriceSelection();" class="confirm-btn">Confirm</button>
-                    <%= form_with(url: voyage_price_path, id: "price-form") do |form| end %>
-                    </div>
-                </div>
-        </div>
     </div>
 </div>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   post "voyage/new" => "voyage#new"
   post "voyage/delete" => "voyage#delete"
+  post "voyage/delete_force" => "voyage#delete_force"
   post "voyage/add_hour" => "voyage#add_hour"
   get "voyage/wipe_slack_convo" => "voyage#wipe_slack_convo"
   post "voyage/price" => "voyage#price"

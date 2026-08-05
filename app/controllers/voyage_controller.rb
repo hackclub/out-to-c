@@ -2,7 +2,7 @@ class VoyageController < ApplicationController
   # require all routes of the voyage controller to be logged in to an account
   before_action :require_logged_in
   # require dev endpoints to be in development environment
-  before_action :dev_check, only: %i[ add_hour wipe_slack_convo]
+  before_action :dev_check, only: %i[ add_hour wipe_slack_convo delete_force]
 
   def delete
     if @voyage == nil
@@ -13,11 +13,11 @@ class VoyageController < ApplicationController
       redirect_to root_path, notice: "Error: Can't delete already shipped Voyage! Ship status: " + @voyage.ship_status.to_s 
       return
     end
-    @voyage.delete()
-    @user.voyage = nil
-    @user.save!
-    session[:user_id] = @user
-    redirect_to root_path
+    delete_internal()
+  end
+
+  def delete_force
+    delete_internal()
   end
 
   def wipe_slack_convo
@@ -214,6 +214,13 @@ class VoyageController < ApplicationController
   end
 
   private
+    def delete_internal
+      @voyage.delete()
+      @user.voyage = nil
+      @user.save!
+      session[:user_id] = @user
+      redirect_to root_path
+    end
     def dev_check
       if !Rails.env.development?
         redirect_to root_path

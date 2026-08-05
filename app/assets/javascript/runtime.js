@@ -32,6 +32,8 @@ let confirmationText = document.getElementById("confirmation-text");
 let deleteVoyageForm = document.getElementById("delete-voyage-form");
 let shipVoyageForm = document.getElementById("ship-form");
 let shipButton = document.getElementById("ship-button");
+let shippedVoyageScreen = document.getElementById("shipped-voyage");
+let shippedOrActiveVoyageScreen = document.getElementById("shipped-or-active-voyage");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -91,6 +93,7 @@ function tryDeleteVoyage() {
 }
 
 function tryShipVoyage() {
+    if (cargoShown) { toggleCargo(); }
     showConfirmation(
         `<h2>Are you sure you want to ship this project?</h2>
         <span class="lightish">
@@ -114,11 +117,12 @@ function tryShipVoyage() {
                 }
                 return response.json();
             }).then((body) => {
-                shipButton.removeAttribute("disabled");
                 if (body["error"]) {
                     showNotice("Error: " + body["error"]);
                     return;
                 }
+                fadeOut(activeVoyageScreen);
+                fadeIn(shippedVoyageScreen);
                 setShipDirection(-1);
             }).catch((error) => {
                 showNotice("Error: Not success :(");
@@ -339,6 +343,7 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
         fadeOut(newVoyageBack);
         fadeOut(noExistingVoyageScreen);
         fadeIn(activeVoyageScreen);
+        fadeIn(shippedOrActiveVoyageScreen);
         if (editingVoyage) {
             fadeIn(voyageInfo);
         }
