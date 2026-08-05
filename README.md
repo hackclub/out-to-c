@@ -10,6 +10,21 @@ This is the Ruby on Rails backend for the Hack Club YSWS [Out to C](https://out-
 * Set up the .env file! Copy the example file with `cp .env.example .env`, then open .env and follow the instructions there.
 * And then you can run the server with `rails s` and hope it works!!
 
+### Slack Bot
+The backend uses a slack bot for fetching user information and sending messages!
+
+The server will work for development purposes without a bot, but for production one is needed.
+
+You'll have to create a bot with the following scopes:
+```
+channels:read
+chat:write
+groups:read
+im:read
+mpim:read
+users.profile:read
+users:read
+```
 
 ## Running in production
 For production, a minified version of the JS needs to be built.
