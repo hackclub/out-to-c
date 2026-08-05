@@ -17,6 +17,10 @@ class HomeController < ApplicationController
           return
         end
         
+        if @voyage.ship_status != 0
+          return
+        end
+        
         for a in @projects
           if a["name"] == @voyage.hackatime
             @voyage.total_seconds = a["total_seconds"]

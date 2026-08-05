@@ -5,6 +5,14 @@ class VoyageController < ApplicationController
   before_action :dev_check, only: %i[ add_hour wipe_slack_convo]
 
   def delete
+    if @voyage == nil
+      redirect_to root_path, notice: "Error: Voyage doesn't exist"
+      return
+    end
+    if @voyage.ship_status != 0
+      redirect_to root_path, notice: "Error: Can't delete already shipped Voyage! Ship status: " + @voyage.ship_status.to_s 
+      return
+    end
     @voyage.delete()
     @user.voyage = nil
     @user.save!
@@ -39,6 +47,10 @@ class VoyageController < ApplicationController
       render json: { "error": "No voyage to ship" }
       return
     end
+    if @voyage.ship_status != 0
+      render json: { "error": "Voyage is already shipped! Ship status: " + @voyage.ship_status.to_s }
+      return
+    end
     if @voyage.name == nil or @voyage.name.blank?
       render json: { "error": "Voyage name is empty" }
       return
@@ -57,6 +69,9 @@ class VoyageController < ApplicationController
     end
     # valid ship probably !
 
+    @voyage.ship_status = 1
+    @voyage.save
+
     # send message to reviewer
     if @voyage_name_trim == nil or @voyage_name_trim.blank?
       generate_desc_trimmed()
@@ -72,6 +87,10 @@ class VoyageController < ApplicationController
   end
 
   def price
+    if @voyage.ship_status != 0
+      render json: { "error": "Voyage is shipped, no prices can be claimed at this point. Ask for support in #out-to-c. Ship status: " + @voyage.ship_status.to_s }
+      return
+    end
     get_next_island
     if not @found_island
       render json: { "error": "You cant claim this item, @found_island not found" }
@@ -103,6 +122,9 @@ class VoyageController < ApplicationController
     render json: { "ok": 1, "price":details, "img": img, "next_island_remaining": @next_island - ( @voyage.total_seconds / 60 / 60), "fp": fp }
   end
   def add_hour
+    if @voyage.ship_status != 0
+      return
+    end
     if @voyage.total_seconds == nil
       @voyage.total_seconds = 0.0
     end
@@ -113,6 +135,11 @@ class VoyageController < ApplicationController
     if @voyage != nil
       # editing voyage !
       # todo: back up old version?
+
+      if @voyage.ship_status != 0
+        render json: { "error": "Shipped voyage can't be editted! Ship status: " + @voyage.ship_status.to_s }
+        return
+      end
     end
     if params["name"].strip.empty?
       render json: { "error": "Name required." }
@@ -147,13 +174,17 @@ class VoyageController < ApplicationController
       "desc": params["desc"],
       "repo": params["repo"],
       "hackatime": params["hackatime"],
-      "cargo":"",
+      "ship_status": 0,
+      "reviewer_note": "",
+      "cargo": "",
       "last_island":0
     }
     if @voyage != nil
       # keep voyage data
       data["cargo"] = @voyage["cargo"]
       data["last_island"] = @voyage["last_island"]
+      data["reviewer_note"] = @voyage["reviewer_note"]
+      data["ship_status"] = @voyage["ship_status"]
       @voyage.update(data)
     else
       @voyage = Voyage.new(data)
