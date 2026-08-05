@@ -21,6 +21,7 @@ channels:read
 chat:write
 groups:read
 im:read
+im:write
 mpim:read
 users.profile:read
 users:read
