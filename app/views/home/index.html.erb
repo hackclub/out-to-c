@@ -5,7 +5,9 @@
 
     _activeCameraStateIndex = voyage == null ? 0 : 2;
 
-    prices = "<%= @voyage && @voyage.cargo %>"
+    prices = "<%= @voyage && @voyage.cargo %>";
+
+    shipStatus = <%= @voyage != nil ? @voyage.ship_status : 0%>
 </script>
 
 <style>

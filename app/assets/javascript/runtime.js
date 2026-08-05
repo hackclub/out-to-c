@@ -119,6 +119,7 @@ function tryShipVoyage() {
                     showNotice("Error: " + body["error"]);
                     return;
                 }
+                setShipDirection(-1);
             }).catch((error) => {
                 showNotice("Error: Not success :(");
                 console.error(error);
@@ -385,4 +386,4 @@ function loadPrices(found_prices) {
         i += 1;
     }
 }
-loadPrices(found_prices)
+loadPrices(found_prices);

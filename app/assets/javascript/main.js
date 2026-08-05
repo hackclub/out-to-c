@@ -152,6 +152,14 @@ for (let child of island.children) {
     }
 }
 ship.position.x = travelDistance;
+
+globalThis.setShipDirection = function (scale) {
+    ship.material.map.repeat.x = scale;
+}
+if (shipStatus != 0) {
+    setShipDirection(-1);
+}
+
 scene.add(island);
 let water = await loadModel("water", waterShader);
 
