@@ -101,7 +101,7 @@ class AuthController < ApplicationController
             puts slack_data
             session[:user_id] = user
             user.save
-            redirect_to root_path, notice: "welcome, new user named: "+user.name
+            redirect_to root_path
         else
             puts "WELCOME back"
             # returning user, only update the token,
@@ -111,7 +111,7 @@ class AuthController < ApplicationController
 
             session[:user_id] = existing_user
             existing_user.save
-            redirect_to root_path, notice: "welcome back, user named:"+existing_user.name
+            redirect_to root_path
         end
         end
     end
