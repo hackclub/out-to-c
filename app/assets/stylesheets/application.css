@@ -944,7 +944,7 @@ canvas {
 .admin-body {
     background-color: #1c1c1c;
     color: white;
-    margin: 5px;
+    margin: 25px;
 }
 
 .admin-body a {
@@ -953,7 +953,7 @@ canvas {
 
 .admin-body h1,
 .admin-body h2 {
-    margin: 20px;
+    margin: 20px 0;
 }
 
 .admin-body h2 {
@@ -973,6 +973,43 @@ canvas {
     min-width: 450px;
     position: relative;
     margin-right: 15px;
+}
+
+#admin-edit {
+    padding: 15px;
+    border: 3px solid #303030;
+    background-color: #161616;
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
+    min-width: 900px;
+}
+
+#admin-edit input,
+#admin-edit select {
+    border: 3px solid #303030;
+    background-color: #161616;
+    color: white;
+    width: 450px;
+    float: right;
+    height: 28px;
+}
+
+#admin-edit select {
+    width: 460px;
+    height: 36px;
+}
+
+#admin-edit label,
+#admin-edit span,
+#admin-edit a {
+    float: left;
+}
+
+#admin-edit button {
+    border: 3px solid #303030;
+    background-color: #161616;
+    color: white;
 }
 
 .admin-user-entry {

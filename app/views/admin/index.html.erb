@@ -20,7 +20,7 @@
         <div class="admin-voyage-list">
             <% for v in section[1] %>
                 <div class="admin-voyage-entry">
-                    <a style="float: right" href="edit/<%= v.id %>">edit</a>
+                    <a style="float: right" href="/admin/edit/<%= v.id %>">edit</a>
                     <p><b><%= v.name %></b></p>
                     <p><%= v.desc %></p>
                     <p><%= v.cargo.blank? ? "<no-cargo>" : v.cargo %></p>

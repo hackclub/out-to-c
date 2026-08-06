@@ -129,6 +129,9 @@ class ApplicationController < ActionController::Base
     end
     def get_hackatime_projects
       token = @user.token
+      get_hackatime_projects_with_token(token)
+    end
+    def get_hackatime_projects_with_token(token)
       if token == nil
         @projects = []
         return

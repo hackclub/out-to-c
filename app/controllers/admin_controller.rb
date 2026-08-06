@@ -28,6 +28,28 @@ class AdminController < ApplicationController
         ]
     end
 
+    def edit
+        id = params["id"]
+        @voyage = Voyage.find(id)
+        @owner_id = @voyage.owner
+        @owner = User.find(@owner_id)
+        get_hackatime_projects_with_token(@owner.token)
+    end
+
+    def submit_edit
+        @voyage = Voyage.find(params["id"])
+        @voyage.name = params["name"]
+        @voyage.desc = params["desc"]
+        @voyage.repo = params["repo"]
+        @voyage.hackatime = params["hackatime"]
+        @voyage.cargo = params["cargo"]
+        @voyage.reviewer_note = params["reviewer_note"]
+        @voyage.ship_status = params["ship_status"]
+        @voyage.save
+        redirect_to admin_path edit
+        puts @voyage.to_json
+    end
+
     private
         def admin_check
             if @user == nil or @user.uid != ENV["ADMIN_SLACK_ID"]

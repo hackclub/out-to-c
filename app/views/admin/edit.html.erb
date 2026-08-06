@@ -1,0 +1,42 @@
+<h1>Admin Panel</h1>
+<hr>
+<div id="admin-edit">
+    <%= form_with(url: admin_submit_edit_path, id: "new-voyage-form") do |form| %>
+    <input type="hidden" name="id" value="<%= @voyage.id %>">
+    <label for="name">Name: </label>
+    <input type="text" id="name" name="name" value="<%= @voyage.name %>"><br>
+    <label for="desc">Desc: </label>
+    <input type="text" id="desc" name="desc" value="<%= @voyage.desc %>"><br>
+    <a type="text" href="<%= @voyage.repo %>">Repository:</a>
+    <input type="text" id="repo" name="repo" value="<%= @voyage.repo %>"><br>
+
+    
+    <label for="hackatime">Hackatime: </label>
+    <select autocomplete="off" name="hackatime" id="hackatime">
+        <option value="" <%= (@voyage.hackatime == nil or @voyage.hackatime.blank?) ? "selected" : "" %>>Select a Hackatime project</option>
+        <% @projects.each do |x| %>
+            <% sel = @voyage.hackatime == x["name"] ? "selected" : "" %>
+            <option <%= sel %> value="<%= x["name"] %>"><%= x["name"] + " (" + (x["total_seconds"].to_f / 60.0 / 60.0).to_i.to_s + " hrs)" %></option>
+        <% end %>
+    </select>
+    <br>
+
+    <label for="cargo-input">Cargo: </label>
+    <input type="text" id="cargo-input" name="cargo" value="<%= @voyage.cargo %>"><br>
+
+    <label for="note">Reviewer Note: </label>
+    <input type="text" id="note" name="reviewer_note" value="<%= @voyage.reviewer_note %>"><br>
+
+    
+    <label for="state">Ship Status: </label>
+    <select autocomplete="off" id="state" name="ship_status">
+        <option value="0" <%= @voyage.ship_status == 0 ? "selected" : "" %>>In Progress / Unshipped</option>
+        <option value="1" <%= @voyage.ship_status == 1 ? "selected" : "" %>>Awaiting Approval</option>
+        <option value="2" <%= @voyage.ship_status == 2 ? "selected" : "" %>>Approved Ship</option>
+    </select>
+
+    <br>
+    <button>Save Changes</button>
+    <% end %>
+</div>
+<pre style="font-size:14px;line-height: 16px;"><%= JSON.pretty_generate(@voyage.as_json) %></pre>

@@ -177,6 +177,7 @@ class VoyageController < ApplicationController
       "ship_status": 0,
       "reviewer_note": "",
       "cargo": "",
+      "owner": @user.id,
       "last_island":0
     }
     if @voyage != nil
