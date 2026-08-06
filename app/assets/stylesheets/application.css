@@ -1036,6 +1036,7 @@ canvas {
     margin-bottom: 10px;
 }
 
-.admin-voyage-entry>p {
+.admin-voyage-entry>p,
+.admin-voyage-entry>pre {
     margin: 0;
 }

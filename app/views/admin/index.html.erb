@@ -24,7 +24,7 @@
                     <p><b><%= v.name %></b></p>
                     <a style="float: right" href="/admin/raw/<%= v.id %>">view raw</a>
                     <p><%= v.desc %></p>
-                    <p><%= v.cargo.blank? ? "<no-cargo>" : v.cargo %></p>
+                    <pre><%= v.cargo.blank? ? "<no-cargo>" : v.cargo %></pre>
                     <p><%= v.hackatime + " (" + (v.total_seconds / 60 / 60).to_i.to_s + "h)"%></p>
                     <p><a href="<%= v.repo %>"><%= v.repo %></a></p>
                     <span style="position:absolute;right:5px;bottom:5px;width:fit-content;"><%= v.id %></span>
