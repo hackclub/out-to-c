@@ -22,9 +22,9 @@ class AdminController < ApplicationController
         end
 
         @sections = [
-            ["Awaiting Approval",@awaiting_approval],
-            ["Unshipped",@unshipped],
-            ["Shipped",@shipped],
+            ["Awaiting Approval",@awaiting_approval,"a-awaiting"],
+            ["Unshipped",@unshipped,"a-unshipped"],
+            ["Shipped",@shipped,"a-shipped"],
         ]
     end
 

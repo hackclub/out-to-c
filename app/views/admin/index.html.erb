@@ -19,7 +19,7 @@
         <h2><%= section[0] %>:</h2>
         <div class="admin-voyage-list">
             <% for v in section[1] %>
-                <div class="admin-voyage-entry">
+                <div class="admin-voyage-entry <%= section[2] %>">
                     <a style="float: right" href="/admin/edit/<%= v.id %>">edit</a>
                     <p><b><%= v.name %></b></p>
                     <a style="float: right" href="/admin/raw/<%= v.id %>">view raw</a>

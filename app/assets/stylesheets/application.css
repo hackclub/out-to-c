@@ -975,6 +975,16 @@ canvas {
     margin-right: 15px;
 }
 
+.a-awaiting {
+    border-color: #fd901d;
+}
+
+/* .a-unshipped {} */
+
+.a-shipped {
+    border-color: #009132;
+}
+
 #admin-edit {
     padding: 15px;
     border: 3px solid #303030;
