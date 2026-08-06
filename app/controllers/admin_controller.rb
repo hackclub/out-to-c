@@ -46,7 +46,7 @@ class AdminController < ApplicationController
         @voyage.reviewer_note = params["reviewer_note"]
         @voyage.ship_status = params["ship_status"]
         @voyage.save
-        redirect_to admin_path edit
+        redirect_to admin_path
         puts @voyage.to_json
     end
 
