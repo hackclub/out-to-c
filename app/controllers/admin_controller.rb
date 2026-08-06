@@ -50,6 +50,11 @@ class AdminController < ApplicationController
         puts @voyage.to_json
     end
 
+    def raw
+        @voyage = Voyage.find(params["id"])
+        render json: JSON.pretty_generate(@voyage.as_json)
+    end
+
     private
         def admin_check
             if @user == nil or @user.uid != ENV["ADMIN_SLACK_ID"]

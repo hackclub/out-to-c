@@ -22,6 +22,7 @@
                 <div class="admin-voyage-entry">
                     <a style="float: right" href="/admin/edit/<%= v.id %>">edit</a>
                     <p><b><%= v.name %></b></p>
+                    <a style="float: right" href="/admin/raw/<%= v.id %>">view raw</a>
                     <p><%= v.desc %></p>
                     <p><%= v.cargo.blank? ? "<no-cargo>" : v.cargo %></p>
                     <p><%= v.hackatime + " (" + (v.total_seconds / 60 / 60).to_i.to_s + "h)"%></p>

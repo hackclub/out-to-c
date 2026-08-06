@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   get "admin" => "admin#index"
   get "admin/edit/:id", to: "admin#edit"
+  get "admin/raw/:id", to: "admin#raw"
   post "admin/submit_edit", to: "admin#submit_edit"
 
   root "home#index"
