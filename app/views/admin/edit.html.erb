@@ -1,5 +1,6 @@
 <h1>Admin Panel</h1>
 <hr>
+<a href="/admin">Go back</a>
 <div id="admin-edit">
     <%= form_with(url: admin_submit_edit_path, id: "new-voyage-form") do |form| %>
     <input type="hidden" name="id" value="<%= @voyage.id %>">
