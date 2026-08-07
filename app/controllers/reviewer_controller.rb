@@ -45,6 +45,17 @@ class ReviewerController < ApplicationController
             render json: { "error": "Can't edit unshipped voyage with reviewer permissions. Contact admin." }
             return
         end
+        if @voyage.ship_status == 2
+            # project is already approved, this is a re-review
+            if params["approved"] == "false"
+                # reviewer cant un-approve an already approved project,
+                # as the user will already have gotten messaged on slack.
+                #
+                # they can only change the reviewer note.
+                render json: { "error": "Reviewer cant un-approve an already approved project. Contact admin." }
+                return
+            end
+        end
         @voyage.reviewer_note = params["reviewer_note"]
         if params["approved"] == "true"
             @voyage.ship_status = 2

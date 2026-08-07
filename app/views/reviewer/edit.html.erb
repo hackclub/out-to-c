@@ -30,7 +30,9 @@
     
     <br>
     <div style="display:flex; width: 100%">
+        <% if @voyage.ship_status == 1 %>
         <button onclick="reviewerSubmit(false)" class="reviwer-button" style="border-color:red;">Reject</button>
+        <% end %>
         <button onclick="reviewerSubmit(true)" class="reviwer-button" style="border-color:#5376ff;">Approve</button>
     </div>
     <% end %>
