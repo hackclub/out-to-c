@@ -16,7 +16,7 @@
                     <p><a href="<%= v.repo %>"><%= v.repo %></a></p>
                     
                     <div style="position:absolute;right:5px;bottom:5px;width:fit-content;border: 1px solid white;">
-                        <% u = User.find(@voyage.owner) %>
+                        <% u = User.find(v.owner) %>
                         <span><%= u.name %></span>
                         <img style="width:50px;aspect-ratio:1;" src="<%= u.pfp %>">
                     </div>
