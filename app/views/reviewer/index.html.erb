@@ -9,9 +9,7 @@
         <div class="admin-voyage-list">
             <% for v in section[1] %>
                 <div class="admin-voyage-entry <%= section[2] %>" style="padding-right:60px">
-                    <% if section[3] %>
-                    <a style="position:absolute;right:5px;top:5px;" href="/reviewer/edit/<%= v.id %>">Review</a>
-                    <% end %>
+                    <a style="position:absolute;right:5px;top:5px;" href="/reviewer/edit/<%= v.id %>"><% if not section[3] %>Re-<%end%>Review</a>
                     <p><b><%= trim_length_fixed(v.name,55) %></b></p>
                     <p><%= trim_length_fixed(v.desc,55) %></p>
                     <pre><%= v.hackatime + " (" + (v.total_seconds / 60 / 60).to_i.to_s + "h)"%></pre>
