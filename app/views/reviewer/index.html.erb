@@ -1,0 +1,30 @@
+<% content_for :title, "Reviewer Panel" %>
+
+<h1>Reviewer Panel</h1>
+
+<hr>
+<div id="admin-voyages">
+    <% for section in @sections %>
+        <h2><%= section[0] %>:</h2>
+        <div class="admin-voyage-list">
+            <% for v in section[1] %>
+                <div class="admin-voyage-entry <%= section[2] %>" style="padding-right:60px">
+                    <% if section[3] %>
+                    <a style="position:absolute;right:5px;top:5px;" href="/reviewer/edit/<%= v.id %>">Review</a>
+                    <% end %>
+                    <p><b><%= trim_length_fixed(v.name,55) %></b></p>
+                    <p><%= trim_length_fixed(v.desc,55) %></p>
+                    <pre><%= v.hackatime + " (" + (v.total_seconds / 60 / 60).to_i.to_s + "h)"%></pre>
+                    <p><a href="<%= v.repo %>"><%= v.repo %></a></p>
+                    
+                    <div style="position:absolute;right:5px;bottom:5px;width:fit-content;border: 1px solid white;">
+                        <% u = User.find(@voyage.owner) %>
+                        <span><%= u.name %></span>
+                        <img style="width:50px;aspect-ratio:1;" src="<%= u.pfp %>">
+                    </div>
+                </div>
+            <% end%>
+            <hr>
+        </div>
+    <% end%>
+</div>

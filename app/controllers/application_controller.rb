@@ -46,12 +46,14 @@ class ApplicationController < ActionController::Base
       
       @hackatime_text = p1+p2
     end
-    def trim_length(t)
-      max_length = 25
-      if t.length > max_length
-        t = t.slice(0,max_length-3)+"..."
+    def trim_length_fixed(t,l)
+      if t.length > l
+        t = t.slice(0,l-3)+"..."
       end
       t
+    end
+    def trim_length(t)
+      trim_length_fixed(t,25)
     end
     def generate_desc_trimmed
       t = (@voyage != nil && @voyage.desc != nil) ? @voyage.desc : ""

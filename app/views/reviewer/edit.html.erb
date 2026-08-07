@@ -1,0 +1,39 @@
+<% content_for :title, "Reviewer Panel" %>
+
+<h1>Reviewer Panel</h1>
+
+<hr>
+<a href="/reviewer">Go back</a>
+<div id="admin-edit">
+    <h1 style="margin-top:0;"><%= @voyage.name %></h1>
+    
+    <p><%= @voyage.desc %></p>
+
+    <pre>Hackatime: <%= @voyage.hackatime + " (" + (@voyage.total_seconds / 60 / 60).to_i.to_s + " hours)" %></pre>
+
+    <label for="cargo-input">Cargo: </label>
+    <div class="reviewer-price">
+    <% for p in @voyage.cargo.split(",") %>
+    <%= image_tag "prices/"+p+".png" %>
+    <% end %>
+    </div>
+    
+    <a style="border: 1px solid white;padding:5px;color:white;" href="<%= @voyage.repo %>">Repository</a><br>
+    <br>
+    <span><img style="width:40px;aspect-ratio:1;border-radius:25px;" src="<%= @owner.pfp %>"> made by @<%= @owner.name %></span><br><br>
+
+    <hr>
+    <%= form_with(url: reviewer_submit_edit_path, id: "submit") do |form| %>
+    <input type="hidden" name="id" value="<%= @voyage.id %>">
+    <label for="note">Reviewer Note: </label>
+    <textarea class="reviewer-textarea" type="text" id="note" name="reviewer_note" value=""><%= @voyage.reviewer_note %></textarea><br>
+    
+    <br>
+    <div style="display:flex; width: 100%">
+        <button onclick="reviewerSubmit(false)" class="reviwer-button" style="border-color:red;">Reject</button>
+        <button onclick="reviewerSubmit(true)" class="reviwer-button" style="border-color:#5376ff;">Approve</button>
+    </div>
+    <% end %>
+</div>
+<br>
+<script src="<%= asset_path "reviewer.js" %>"></script>
