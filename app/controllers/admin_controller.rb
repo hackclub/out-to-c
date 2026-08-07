@@ -55,6 +55,11 @@ class AdminController < ApplicationController
         render json: JSON.pretty_generate(@voyage.as_json)
     end
 
+    def reload_reviewer_list
+        Dotenv.overload('.env')
+        render plain:"reloaded .env!\n\nreviewer list: \"" + ENV["REVIEWERS"].to_s + "\""
+    end
+
     private
         def admin_check
             if @user == nil or @user.uid != ENV["ADMIN_SLACK_ID"]
