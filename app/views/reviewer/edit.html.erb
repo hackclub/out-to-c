@@ -11,11 +11,13 @@
 
     <pre>Hackatime: <%= @voyage.hackatime + " (" + (@voyage.total_seconds / 60 / 60).to_i.to_s + " hours)" %></pre>
 
-    <label for="cargo-input">Cargo: </label>
-    <div class="reviewer-price">
-    <% for p in @voyage.cargo.split(",") %>
-    <%= image_tag "prices/"+p+".png" %>
-    <% end %>
+    <div style="width:100%">
+        <label for="cargo-input">Cargo: </label>
+        <div class="reviewer-price">
+        <% for p in @voyage.cargo.split(",") %>
+        <%= image_tag "prices/"+p+".png" %>
+        <% end %>
+        </div>
     </div>
     
     <a style="border: 1px solid white;padding:5px;color:white;" href="<%= @voyage.repo %>">Repository</a><br>
