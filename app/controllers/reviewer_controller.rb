@@ -71,8 +71,8 @@ class ReviewerController < ApplicationController
 
     private
         def reviewer_check
-            # todo: fix
-            if @user == nil or @user.uid != ENV["ADMIN_SLACK_ID"]
+            @reviewers = ENV["REVIEWERS"].split(",")
+            if @user == nil or not @reviewers.include?(@user.uid)
                 redirect_to root_path
                 return
             end
