@@ -38,7 +38,7 @@
                 (Choose 1)
                 <div class="spread">
                     <% for i in @prices[0] %>
-                    <%= image_tag("prices/#{i[0]}.png") %>
+                    <img src="<%= asset_path("prices/#{i[0]}.png") %>" title="<%= i[1][:name] %>">
                     <% end %>
                 </div>
                 </div>
@@ -49,7 +49,7 @@
                 <div>(Choose 1)
                 <div class="spread">
                     <% for i in @prices[1] %>
-                    <%= image_tag("prices/#{i[0]}.png") %>
+                    <img src="<%= asset_path("prices/#{i[0]}.png") %>" title="<%= i[1][:name] %>">
                     <% end %>
                 </div>
                 </div>
@@ -60,7 +60,7 @@
                 <div>(Choose 1)
                 <div class="spread">
                     <% for i in @prices[2] %>
-                    <%= image_tag("prices/#{i[0]}.png") %>
+                    <img src="<%= asset_path("prices/#{i[0]}.png") %>" title="<%= i[1][:name] %>">
                     <% end %>
                 </div>
                 </div>
