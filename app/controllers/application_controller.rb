@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
       data = JSON.parse(res.body)
     end
     def get_islands
-      @islands = [6,12,24]
+      @islands = [6,12,26]
     end
     def generate_hackatime_text()
       p1 = ((@voyage != nil && @voyage.hackatime != nil && @voyage.hackatime != "") ? @voyage.hackatime : "Not linked" )
@@ -101,9 +101,9 @@ class ApplicationController < ActionController::Base
         },
       
         {
-          "tbd":{"name":"To Be Defined..."},
-          "tbd":{"name":"To Be Defined..."},
-          "tbd":{"name":"To Be Defined..."},
+          "innioasis":{"name":"Innioasis Y1"},
+          "tamagotchi":{"name":"Tamagotchi !!"},
+          "cardputer":{"name":"Cardputer (Adv)"},
         },
       ]
     end

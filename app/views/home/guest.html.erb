@@ -37,9 +37,9 @@
                 <div>
                 (Choose 1)
                 <div class="spread">
-                    <%= image_tag("prices/blahaj.png") %>
-                    <%= image_tag("prices/pinecil.png") %>
-                    <%= image_tag("prices/pizero2w.png") %>
+                    <% for i in @prices[0] %>
+                    <%= image_tag("prices/#{i[0]}.png") %>
+                    <% end %>
                 </div>
                 </div>
             </div>
@@ -48,9 +48,9 @@
             <div>
                 <div>(Choose 1)
                 <div class="spread">
-                    <%= image_tag("prices/pipico.png") %>
-                    <%= image_tag("prices/pico8.png") %>
-                    <%= image_tag("prices/cloudflare.png") %>
+                    <% for i in @prices[1] %>
+                    <%= image_tag("prices/#{i[0]}.png") %>
+                    <% end %>
                 </div>
                 </div>
             </div>
@@ -59,9 +59,9 @@
             <div>
                 <div>(Choose 1)
                 <div class="spread">
-                    <%= image_tag("prices/hm1.png") %>
-                    <%= image_tag("prices/hm2.png") %>
-                    <%= image_tag("prices/hm3.png") %>
+                    <% for i in @prices[2] %>
+                    <%= image_tag("prices/#{i[0]}.png") %>
+                    <% end %>
                 </div>
                 </div>
             </div>

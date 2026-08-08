@@ -824,6 +824,7 @@ h2 {
     position: absolute;
     top: 0;
     transform: translateY(5px);
+    image-rendering: unset !important;
 }
 
 .spread>img:hover {
