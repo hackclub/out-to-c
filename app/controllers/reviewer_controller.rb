@@ -43,14 +43,18 @@ class ReviewerController < ApplicationController
             render json: { "error": "Voyage not found" }
             return
         end
-        if @voyage.ship_status == 0
-            render json: { "error": "Can't edit unshipped voyage with reviewer permissions. Contact admin." }
-            return
-        end
         no_conflict = params["updated"] == @voyage.updated_at.to_s
 
         if not no_conflict
-            render json: { "error": "Conflict detected! This project may have been reviewed by someone else while you were on this page. Your changes have been discarded. You should reload the current page to see actual updated state." }
+            if @voyage.ship_status == 0
+                render json: { "error": "Conflict detected! This project was rejected by someone else while you were on this page. Your changes have been discarded." }
+                return
+            end
+            render json: { "error": "Conflict detected! This project was approved reviewed by someone else while you were on this page. Your changes have been discarded. You can reload the current page to see actual updated state." }
+            return
+        end
+        if @voyage.ship_status == 0
+            render json: { "error": "Can't edit unshipped voyage with reviewer permissions. Contact admin." }
             return
         end
 
