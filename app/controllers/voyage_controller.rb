@@ -2,7 +2,7 @@ class VoyageController < ApplicationController
   # require all routes of the voyage controller to be logged in to an account
   before_action :require_logged_in
   # require dev endpoints to be in development environment
-  before_action :dev_check, only: %i[ add_hour wipe_slack_convo delete_force]
+  before_action :dev_check, only: %i[ add_hour wipe_slack_convo delete_force wipe_slack_channel]
 
   def delete
     if @voyage == nil
@@ -20,25 +20,13 @@ class VoyageController < ApplicationController
     delete_internal()
   end
 
+  def wipe_slack_channel
+    wipe_internal(params["id"])
+  end
+
   def wipe_slack_convo
     id = slack_open_conversation(@user.uid)
-    url = URI("https://slack.com/api/conversations.history?channel="+id)
-    req = Net::HTTP::Get.new(url)
-    req["Authorization"] = "Bearer " + ENV["SLACK_BOT_TOKEN"]
-    res = Net::HTTP.start(url.hostname, url.port, use_ssl: url.scheme == "https") { |http|
-      http.request(req)
-    }
-    data = JSON.parse(res.body)
-    messages = data["messages"]
-    for message in messages
-      if message["bot_id"]
-        url = URI("https://slack.com/api/chat.delete")
-        body = { "channel": id, "ts":message["ts"] }
-        headers = { 'Content-Type': 'application/json', "Authorization": "Bearer " + ENV["SLACK_BOT_TOKEN"]  }
-        res = Net::HTTP.post(url, body.to_json, headers)
-      end
-    end
-    
+    wipe_internal(id)
     redirect_to root_path
   end
 
@@ -221,6 +209,25 @@ class VoyageController < ApplicationController
       @user.save!
       session[:user_id] = @user
       redirect_to root_path
+    end
+    def wipe_internal(id)
+      url = URI("https://slack.com/api/conversations.history?channel="+id)
+      req = Net::HTTP::Get.new(url)
+      req["Authorization"] = "Bearer " + ENV["SLACK_BOT_TOKEN"]
+      res = Net::HTTP.start(url.hostname, url.port, use_ssl: url.scheme == "https") { |http|
+        http.request(req)
+      }
+      puts res.body
+      data = JSON.parse(res.body)
+      messages = data["messages"]
+      for message in messages
+        if message["bot_profile"] != nil and message["bot_profile"]["name"] == "Pirate Orph'"
+          url = URI("https://slack.com/api/chat.delete")
+          body = { "channel": id, "ts":message["ts"] }
+          headers = { 'Content-Type': 'application/json', "Authorization": "Bearer " + ENV["SLACK_BOT_TOKEN"]  }
+          res = Net::HTTP.post(url, body.to_json, headers)
+        end
+      end
     end
     def dev_check
       if !Rails.env.development?

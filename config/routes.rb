@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   get "auth/test" => "auth#test"
   get "auth/dev" => "auth#dev"
   
-  get "voyage/wipe_slack_convo" => "voyage#wipe_slack_convo"
+  get "wipe_slack_convo" => "voyage#wipe_slack_convo"
+  get "wipe_slack_channel/:id" => "voyage#wipe_slack_channel"
   post "voyage/new" => "voyage#new"
   post "voyage/delete" => "voyage#delete"
   post "voyage/delete_force" => "voyage#delete_force"
