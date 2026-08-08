@@ -176,6 +176,7 @@ globalThis.toggleCargo = function () {
         if (selectedCargoSlot != null) {
             cargoInfoContents.style.display = "none";
             selectedCargoSlot.classList.remove("selected-slot");
+            selectedCargoSlot = null;
         }
     } else {
         fadeIn(cargo);
