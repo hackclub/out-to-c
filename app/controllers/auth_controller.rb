@@ -166,7 +166,7 @@ class AuthController < ApplicationController
         @user.token = token
         @user.save
         # existing user
-        redirect_to root_path, notice: "linked hackatime, user named:"+@user.name
+        redirect_to root_path, notice: "Successfully linked Hackatime!"
     end
 
     def test
