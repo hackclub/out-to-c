@@ -92,6 +92,28 @@ class AuthController < ApplicationController
 
         if existing_user == nil
             puts "NEW USER ALERT!!!"
+
+            # check for YSWS eligibility
+            
+            uri = URI.parse("https://auth.hackclub.com/api/v1/me")
+            headers = {'Authorization': 'Bearer ' + token}
+            response = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
+                req = Net::HTTP::Get.new(uri)
+                req['Authorization'] = 'Bearer ' + token
+                response = http.request(req)
+                response
+            end
+            
+            if not (response.kind_of? Net::HTTPSuccess)
+                redirect_to root_path, notice: "Problem fetching user info (/v1/me)"
+                return
+            end
+
+            ysws_eligible = JSON.parse(response.body)["identity"]["ysws_eligible"]
+            if not ysws_eligible
+                redirect_to root_path, notice: "Error: you're not YSWS eligible!"
+                return
+            end
             
             # get new user's slack username and profile picture using the cachet api
             slack_data = get_slack_data(slack_id)
