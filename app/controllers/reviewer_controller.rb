@@ -32,6 +32,10 @@ class ReviewerController < ApplicationController
     def edit
         id = params["id"]
         @voyage = Voyage.find(id)
+        if @voyage.ship_status == 0
+            redirect_to reviewer_path
+            return
+        end
         @owner = User.find(@voyage.owner)
     end
 
