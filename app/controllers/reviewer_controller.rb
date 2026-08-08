@@ -81,7 +81,7 @@ class ReviewerController < ApplicationController
             for line in @voyage.reviewer_note.split("\n")
                 review_message += ">" + line.strip + "\n"
             end
-            slack_send_message_conversation(id,":yayayayayay: Your project has been approved by <@#{@user.uid}> :yayayayayay:\n#{review_message}\n\nYou will be DMd by <@#{ENV["ADMIN_SLACK_ID"]}> shortly about fulfilment ! :sos-heidi-treasure::treasure-box:\n\n/yours truly--pirate orph'")
+            slack_send_message_conversation(id,":yayayayayay: Your project has been approved by <@#{@user.uid}> :yayayayayay:\n#{review_message}\nYou will be DMd by <@#{ENV["ADMIN_SLACK_ID"]}> shortly about fulfilment ! :sos-heidi-treasure::treasure-box:\n\n/yours truly--pirate orph'")
             slack_send_message_conversation(aid,":exclamation:Project approved:exclamation::yay:\nFulfilment time! <@#{@owner.uid}> shipped '#{trim_length_fixed(@voyage.name,25)}' which was approved by <@#{@user.uid}>.\nCargo: `#{@voyage.cargo}`")
         end
 
