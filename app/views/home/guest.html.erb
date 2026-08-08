@@ -32,40 +32,20 @@
         </div>
         <div class="map-holder">
             <div style="background-color: red;width: var(--w_factor);height: var(--w_factor);"></div>
-            <div class="map-marker" id="map-marker-1">
-            <div>
+            <% for mi in 0..3-1 %>
+            <div class="map-marker" id="map-marker-<%= mi+1 %>">
                 <div>
-                (Choose 1)
-                <div class="spread">
-                    <% for i in @prices[0] %>
-                    <img src="<%= asset_path("prices/#{i[0]}.png") %>" title="<%= i[1][:name] %>">
-                    <% end %>
-                </div>
-                </div>
-            </div>
-            </div>
-            <div class="map-marker" id="map-marker-2">
-            <div>
-                <div>(Choose 1)
-                <div class="spread">
-                    <% for i in @prices[1] %>
-                    <img src="<%= asset_path("prices/#{i[0]}.png") %>" title="<%= i[1][:name] %>">
-                    <% end %>
-                </div>
+                    <div>
+                    (Choose 1)
+                    <div class="spread">
+                        <% for i in @prices[mi] %>
+                        <img src="<%= asset_path("prices/#{i[0]}.png") %>" title="<%= i[1][:name] %>">
+                        <% end %>
+                    </div>
+                    </div>
                 </div>
             </div>
-            </div>
-            <div class="map-marker" id="map-marker-3">
-            <div>
-                <div>(Choose 1)
-                <div class="spread">
-                    <% for i in @prices[2] %>
-                    <img src="<%= asset_path("prices/#{i[0]}.png") %>" title="<%= i[1][:name] %>">
-                    <% end %>
-                </div>
-                </div>
-            </div>
-            </div>
+            <% end %>
             <%= image_tag "graphics/map.svg", id: "map" %>
         </div>
         <h1>More information</h1>
