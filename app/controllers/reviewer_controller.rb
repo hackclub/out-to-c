@@ -37,6 +37,7 @@ class ReviewerController < ApplicationController
 
     def submit_edit
         @voyage = Voyage.find(params["id"])
+        @owner = User.find(@voyage.owner)
         if @voyage == nil
             render json: { "error": "Voyage not found" }
             return
@@ -65,7 +66,20 @@ class ReviewerController < ApplicationController
             render json: { "error": "Bad value of 'approved', :"+params["approved"].to_s }
             return
         end
+        # prepare DMs to both the user with the status update, and
+        # to the admin to notify them about fulfilment.
+        id = slack_open_conversation(@owner.uid)
+        aid = slack_open_conversation(ENV["ADMIN_SLACK_ID"])
+        
         @voyage.save
+
+        review_message = ""
+        for line in @voyage.reviewer_note.split("\n")
+            review_message += "> " + line.strip
+        end
+        slack_send_message_conversation(id,":yayayayayay: Your project has been approved by <@#{@user.uid}> :yayayayayay:\n#{review_message}\n\nYou will be DMd by <@#{ENV["ADMIN_SLACK_ID"]}> shortly about fulfilment ! :sos-heidi-treasure::treasure-box:\n\n/yours truly--pirate orph'")
+        slack_send_message_conversation(aid,":exclamation:Project approved:exclamation::yay:\nFulfilment time! <@#{@owner.uid}> shipped '#{trim_length_fixed(@voyage.name,25)}' which was approved by <@#{@user.uid}>.\nCargo: `#{@voyage.cargo}`")
+
         render json: { "ok": 1 }
     end
 
