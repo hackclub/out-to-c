@@ -38,6 +38,7 @@ class ReviewerController < ApplicationController
     def submit_edit
         @voyage = Voyage.find(params["id"])
         @owner = User.find(@voyage.owner)
+
         if @voyage == nil
             render json: { "error": "Voyage not found" }
             return
@@ -46,6 +47,13 @@ class ReviewerController < ApplicationController
             render json: { "error": "Can't edit unshipped voyage with reviewer permissions. Contact admin." }
             return
         end
+        no_conflict = params["updated"] == @voyage.updated_at.to_s
+
+        if not no_conflict
+            render json: { "error": "Conflict detected! This project may have been reviewed by someone else while you were on this page. Your changes have been discarded. You should reload the current page to see actual updated state." }
+            return
+        end
+
         rereview = @voyage.ship_status == 2
         if rereview
             # project is already approved, this is a re-review

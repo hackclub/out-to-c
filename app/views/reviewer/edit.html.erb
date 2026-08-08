@@ -27,8 +27,9 @@
     <hr>
     <%= form_with(url: reviewer_submit_edit_path, id: "submit") do |form| %>
     <input type="hidden" name="id" value="<%= @voyage.id %>">
+    <input type="hidden" name="updated" value="<%= @voyage.updated_at %>">
     <label for="note">Reviewer Note: </label>
-    <textarea class="reviewer-textarea" type="text" id="note" name="reviewer_note" value=""><%= @voyage.reviewer_note %></textarea><br>
+    <textarea autocomplete="off" class="reviewer-textarea" type="text" id="note" name="reviewer_note" value=""><%= @voyage.reviewer_note %></textarea><br>
     
     
     <% if @voyage.ship_status == 1 %>
