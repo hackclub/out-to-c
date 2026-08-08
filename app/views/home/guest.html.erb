@@ -37,7 +37,7 @@
                 <div>
                     <div>
                     (Choose 1)
-                    <div class="spread">
+                    <div class="spread spread<%= @prices[mi].length %>">
                         <% for i in @prices[mi] %>
                         <img src="<%= asset_path("prices/#{i[0]}.png") %>" title="<%= i[1][:name] %>">
                         <% end %>

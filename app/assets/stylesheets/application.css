@@ -829,24 +829,55 @@ h2 {
 
 .spread>img:hover {
     scale: 1.2;
-    z-index: 3;
+    z-index: 3 !important;
 }
 
-.spread>img:nth-child(1) {
+.spread3>img:nth-child(1) {
     left: calc(50% - 110px / 2);
     z-index: 1;
     transform: translateY(0);
 }
 
-.spread>img:nth-child(2) {
+.spread3>img:nth-child(2) {
     left: 0;
     rotate: -5deg;
 }
 
-.spread>img:nth-child(3) {
+.spread3>img:nth-child(3) {
     right: 0;
     rotate: 5deg;
 }
+
+
+
+.spread4>img:nth-child(1) {
+    left: calc(50% - 110px / 2 + 30px);
+    z-index: 2;
+    transform: translateY(0);
+    rotate: 3deg;
+}
+
+.spread4>img:nth-child(2) {
+    left: calc(50% - 110px / 2 - 50px);
+    z-index: 1;
+    transform: translateY(0);
+    rotate: -3deg;
+}
+
+.spread4>img:nth-child(3) {
+    left: 0;
+    rotate: -8deg;
+}
+
+.spread4>img:nth-child(3):hover {
+    left: -30px;
+}
+
+.spread4>img:nth-child(4) {
+    right: 0;
+    rotate: 8deg;
+}
+
 
 
 .map-marker>div:hover>div {
