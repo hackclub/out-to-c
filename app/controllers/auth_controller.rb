@@ -162,9 +162,6 @@ class AuthController < ApplicationController
         end
         token = response[:token]
 
-        user_data = get_user_data(token)
-        slack_id = user_data["slack_id"]
-
         # check for existing user
         @user.token = token
         @user.save
