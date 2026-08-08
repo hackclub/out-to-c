@@ -22,6 +22,7 @@ class VoyageController < ApplicationController
 
   def wipe_slack_channel
     wipe_internal(params["id"])
+    redirect_to root_path
   end
 
   def wipe_slack_convo

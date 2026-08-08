@@ -19,7 +19,10 @@ You'll have to create a bot with the following scopes:
 ```
 channels:read
 chat:write
+channel:history
+groups:history
 groups:read
+im:history
 im:read
 im:write
 mpim:read
