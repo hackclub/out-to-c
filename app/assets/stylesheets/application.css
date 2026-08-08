@@ -783,6 +783,7 @@ h2 {
 }
 
 .map-holder {
+    scrollbar-color: rgb(19, 0, 128) rgba(0, 0, 0, 0.247);
     overflow-x: auto;
     margin-left: auto;
     margin-right: auto;
