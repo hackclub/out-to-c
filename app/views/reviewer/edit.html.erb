@@ -30,7 +30,12 @@
     <label for="note">Reviewer Note: </label>
     <textarea class="reviewer-textarea" type="text" id="note" name="reviewer_note" value=""><%= @voyage.reviewer_note %></textarea><br>
     
-    <p class="light">When you Reject/Approve a project, the user receives a slack DM from @Pirate Orph' containing the reviewer note.</p>
+    
+    <% if @voyage.ship_status == 1 %>
+        <p class="light">When you Reject/Approve a project, the user receives a slack DM from @Pirate Orph' containing the reviewer note.</p>
+    <% else %>
+        <p class="light">When you re-review a project, <u>no slack DMs</u> are sent. The only change is the reviewer note, for other staff.</p>
+    <% end %>
     <br>
     <div style="display:flex; width: 100%">
         <% if @voyage.ship_status == 1 %>

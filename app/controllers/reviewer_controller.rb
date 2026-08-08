@@ -46,7 +46,8 @@ class ReviewerController < ApplicationController
             render json: { "error": "Can't edit unshipped voyage with reviewer permissions. Contact admin." }
             return
         end
-        if @voyage.ship_status == 2
+        rereview = @voyage.ship_status == 2
+        if rereview
             # project is already approved, this is a re-review
             if params["approved"] == "false"
                 # reviewer cant un-approve an already approved project,
@@ -66,19 +67,23 @@ class ReviewerController < ApplicationController
             render json: { "error": "Bad value of 'approved', :"+params["approved"].to_s }
             return
         end
-        # prepare DMs to both the user with the status update, and
-        # to the admin to notify them about fulfilment.
-        id = slack_open_conversation(@owner.uid)
-        aid = slack_open_conversation(ENV["ADMIN_SLACK_ID"])
-        
+        if not rereview
+            # prepare DMs to both the user with the status update, and
+            # to the admin to notify them about fulfilment.
+            id = slack_open_conversation(@owner.uid)
+            aid = slack_open_conversation(ENV["ADMIN_SLACK_ID"])
+        end
+
         @voyage.save
 
-        review_message = ""
-        for line in @voyage.reviewer_note.split("\n")
-            review_message += "> " + line.strip
+        if not rereview
+            review_message = ""
+            for line in @voyage.reviewer_note.split("\n")
+                review_message += ">" + line.strip + "\n"
+            end
+            slack_send_message_conversation(id,":yayayayayay: Your project has been approved by <@#{@user.uid}> :yayayayayay:\n#{review_message}\n\nYou will be DMd by <@#{ENV["ADMIN_SLACK_ID"]}> shortly about fulfilment ! :sos-heidi-treasure::treasure-box:\n\n/yours truly--pirate orph'")
+            slack_send_message_conversation(aid,":exclamation:Project approved:exclamation::yay:\nFulfilment time! <@#{@owner.uid}> shipped '#{trim_length_fixed(@voyage.name,25)}' which was approved by <@#{@user.uid}>.\nCargo: `#{@voyage.cargo}`")
         end
-        slack_send_message_conversation(id,":yayayayayay: Your project has been approved by <@#{@user.uid}> :yayayayayay:\n#{review_message}\n\nYou will be DMd by <@#{ENV["ADMIN_SLACK_ID"]}> shortly about fulfilment ! :sos-heidi-treasure::treasure-box:\n\n/yours truly--pirate orph'")
-        slack_send_message_conversation(aid,":exclamation:Project approved:exclamation::yay:\nFulfilment time! <@#{@owner.uid}> shipped '#{trim_length_fixed(@voyage.name,25)}' which was approved by <@#{@user.uid}>.\nCargo: `#{@voyage.cargo}`")
 
         render json: { "ok": 1 }
     end
