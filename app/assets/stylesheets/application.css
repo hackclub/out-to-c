@@ -783,10 +783,13 @@ h2 {
 }
 
 .map-holder {
+    overflow-x: auto;
     margin-left: auto;
     margin-right: auto;
     width: 800px;
     max-width: 100%;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
 
     /* calc the factor the image will be scaled at. used to calc the positions of points of interest.
     the margin is 38, and not 20, since on chrome, 100vw doesnt include the scrollbars. this is to compensate for that. */
@@ -885,18 +888,12 @@ h2 {
 }
 
 #map-marker-3>div>div {
-    margin-left: -75px;
+    margin-left: -138px;
     transform: translateY(-100px);
 }
 
-@media (max-width: 935px) {
-    .map-marker>div>div {
-        margin-left: -135px;
-    }
-
-    #map-marker-3>div>div {
-        margin-left: -195px;
-    }
+#map-marker-1>div>div {
+    transform: translateY(-75px);
 }
 
 #map-marker-1 {
@@ -926,7 +923,7 @@ h2 {
 }
 
 #map {
-    width: 100%;
+    width: calc(1200 * var(--w_factor));
     display: block;
 }
 
