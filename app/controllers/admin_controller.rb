@@ -44,6 +44,7 @@ class AdminController < ApplicationController
         @voyage.hackatime = params["hackatime"]
         @voyage.cargo = params["cargo"]
         @voyage.reviewer_note = params["reviewer_note"]
+        @voyage.justification = params["justification"]
         @voyage.ship_status = params["ship_status"]
         @voyage.save
         redirect_to admin_path

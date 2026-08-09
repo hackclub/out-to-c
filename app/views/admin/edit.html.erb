@@ -25,10 +25,6 @@
 
     <label for="cargo-input">Cargo: </label>
     <input type="text" id="cargo-input" name="cargo" value="<%= @voyage.cargo %>"><br>
-
-    <label for="note">Reviewer Note: </label>
-    <input type="text" id="note" name="reviewer_note" value="<%= @voyage.reviewer_note %>"><br>
-
     
     <label for="state">Ship Status: </label>
     <select autocomplete="off" id="state" name="ship_status">
@@ -36,8 +32,15 @@
         <option value="1" <%= @voyage.ship_status == 1 ? "selected" : "" %>>Awaiting Approval</option>
         <option value="2" <%= @voyage.ship_status == 2 ? "selected" : "" %>>Approved Ship</option>
     </select>
-
     <br>
+    <br>
+
+    <label for="note">Justification: </label>
+    <textarea autocomplete="off" class="reviewer-textarea" type="text" id="note" name="justification" value=""><%= @voyage.justification %></textarea><br>
+
+    <label for="note">Reviewer Note: </label>
+    <textarea autocomplete="off" class="reviewer-textarea" type="text" id="note" name="reviewer_note" value=""><%= @voyage.reviewer_note %></textarea><br>
+
     <button>Save Changes</button>
     <% end %>
 </div>
