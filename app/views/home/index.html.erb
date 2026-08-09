@@ -123,7 +123,11 @@
     
     <div id="shipped-voyage" <% if @voyage == nil or @voyage.ship_status == 0 %> style="display:none;"<% end %>>
         <h1>Voyage Shipped!</h1>
+        <% if @voyage.ship_status == 1 %>
         <h2>Awaiting approval.</h2>
+        <% else %>
+        <h2>Approved! You should have been DMd about fulfilment now!</h2>
+        <% end %>
     </div>
 
     <div id="shipped-or-active-voyage" <% if @voyage == nil %> style="display:none;"<% end %>>
