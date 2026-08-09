@@ -203,6 +203,10 @@ form>button:hover:not([disabled]) {
     pointer-events: none;
 }
 
+.light li {
+    line-height: 26px;
+}
+
 @keyframes prize-get {
     0% {
         right: calc(50% - 240px / 2);
@@ -1084,7 +1088,7 @@ canvas {
     border-color: #009132;
 }
 
-#admin-edit {
+.admin-edit {
     padding: 15px;
     border: 3px solid #303030;
     background-color: #161616;
@@ -1092,30 +1096,31 @@ canvas {
     margin: 0 auto;
     width: fit-content;
     min-width: 900px;
+    margin-bottom: 30px;
 }
 
-#admin-edit input,
-#admin-edit select {
-    border: 3px solid #303030;
-    background-color: #161616;
+.admin-edit input,
+.admin-edit select {
+    border: 3px solid #303030 !important;
+    background-color: #161616 !important;
     color: white;
-    width: 450px;
+    width: 450px !important;
     float: right;
     height: 28px;
 }
 
-#admin-edit select {
-    width: 460px;
+.admin-edit select {
+    width: 460px !important;
     height: 36px;
 }
 
-#admin-edit label,
-#admin-edit span,
-#admin-edit a {
+.admin-edit label,
+.admin-edit span,
+.admin-edit a {
     float: left;
 }
 
-#admin-edit button {
+.admin-edit button {
     border: 3px solid #303030;
     background-color: #161616;
     color: white;
@@ -1159,5 +1164,7 @@ canvas {
     background-color: #161616;
     color: white;
     width: 100%;
+    height: 32px;
+    min-height: 32px;
     resize: vertical;
 }

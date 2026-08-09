@@ -4,7 +4,7 @@
 
 <hr>
 <a href="/reviewer">Go back</a>
-<div id="admin-edit">
+<div class="admin-edit">
     <h1 style="margin-top:0;"><%= @voyage.name %></h1>
     
     <p><%= @voyage.desc %></p>
@@ -23,11 +23,25 @@
     <a target="_blank" style="border: 1px solid white;padding:5px;color:white;" href="<%= @voyage.repo %>">Repository</a><br>
     <br>
     <span><img style="width:40px;aspect-ratio:1;border-radius:25px;" src="<%= @owner.pfp %>"> made by @<%= @owner.name %></span><br><br>
+</div>
 
-    <hr>
+<div class="admin-edit">
     <%= form_with(url: reviewer_submit_edit_path, id: "submit") do |form| %>
     <input type="hidden" name="id" value="<%= @voyage.id %>">
     <input type="hidden" name="updated" value="<%= @voyage.updated_at %>">
+
+    <label for="note">Justification: </label>
+    <textarea autocomplete="off" class="reviewer-textarea" type="text" id="note" name="justification" value=""><%= @voyage.justification %></textarea><br>
+    <p style="margin-bottom: 5px;" class="light"><u>You only have to provide a justification for approvals!</u> The justification is only internal and not shared with the user.<br>The justification should explain:</p>
+    <ul style="margin: 0;" class="light">
+    <li>What the project is/does.</li>
+    <li>How is the project experienced? Ex, is it a downloadable binary, something web-playable, etc?</li>
+    <li>How well the commit count supports the amount of approved hours.</li>
+    <li>Any additional notes.</li>
+    </ul>
+
+    <br>
+
     <label for="note">Reviewer Note: </label>
     <textarea autocomplete="off" class="reviewer-textarea" type="text" id="note" name="reviewer_note" value=""><%= @voyage.reviewer_note %></textarea><br>
     
@@ -35,14 +49,20 @@
     <% if @voyage.ship_status == 1 %>
         <p class="light">When you Reject/Approve a project, the user receives a slack DM from @Pirate Orph' containing the reviewer note.</p>
     <% else %>
-        <p class="light">When you re-review a project, <u>no slack DMs</u> are sent. The only change is the reviewer note, for other staff.</p>
+        <p class="light">When you re-review a project, <u>no slack DMs</u> are sent. </p>
     <% end %>
     <br>
     <div style="display:flex; width: 100%">
         <% if @voyage.ship_status == 1 %>
         <button onclick="reviewerSubmit(false)" class="reviwer-button" style="border-color:red;">Reject</button>
         <% end %>
-        <button onclick="reviewerSubmit(true)" class="reviwer-button" style="border-color:#5376ff;">Approve</button>
+        <button onclick="reviewerSubmit(true)" class="reviwer-button" style="border-color:#5376ff;">
+            <% if @voyage.ship_status == 1 %>
+            Approve
+            <% else %>
+            Save Approved Ship
+            <% end %>
+        </button>
     </div>
     <% end %>
 </div>

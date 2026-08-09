@@ -75,6 +75,7 @@ class ReviewerController < ApplicationController
             end
         end
         @voyage.reviewer_note = params["reviewer_note"]
+        @voyage.justification = params["justification"]
         if params["approved"] == "true"
             @voyage.ship_status = 2
         elsif params["approved"] == "false"
