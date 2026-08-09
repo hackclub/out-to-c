@@ -200,6 +200,7 @@ form>button:hover:not([disabled]) {
     animation: prize-get 1.2s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in;
+    pointer-events: none;
 }
 
 @keyframes prize-get {
