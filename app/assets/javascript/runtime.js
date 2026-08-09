@@ -34,6 +34,7 @@ let shipVoyageForm = document.getElementById("ship-form");
 let shipButton = document.getElementById("ship-button");
 let shippedVoyageScreen = document.getElementById("shipped-voyage");
 let shippedOrActiveVoyageScreen = document.getElementById("shipped-or-active-voyage");
+let prizeGot = document.getElementById("prize-got");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -186,6 +187,16 @@ globalThis.toggleCargo = function () {
     }
     cargoShown = !cargoShown;
 }
+
+// Source - https://stackoverflow.com/a/45036752 (modified)
+// Posted by user, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-08-10, License - CC BY-SA 4.0
+function resetAnimation(el) {
+    el.style.animation = 'none';
+    el.offsetHeight; /* trigger reflow */
+    el.style.animation = null;
+}
+
 let selectedPrice = -1;
 let selectedPriceID = "";
 globalThis.selectPrice = function (id, index) {
@@ -241,6 +252,10 @@ globalThis.finalizePriceSelection = function () {
         if (body["fp"]) {
             loadPrices(body["fp"]);
             fadeIn(islandFound);
+        } else {
+            prizeGot.children[0].src = body["img"];
+            resetAnimation(prizeGot);
+            fadeIn(prizeGot);
         }
     }).catch((error) => {
         showNotice("Error: Not success :(");
