@@ -782,6 +782,32 @@ h2 {
     }
 }
 
+.info-hover {
+    position: relative;
+}
+
+.info-hover {
+    text-decoration: underline;
+}
+
+.info-hover>span {
+    text-decoration: none;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    background-color: #252525;
+    border: 2px solid #fff;
+    /* color: black; */
+    padding: 5px;
+    width: 220px;
+    font-size: 14px;
+}
+
+.info-hover:hover>span {
+    display: block;
+}
+
 .map-holder {
     scrollbar-color: rgb(19, 0, 128) rgba(0, 0, 0, 0.247);
     overflow-x: auto;
