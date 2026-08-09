@@ -206,6 +206,11 @@ form>button:hover:not([disabled]) {
     0% {
         right: calc(50% - 240px / 2);
         bottom: calc(50% - 240px / 2);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
     }
 
     25% {

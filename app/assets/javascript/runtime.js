@@ -207,9 +207,15 @@ globalThis.selectPrice = function (id, index) {
     selectedPrice = index;
     document.getElementById("priceButton" + index).classList.add("selected-price");
 }
+let remainingPricesToBePicked = false;
 globalThis.finalizePriceSelection = function () {
     if (selectedPriceID == "") {
         return;
+    }
+    if (!remainingPricesToBePicked) {
+        while (prizeGot.children[0]) {
+            prizeGot.children[0].remove();
+        }
     }
     priceSubmitBtn.setAttribute("disabled", "");
 
@@ -249,11 +255,15 @@ globalThis.finalizePriceSelection = function () {
                 break;
             }
         }
+        let img = document.createElement("img");
+        img.src = body["img"];
+        prizeGot.appendChild(img);
         if (body["fp"]) {
+            remainingPricesToBePicked = true;
             loadPrices(body["fp"]);
             fadeIn(islandFound);
         } else {
-            prizeGot.children[0].src = body["img"];
+            remainingPricesToBePicked = false;
             resetAnimation(prizeGot);
             fadeIn(prizeGot);
         }
