@@ -65,7 +65,7 @@
     <div id="no-existing-voyage" <% if @voyage != nil %> style="display:none;"<% end %>>
         <img id="logo" style="width:450px;" src="<%= asset_path("graphics/logo.svg") %>" alt="Out To C">
         <div id="new-voyage-buttons">
-            <div class="surround-border"><a <%= @user.token != nil ? "disabled" : "" %> class="voyage-btn" href="https://hackatime.hackclub.com/oauth/authorize?client_id=<%= ENV["HACKATIME_UID"] %>&redirect_uri=<%= CGI.escape(auth_hackatime_callback_url) %>&response_type=code&scope=profile+read" id="link-hackatime">Link Hackatime</a></div>
+            <div class="surround-border"><a <%= @user.token != nil ? "disabled" : "" %> class="voyage-btn" href="https://hackatime.hackclub.com/oauth/authorize?client_id=<%= ENV["HACKATIME_UID"] %>&redirect_uri=<%= CGI.escape(auth_hackatime_callback_url) %>&response_type=code&scope=read" id="link-hackatime">Link Hackatime</a></div>
             <div class="surround-border"><button <%= @user.token == nil ? "disabled" : "" %> class="voyage-btn" onclick="newVoyage();" id="new-voyage">New Voyage</button></div>
         </div>
     </div>
@@ -123,10 +123,10 @@
     
     <div id="shipped-voyage" <% if @voyage == nil or @voyage.ship_status == 0 %> style="display:none;"<% end %>>
         <h1>Voyage Shipped!</h1>
-        <% if @voyage.ship_status == 1 %>
-        <h2>Awaiting approval.</h2>
-        <% else %>
+        <% if @voyage != nil && @voyage.ship_status == 2 %>
         <h2>Approved! You should have been DMd about fulfilment now!</h2>
+        <% else %>
+        <h2>Awaiting approval.</h2>
         <% end %>
     </div>
 
