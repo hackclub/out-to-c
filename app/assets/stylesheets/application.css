@@ -100,16 +100,16 @@ body {
     display: unset !important;
 }
 
-form>input[type=text],
-form>input[type=url],
-form>button,
-form>select {
+form input[type=text],
+form input[type=url],
+form button,
+form select {
     width: calc(100% - 10px);
     background-color: #9c6a3d;
     border: 2px solid #583d26;
 }
 
-form>button {
+form button {
     width: calc(100% - 40px);
     margin: 0 auto;
     margin-top: 10px;
@@ -117,13 +117,13 @@ form>button {
     color: black;
 }
 
-form>button[disabled] {
+form button[disabled] {
     cursor: default;
     filter: brightness(0.7) contrast(0.7);
     pointer-events: none;
 }
 
-form>button:hover:not([disabled]) {
+form button:hover:not([disabled]) {
     filter: saturate(1.1) brightness(1.1);
 }
 

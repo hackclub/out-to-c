@@ -405,6 +405,9 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
         }
         newVoyageTitle.innerText = "Edit Voyage";
         newVoyageSubmitBtn.innerText = "SAVE CHANGES";
+        for (let element of document.getElementsByClassName("input-show-on-voyage-create")) {
+            element.style.display = "unset";
+        }
     }).catch((error) => {
         showNotice("Error: Not success :(");
         console.error(error);

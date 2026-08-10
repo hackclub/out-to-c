@@ -31,12 +31,19 @@
 
     <button onclick="backVoyage();" id="new-voyage-back"><%= image_tag "graphics/back.png", :alt => "Back" %></button>
     <div id="new-voyage-div" class="page surround-border">
+        <style>
+            .input-show-on-voyage-create {
+                <% if @voyage == nil  %>
+                display:none;
+                <% end %>
+            }
+        </style>
         <% new_or_edit = @voyage == nil ? "New" : "Edit" %>
         <% create_or_save = @voyage == nil ? "CREATE VOYAGE" : "SAVE CHANGES" %>
         <h1 id="new-voyage-title"><%= new_or_edit %> Voyage</h1>
         <%= form_with(url: voyage_new_path, id: "new-voyage-form", ) do |form| %>
-            <label for="image_data">
-            <img src="<%= @voyage != nil && @voyage.image_link != nil ? @voyage.image_link : "" %>" id="image-link-showcase" alt="Project screenshot. Click to edit!">
+            <label for="image_data" class="input-show-on-voyage-create">
+                <img src="<%= @voyage != nil && @voyage.image_link != nil ? @voyage.image_link : "" %>" id="image-link-showcase" alt="Project screenshot. Click to edit!">
             </label>
             <%= form.file_field :image_data, accept:"image/*", style:"display:none", onchange:"readURL(this);" %>
             <label for=name>Name: </label><br>
@@ -45,10 +52,12 @@
             <label for=desc>Description (optional): </label><br>
             <input autocomplete="off" name="desc" type="text"  value="<%= @voyage != nil && @voyage.desc != nil ? @voyage.desc : "" %>">
             <br>
-            <label for=repo>Github Repository URL (optional): </label><br>
-            <input autocomplete="off" name="repo" type="url"  value="<%= @voyage != nil && @voyage.repo != nil ? @voyage.repo : "" %>">
+            <div class="input-show-on-voyage-create">
+                <label for=repo>Github Repository URL (optional): </label><br>
+                <input autocomplete="off" name="repo" type="url"  value="<%= @voyage != nil && @voyage.repo != nil ? @voyage.repo : "" %>">
+                <br>
+            </div>
 
-            <br>
             <label for=hackatime>Select Hackatime project (optional): </label><br>
 
             <select autocomplete="off" name="hackatime" id="hackatime">
