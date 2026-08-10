@@ -151,7 +151,7 @@ class ApplicationController < ActionController::Base
         http.request(req)
       }
       @token_invalid = false
-      if not (response.kind_of? Net::HTTPSuccess)
+      if not (res.kind_of? Net::HTTPSuccess)
         @token_invalid = true
         @projects = []
         return
