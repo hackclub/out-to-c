@@ -11,6 +11,13 @@
 
 #notice>button {
     margin-left: 10px;
+    border: 2px solid black;
+    width: 40px;
+    background-color: limegreen;
+}
+
+#notice>button:hover {
+    filter: brightness(1.2);
 }
 
 img {
