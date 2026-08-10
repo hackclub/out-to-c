@@ -27,3 +27,5 @@ module OutToCServer
     config.assets.paths << Rails.root.join("app", "assets", "javascript")
   end
 end
+
+Rails.application.config.session_store :cookie_store, expires:  Time.now + 60.days
