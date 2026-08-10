@@ -710,6 +710,42 @@ form>button:hover:not([disabled]) {
     left: 0;
 }
 
+#image-link-showcase {
+    margin-top: 20px;
+    width: 100%;
+    min-height: 70px;
+    text-align: center;
+    background-color: #6e4c30;
+    border: 2px solid #9c6a3d;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+}
+
+#image-link-showcase::after {
+    /* basically draw the ::after pseudo element as a block that covers
+    the entire normal element, so we can display this custom error page.
+    technique from: https://bitsofco.de/styling-broken-images/ */
+    content: "Project screenshot. Click to edit!";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    padding-top: 17px;
+    font-style: italic;
+    font-size: 14px;
+    background-color: #6e4c30;
+}
+
+#image-link-showcase::before {
+    font: inherit;
+    display: block !important;
+    font-style: italic;
+    margin-top: 17px;
+    font-size: 14px;
+}
+
 #ship-container {
     position: absolute;
     bottom: 10px;

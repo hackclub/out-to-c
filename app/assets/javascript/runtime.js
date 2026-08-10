@@ -188,6 +188,22 @@ globalThis.toggleCargo = function () {
     cargoShown = !cargoShown;
 }
 
+// Source - https://stackoverflow.com/a/12369027
+// Posted by ygssoni, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-03-12, License - CC BY-SA 4.0
+
+globalThis.readURL = function (input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            document.getElementById("image-link-showcase").setAttribute("src", e.target.result)
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 // Source - https://stackoverflow.com/a/45036752 (modified)
 // Posted by user, modified by community. See post 'Timeline' for change history
 // Retrieved 2026-08-10, License - CC BY-SA 4.0
@@ -352,7 +368,7 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
     newVoyageSubmitBtn.setAttribute("disabled", "");
     fetch(event.target.action, {
         method: 'POST',
-        body: new URLSearchParams(new FormData(event.target))
+        body: new FormData(event.target)
     }).then((response) => {
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);

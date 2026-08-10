@@ -34,7 +34,11 @@
         <% new_or_edit = @voyage == nil ? "New" : "Edit" %>
         <% create_or_save = @voyage == nil ? "CREATE VOYAGE" : "SAVE CHANGES" %>
         <h1 id="new-voyage-title"><%= new_or_edit %> Voyage</h1>
-        <%= form_with(url: voyage_new_path, id: "new-voyage-form") do |form| %>
+        <%= form_with(url: voyage_new_path, id: "new-voyage-form", ) do |form| %>
+            <label for="image_data">
+            <img src="<%= @voyage != nil && @voyage.image_link != nil ? @voyage.image_link : "" %>" id="image-link-showcase" alt="Project screenshot. Click to edit!">
+            </label>
+            <%= form.file_field :image_data, accept:"image/*", style:"display:none", onchange:"readURL(this);" %>
             <label for=name>Name: </label><br>
             <input autocomplete="off" name="name" type="text" value="<%= @voyage != nil && @voyage.name != nil ? @voyage.name : "" %>">
             <br>
@@ -55,6 +59,7 @@
                 <% end %>
             </select>
             <br>
+            
             <button id="new-voyage-form-submit"><%= create_or_save %></button>
             <button id="delete-voyage-button" style="display:<%= @voyage == nil ? "none" : "block" %>" type="button" onclick="tryDeleteVoyage();">Delete Voyage...</button>
         <% end %>
