@@ -408,6 +408,9 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
         for (let element of document.getElementsByClassName("input-show-on-voyage-create")) {
             element.style.display = "unset";
         }
+        for (let element of document.getElementsByClassName("input-hide-on-voyage-create")) {
+            element.style.display = "none";
+        }
     }).catch((error) => {
         showNotice("Error: Not success :(");
         console.error(error);

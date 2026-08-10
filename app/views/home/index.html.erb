@@ -37,6 +37,11 @@
                 display:none;
                 <% end %>
             }
+            .input-hide-on-voyage-create {
+                <% if @voyage != nil  %>
+                display:none;
+                <% end %>
+            }
         </style>
         <% new_or_edit = @voyage == nil ? "New" : "Edit" %>
         <% create_or_save = @voyage == nil ? "CREATE VOYAGE" : "SAVE CHANGES" %>
@@ -49,16 +54,16 @@
             <label for=name>Name: </label><br>
             <input autocomplete="off" name="name" type="text" value="<%= @voyage != nil && @voyage.name != nil ? @voyage.name : "" %>">
             <br>
-            <label for=desc>Description (optional): </label><br>
+            <label for=desc>Description<span class="input-hide-on-voyage-create"> (optional)</span>: </label><br>
             <input autocomplete="off" name="desc" type="text"  value="<%= @voyage != nil && @voyage.desc != nil ? @voyage.desc : "" %>">
             <br>
             <div class="input-show-on-voyage-create">
-                <label for=repo>Github Repository URL (optional): </label><br>
+                <label for=repo>Github Repository URL<span class="input-hide-on-voyage-create"> (optional)</span>: </label><br>
                 <input autocomplete="off" name="repo" type="url"  value="<%= @voyage != nil && @voyage.repo != nil ? @voyage.repo : "" %>">
                 <br>
             </div>
 
-            <label for=hackatime>Select Hackatime project (optional): </label><br>
+            <label for=hackatime>Select Hackatime project<span class="input-hide-on-voyage-create"> (optional)</span>: </label><br>
 
             <select autocomplete="off" name="hackatime" id="hackatime">
                 <option value="" <%= @voyage == nil ? "selected" : "" %>>Select a Hackatime project</option>
