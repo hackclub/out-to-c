@@ -48,6 +48,7 @@
         <h1 id="new-voyage-title"><%= new_or_edit %> Voyage</h1>
         <%= form_with(url: voyage_new_path, id: "new-voyage-form", ) do |form| %>
             <label for="image_data" class="input-show-on-voyage-create">
+                Screenshot [<span class="info-hover">?<span>The screenshot should showcase your project running.</span></span>]:
                 <img src="<%= @voyage != nil && @voyage.image_link != nil ? @voyage.image_link : "" %>" id="image-link-showcase" alt="Project screenshot. Click to edit!">
             </label>
             <%= form.file_field :image_data, accept:"image/*", style:"display:none", onchange:"readURL(this);" %>

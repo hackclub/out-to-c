@@ -720,7 +720,6 @@ form button:hover:not([disabled]) {
 }
 
 #image-link-showcase {
-    margin-top: 20px;
     width: 100%;
     min-height: 70px;
     max-height: 291px;
@@ -897,6 +896,7 @@ h2 {
     text-decoration: none;
     display: none;
     position: absolute;
+    z-index: 77;
     top: 0;
     left: 5px;
     background-color: #252525;
