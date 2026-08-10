@@ -35,6 +35,14 @@
     <br>
     <br>
 
+    <br>
+    <label for="image_data" class="input-show-on-voyage-create" id="admin-image-label-showcase">
+        Screenshot:<br>
+        <img src="<%= @voyage != nil && @voyage.image_link != nil ? @voyage.image_link : "" %>" id="image-link-showcase" alt="Project screenshot. Click to edit!">
+    </label>
+    <%= form.file_field :image_data, accept:"image/*", style:"display:none", onchange:"readURL(this);" %>
+    <br>
+
     <label for="note">Justification: </label>
     <textarea autocomplete="off" class="reviewer-textarea" type="text" id="note" name="justification" value=""><%= @voyage.justification %></textarea><br>
 
@@ -47,3 +55,4 @@
 <br>
 <span><img style="width:40px;aspect-ratio:1;border-radius:25px;" src="<%= @owner.pfp %>"> made by @<%= @owner.name %></span><br>
 <pre style="font-size:14px;line-height: 16px;"><%= JSON.pretty_generate(@voyage.as_json) %></pre>
+<script src="<%= asset_path "admin.js" %>"></script>

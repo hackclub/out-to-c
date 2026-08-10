@@ -38,6 +38,16 @@ class AdminController < ApplicationController
 
     def submit_edit
         @voyage = Voyage.find(params["id"])
+        image_link = @voyage.image_link
+        if params["image_data"] != nil
+            upload_data = upload_image(params["image_data"])
+            if upload_data[:error] != nil
+                render json: { "error": upload_data[:error]}
+                return
+            end
+            image_link = upload_data[:ok]
+        end
+        @voyage.image_link = image_link
         @voyage.name = params["name"]
         @voyage.desc = params["desc"]
         @voyage.repo = params["repo"]

@@ -11,6 +11,67 @@ class ApplicationController < ActionController::Base
 
 
   private
+    # checks that an uploaded file is an image,
+    # and that it is not animated.
+    # returns json response.
+    # also returns the file data in the 'data' key if it is read. (since file reads exhaust the file object)
+    def is_image_valid(file)
+      allowed_types = ["jpeg","jpg","png","webp"]
+      type = FastImage.type(file)
+      if type == nil
+        return {"error":"File is not recognized as an image"}
+      end
+      valid_type = allowed_types.include? type.to_s
+      if not valid_type
+        return {"error":"Image type is not allowed. Allowed types are "+allowed_types.join(", ")}
+      end
+      file_data = file.read
+      if type.to_s == "png" and is_png_animated(file_data)
+        return {"error":"Animated PNGs are not allowed","data":file_data}
+      end
+      if type.to_s == "webp" and is_webp_animated(file_data)
+        return {"error":"Animated images are not allowed","data":file_data}
+      end
+      puts type.to_s
+      puts "type^"
+
+      # success state!
+      # the file data is returned, as the file data
+      # can only be read once from a single file object,
+      # and since it is used here, the file data also needs
+      # to be returned so that it can be used
+      {"data":file_data,"type":type.to_s}
+    end
+
+    # reads png file data to determine if it is animated
+    def is_png_animated(data)
+      idat_pos = data.index('IDAT')
+      idat_pos != nil and data[0..idat_pos].index('acTL') != nil 
+    end
+
+    # checks if webp is animated
+    def is_webp_animated(data)
+      pos = data.index('ANMF')
+      pos != nil
+    end
+    def upload_image(file)
+      # validate image format
+      is_image_valid = is_image_valid(file)
+      if is_image_valid[:error] != nil
+        return {"error": is_image_valid[:error]}
+      end
+      
+      # generate id for upload
+      o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
+      img_id = (0...50).map { o[rand(o.length)] }.join
+
+      # write file
+      img_name = "#{img_id}.#{is_image_valid[:type]}"
+      File.open("public/uploads/#{img_name}", 'wb') { |file| file.write(is_image_valid[:data]) }
+
+      image_link = root_url.to_s + "uploads/"+img_name
+      return {"ok":image_link}
+    end
     def slack_open_conversation(user)
       puts "opening convo with: " + user
       if ENV["SLACK_BOT_TOKEN"] == nil || ENV["SLACK_BOT_TOKEN"].blank?

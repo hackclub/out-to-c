@@ -1224,3 +1224,11 @@ canvas {
     min-height: 32px;
     resize: vertical;
 }
+
+#admin-image-label-showcase {
+    float: unset !important;
+}
+
+.admin-body #image-link-showcase {
+    width: unset !important;
+}
