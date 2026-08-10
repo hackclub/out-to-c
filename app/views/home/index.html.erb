@@ -144,6 +144,11 @@
             <% end %>
         </div>
         <% end %>
+        <% if @user.token == nil %>
+        <div class="page" id="hackatime-panel">
+            <a href="https://hackatime.hackclub.com/oauth/authorize?client_id=<%= ENV["HACKATIME_UID"] %>&redirect_uri=<%= CGI.escape(auth_hackatime_callback_url) %>&response_type=code&scope=read" id="link-hackatime">Link Hackatime</a>
+        </div>
+        <% end %>
         <div id="cargo">
             <div id="cargo-header">
                 <span>Ship Cargo</span>

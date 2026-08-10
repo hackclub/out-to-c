@@ -694,9 +694,19 @@ form>button:hover:not([disabled]) {
     line-height: 13px;
 }
 
-#devpanel {
+#hackatime-panel {
     position: absolute;
     top: 380px;
+    left: 0;
+}
+
+#hackatime-panel>a {
+    color: white;
+}
+
+#devpanel {
+    position: absolute;
+    top: 480px;
     left: 0;
 }
 
