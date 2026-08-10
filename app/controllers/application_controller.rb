@@ -133,6 +133,10 @@ class ApplicationController < ActionController::Base
     def get_hackatime_projects
       token = @user.token
       get_hackatime_projects_with_token(token)
+      if @token_invalid
+        @user.token = nil
+        @user.save
+      end
     end
     def get_hackatime_projects_with_token(token)
       if token == nil
@@ -146,6 +150,13 @@ class ApplicationController < ActionController::Base
       res = Net::HTTP.start(url.hostname, url.port, use_ssl: url.scheme == "https") { |http|
         http.request(req)
       }
+      @token_invalid = false
+      if not (response.kind_of? Net::HTTPSuccess)
+        @token_invalid = true
+        @projects = []
+        return
+      end
+
       data = JSON.parse(res.body)
       @projects = data["projects"]
     end
