@@ -4,8 +4,9 @@
     <a href="https://hackclub.com" id="hackclub-flag"><img src="https://assets.hackclub.com/flag-orpheus-top.svg"></a>
     <div style="position: absolute;width:100%"><img id="logo" src="<%= asset_path("graphics/logo.svg") %>" alt="Out To C"></div>
     <%= image_tag "graphics/scroll.svg", id: "scroll-indicator" %>
-    <a class="linkbutton sign-in" href="https://auth.hackclub.com/oauth/authorize?client_id=<%= ENV["HCA_CLIENT_ID"] %>&redirect_uri=<%= CGI.escape(auth_hca_callback_url) %>&response_type=code&scope=email+slack_id+openid+verification_status"
-        title="RSVP form :O">Sign in with Hack Club</a>
+    <a class="linkbutton sign-in" href="https://auth.hackclub.com/oauth/authorize?client_id=<%= ENV["HCA_CLIENT_ID"] %>&redirect_uri=<%= CGI.escape(auth_hca_callback_url) %>&response_type=code&scope=email+slack_id+openid+verification_status">
+        Sign in with Hack Club
+    </a>
     <% if Rails.env.development? %>
     <div class="devlogin">
         <span>Dev login:</span>
@@ -22,7 +23,7 @@
         <div class="centered">
         <main>
             <h1>Out To C</h1>
-            <p>Voyage out to sea on the hunt for treasure! You write projects in C or C++, and while you work,
+            <p>Voyage out to sea on the hunt for treasure! You write projects in C, C++ or C#, and while you work,
             your ship travels further and further. On the way, there's islands with treasure chests!</p>
         </main>
         <div class="card-holder">
@@ -51,17 +52,21 @@
         <p>There's islands with treasure that your ship reaches as you code. At each island, 
             you get to choose one out of several possible rewards, which is added to your ship's cargo.<br>
             When you're done with your project, you can ship [<span class="info-hover">?<span>Shipping means publishing/releasing your project.</span></span>] it, at which point you receive all
-            the treasure you've gotten so far. You can also continue working more hours after the big treasure island,
-            with
-            more prizes to be defined.</p>
-        <p>This YSWS is running from 3 Aug - 31 Aug.</p>
-        <span>Interested? Join the channel <a class="channel-link"
-            href="https://hackclub.enterprise.slack.com/archives/C0ANHQPT1S4">#out-to-c</a></span>
-
+            the treasure you've gotten so far. </p>
+        <p>This YSWS is running from 14 Aug - 7 Sep (2026).</p>
+        <span>Interested? Sign up now, and join the channel <a class="channel-link"
+            href="https://hackclub.enterprise.slack.com/archives/C0ANHQPT1S4">#out-to-c</a>!</span>
+        <div style="margin-left: auto;margin-right: auto;width: fit-content;margin-top:45px;">
+            <a class="linkbutton" href="https://auth.hackclub.com/oauth/authorize?client_id=<%= ENV["HCA_CLIENT_ID"] %>&redirect_uri=<%= CGI.escape(auth_hca_callback_url) %>&response_type=code&scope=email+slack_id+openid+verification_status">Sign in with Hack Club</a>
+        </div>
         <div class="bottom">
-            <p>Made by <a class="channel-link" target="_blank"
-                href="https://hackclub.enterprise.slack.com/team/U098P9DLUGJ">@iris</a> • <a class="channel-link"
-                target="_blank" href="https://github.com/ingobeans/out-to-c-server">Github Repo</a></p>
+            <p>Made by 
+                <a class="channel-link" target="_blank" href="https://hackclub.enterprise.slack.com/team/U098P9DLUGJ">@iris</a>
+                |
+                <a class="channel-link" target="_blank" href="https://github.com/ingobeans/out-to-c-server">Github Repo</a>
+                |
+                <a class="channel-link" target="_blank" href="https://hackclub.com/privacy-and-terms">Hack Club Privacy Policy</a></p>
+                
         </div>
         </div>
     </div>

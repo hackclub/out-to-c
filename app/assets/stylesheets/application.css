@@ -810,6 +810,11 @@ form button:hover:not([disabled]) {
 .channel-link {
     font-weight: bold;
     color: white;
+    text-decoration: none;
+}
+
+.channel-link:hover {
+    text-decoration: underline;
 }
 
 .sign-in {
