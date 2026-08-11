@@ -1232,3 +1232,17 @@ canvas {
 .admin-body #image-link-showcase {
     width: unset !important;
 }
+
+.reviewer-link-btn {
+    border: 1px solid white;
+    padding: 5px;
+    color: white !important;
+    background-color: inherit;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+.reviewer-link-btn:hover {
+    filter: brightness(2.0);
+    text-decoration: underline;
+}
