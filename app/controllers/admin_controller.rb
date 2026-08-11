@@ -51,6 +51,7 @@ class AdminController < ApplicationController
         @voyage.name = params["name"]
         @voyage.desc = params["desc"]
         @voyage.repo = params["repo"]
+        @voyage.demo = params["demo"]
         @voyage.hackatime = params["hackatime"]
         @voyage.cargo = params["cargo"]
         @voyage.reviewer_note = params["reviewer_note"]
