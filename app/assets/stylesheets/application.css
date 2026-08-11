@@ -803,7 +803,7 @@ form button:hover:not([disabled]) {
 .bottom {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 200px;
+    margin-top: 40px;
     width: fit-content;
 }
 
@@ -1280,4 +1280,10 @@ canvas {
     overflow: scroll;
     height: 850px;
     max-height: 80%;
+}
+
+details>p {
+    margin: 0 25px;
+    border-left: 2px solid white;
+    padding-left: 20px;
 }

@@ -53,9 +53,27 @@
             you get to choose one out of several possible rewards, which is added to your ship's cargo.<br>
             When you're done with your project, you can ship [<span class="info-hover">?<span>Shipping means publishing/releasing your project.</span></span>] it, at which point you receive all
             the treasure you've gotten so far. </p>
-        <p>This YSWS is running from 14 Aug - 7 Sep (2026).</p>
         <span>Interested? Sign up now, and join the channel <a class="channel-link"
             href="https://hackclub.enterprise.slack.com/archives/C0ANHQPT1S4">#out-to-c</a>!</span>
+
+        <hr>
+        
+        <details>
+        <summary>When is this event running?</summary>
+        <p>This YSWS is running from 14 Aug - 7 Sep (2026).</p>
+        </details>
+
+        <details>
+        <summary>What is Hack Club?</summary>
+        <p>Hack Club is a 501(c)(3) nonprofit, dedicated to getting teenagers into the world of tech! Hack Club runs events like this all the time, for teenagers, by teenagers!</p>
+        </details>
+
+        <details>
+        <summary>Who can participate?</summary>
+        <p>Anyone aged 13-18 can join! Its totally free and you get cool stuff! You don't need to know programming beforehand, you can learn during the event!</p>
+        </details>
+        
+        <div style="height:100px"></div>
         <div style="margin-left: auto;margin-right: auto;width: fit-content;margin-top:45px;">
             <a class="linkbutton" href="https://auth.hackclub.com/oauth/authorize?client_id=<%= ENV["HCA_CLIENT_ID"] %>&redirect_uri=<%= CGI.escape(auth_hca_callback_url) %>&response_type=code&scope=email+slack_id+openid+verification_status">Sign in with Hack Club</a>
         </div>
