@@ -15,6 +15,8 @@ gem "turbo-rails"
 gem "stimulus-rails"
 gem "jbuilder"
 
+gem 'whenever', require: false
+
 gem "fastimage", "~> 2.4"
 
 gem "tzinfo-data", platforms: %i[ windows jruby ]
