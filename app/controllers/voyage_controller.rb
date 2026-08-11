@@ -255,9 +255,6 @@ class VoyageController < ApplicationController
     end
 
     # set user's voyage to this voyage!
-    @user.voyage = @voyage.id
-    @user.save!
-    session[:user_id] = @user
 
     # sync to airtable
     airtable_data = 
@@ -280,6 +277,8 @@ class VoyageController < ApplicationController
     end
 
     @voyage.save!
+    @user.voyage = @voyage.id
+    session[:user_id] = @user
     @user.save!
 
     get_next_island()
