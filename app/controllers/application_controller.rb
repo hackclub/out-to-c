@@ -19,11 +19,11 @@ class ApplicationController < ActionController::Base
       allowed_types = ["jpeg","jpg","png","webp"]
       type = FastImage.type(file)
       if type == nil
-        return {"error":"File is not recognized as an image"}
+        return {"error":"Uploaded screenshot is not recognized as an image"}
       end
       valid_type = allowed_types.include? type.to_s
       if not valid_type
-        return {"error":"Image type is not allowed. Allowed types are "+allowed_types.join(", ")}
+        return {"error":"Uploaded screenshot's image type is not allowed. Allowed types are "+allowed_types.join(", ")}
       end
       file_data = file.read
       if type.to_s == "png" and is_png_animated(file_data)
