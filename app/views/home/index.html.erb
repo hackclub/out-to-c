@@ -95,7 +95,6 @@
     <div id="active-voyage" <% if @voyage == nil or @voyage.ship_status != 0 %> style="display:none;"<% end %>>
         <div id="ship-container">
             <button onclick="tryShipVoyage()" id="ship-button">Ship Project</button>
-            <%= form_with(url: voyage_ship_path, id: "ship-form") do |form| end %>
         </div>
         <div id="voyage-info">
             <div id="voyage-info-contents">
@@ -143,6 +142,44 @@
                 </div>
         </div>
         <div id="prize-got" style="display:none;">
+        </div>
+        <div id="ship-pii-container" style="display:none">
+            <div id="ship-pii">
+                <%= form_with(url: voyage_ship_path, id: "ship-pii-form", ) do |form| %>
+                    <span>To ship your project, you'll need to provide some more information.</span>
+                    <span>This personal data is stored on a secure, remote database.</span>
+                    <br>
+                    <br>
+                    <label for=name>First Name: </label><br>
+                    <input required autocomplete="off" name="first_name" type="text">
+                    <br>
+                    <label for=name>Last Name: </label><br>
+                    <input required autocomplete="off" name="last_name" type="text">
+                    <br>
+                    <label for=name>Birthdate: </label><br>
+                    <input required autocomplete="off" name="birthday" type="date">
+                    <br>
+                    <label for=name>Address (line 1): </label><br>
+                    <input required autocomplete="off" name="address_1" type="text">
+                    <br>
+                    <label for=name>Address (line 2) (optional): </label><br>
+                    <input autocomplete="off" name="address_2" type="text">
+                    <br>
+                    <label for=name>City: </label><br>
+                    <input required autocomplete="off" name="city" type="text">
+                    <br>
+                    <label for=name>State / Province: </label><br>
+                    <input required autocomplete="off" name="state" type="text">
+                    <br>
+                    <label for=name>Country: </label><br>
+                    <input required autocomplete="off" name="country" type="text">
+                    <br>
+                    <label for=name>ZIP / Postal code: </label><br>
+                    <input required autocomplete="off" name="zip" type="text">
+                    
+                    <button id="ship-pii-submit">Submit</button>
+                <% end %>
+            </div>
         </div>
     </div>
     

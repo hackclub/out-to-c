@@ -108,18 +108,21 @@ class AuthController < ApplicationController
                 redirect_to root_path, notice: "Problem fetching user info (/v1/me)"
                 return
             end
+            user_me_data = JSON.parse(response.body)
 
-            ysws_eligible = JSON.parse(response.body)["identity"]["ysws_eligible"]
+            ysws_eligible = user_me_data["identity"]["ysws_eligible"]
             if not ysws_eligible
                 redirect_to root_path, notice: "Error: you're not YSWS eligible!"
                 return
             end
+
+            email = user_me_data["identity"]["primary_email"]
             
             # get new user's slack username and profile picture using the cachet api
             slack_data = get_slack_data(slack_id)
             
             # construct the new user :3
-            user = User.new({"uid":slack_id, "hca_token":token, "name":slack_data[:name], "pfp":slack_data[:pfp]})
+            user = User.new({"uid":slack_id, "hca_token":token, "email":email, "name":slack_data[:name], "pfp":slack_data[:pfp]})
             puts slack_data
             session[:user_id] = user
             user.save

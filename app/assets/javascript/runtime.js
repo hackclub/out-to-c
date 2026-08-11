@@ -30,11 +30,11 @@ let priceSubmitBtn = document.getElementById("price-submit-btn");
 let confirmationContainer = document.getElementById("confirmation-container");
 let confirmationText = document.getElementById("confirmation-text");
 let deleteVoyageForm = document.getElementById("delete-voyage-form");
-let shipVoyageForm = document.getElementById("ship-form");
 let shipButton = document.getElementById("ship-button");
 let shippedVoyageScreen = document.getElementById("shipped-voyage");
 let shippedOrActiveVoyageScreen = document.getElementById("shipped-or-active-voyage");
 let prizeGot = document.getElementById("prize-got");
+let shipPiiBtn = document.getElementById("ship-pii-submit");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -106,32 +106,34 @@ function tryShipVoyage() {
             <li>README.md file which explains your project and how to use it</li>
             <li>A project made with C/C++</li>
         </ul>
-        </span>`,
-        () => {
-            shipButton.setAttribute("disabled", "");
-            fetch(shipVoyageForm.action, {
-                method: 'POST',
-                body: new URLSearchParams(new FormData(shipVoyageForm))
-            }).then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            }).then((body) => {
-                if (body["error"]) {
-                    shipButton.removeAttribute("disabled");
-                    showNotice("Error: " + body["error"]);
-                    return;
-                }
-                fadeOut(activeVoyageScreen);
-                fadeIn(shippedVoyageScreen);
-                setShipDirection(-1);
-            }).catch((error) => {
-                showNotice("Error: Not success :(");
-                console.error(error);
-            });
-        });
+        </span>`, () => { document.getElementById("ship-pii-container").style.display = "" });
 }
+
+document.forms['ship-pii-form'].addEventListener('submit', (event) => {
+    event.preventDefault();
+    shipPiiBtn.setAttribute("disabled", "");
+    fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target))
+    }).then((response) => {
+        shipPiiBtn.removeAttribute("disabled");
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    }).then((body) => {
+        if (body["error"]) {
+            showNotice("Error: " + body["error"]);
+            return;
+        }
+        fadeOut(activeVoyageScreen);
+        fadeIn(shippedVoyageScreen);
+        setShipDirection(-1);
+    }).catch((error) => {
+        showNotice("Error: Not success :(");
+        console.error(error);
+    });
+});
 
 function selectTreasure() {
     treasureSelect.classList.add("treasure-select-fade");

@@ -62,6 +62,29 @@ class VoyageController < ApplicationController
       render json: { "error": "Voyage has less time tracked than required for the selected prices. Did you change the hackatime project to one with less time?" }
       return
     end
+    if @user.email == nil or @user.email.blank?
+      render json: { "error": "Your user has no email set. Ask an admin for help!" }
+      return
+    end
+    
+    if @voyage.airtable_entry == nil or @voyage.airtable_entry.blank?
+      render json: { "error": "Voyage airtable entry not found! Ask an admin for help!" }
+      return
+    end
+    # send PII to airtable
+    AirtableEntry.update(@voyage.airtable_entry, {
+      "Email": @user.email,
+      "First Name": params["first_name"],
+      "Last Name": params["last_name"],
+      "Birthday": params["birthday"],
+      "Address (Line 1)": params["address_1"],
+      "Address (Line 2)": params["address_2"],
+      "City": params["city"],
+      "Country": params["country"],
+      "State / Province": params["state"],
+      "ZIP / Postal Code": params["zip"],
+    })
+
     # valid ship probably !
     aid = ENV["REVIEWER_CHANNEL_ID"]
     id = slack_open_conversation(@user.uid)

@@ -109,6 +109,7 @@ body {
 
 form input[type=text],
 form input[type=url],
+form input[type=date],
 form button,
 form select {
     width: calc(100% - 10px);
@@ -555,7 +556,8 @@ form button:hover:not([disabled]) {
     position: absolute;
 }
 
-#confirmation-container {
+#confirmation-container,
+#ship-pii-container {
     position: absolute;
     z-index: 15;
     width: 100%;
@@ -1245,4 +1247,16 @@ canvas {
 .reviewer-link-btn:hover {
     filter: brightness(2.0);
     text-decoration: underline;
+}
+
+#ship-pii {
+    padding: 10px;
+    color: white;
+    background-color: #6e4c30;
+    outline: 5px solid #9c6a3d;
+    position: absolute;
+    width: 600px;
+    left: calc(50% - 600px / 2);
+    top: 25px;
+    z-index: 9980;
 }
