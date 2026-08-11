@@ -96,6 +96,12 @@ class ReviewerController < ApplicationController
 
         @voyage.save
 
+        if @voyage.ship_status == 2
+            AirtableEntry.update(@voyage.airtable_entry, {
+                "Optional - Override Hours Spent Justification": @voyage.justification
+            })
+        end
+
         if not rereview
             review_message = ""
             for line in @voyage.reviewer_note.split("\n")
