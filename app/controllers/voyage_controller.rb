@@ -159,6 +159,14 @@ class VoyageController < ApplicationController
       render json: { "error": "Hackatime project doesn't exist" }
       return
     end
+    if params["demo"] != nil and not params["demo"].blank? and is_invalid_url(params["demo"])
+      render json: { "error": "Demo URL must be blank or a valid link!" }
+      return
+    end
+    if params["repo"] != nil and not params["repo"].blank? and is_invalid_url(params["repo"])
+      render json: { "error": "Repository URL must be blank or a valid link!" }
+      return
+    end
     
     image_link = ""
 
