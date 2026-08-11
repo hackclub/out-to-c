@@ -70,7 +70,11 @@ class VoyageController < ApplicationController
       render json: { "error": "Your user has no email set. Ask an admin for help!" }
       return
     end
-    
+    if @user.github_username == nil or @user.github_username.blank?
+      render json: { "error": "Your user has no GitHub username set. Ask an admin for help!" }
+      return
+    end
+
     if @voyage.airtable_entry == nil or @voyage.airtable_entry.blank?
       render json: { "error": "Voyage airtable entry not found! Ask an admin for help!" }
       return
@@ -84,6 +88,7 @@ class VoyageController < ApplicationController
     # send PII to airtable
     AirtableEntry.update(@voyage.airtable_entry, {
       "Email": @user.email,
+      "GitHub Username": @user.github_username,
       "First Name": params["first_name"],
       "Last Name": params["last_name"],
       "Birthday": params["birthday"],

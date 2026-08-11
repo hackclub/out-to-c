@@ -165,10 +165,12 @@ class AuthController < ApplicationController
         end
         token = response[:token]
 
-        # check for existing user
+        user_data = get_user_data(token)
+        github_username = user_data["github_username"]
+        
+        @user.github_username = github_username
         @user.token = token
         @user.save
-        # existing user
         redirect_to root_path, notice: "Successfully linked Hackatime!"
     end
 

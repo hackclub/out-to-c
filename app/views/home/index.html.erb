@@ -88,7 +88,7 @@
     <div id="no-existing-voyage" <% if @voyage != nil %> style="display:none;"<% end %>>
         <img id="logo" style="width:450px;" src="<%= asset_path("graphics/logo.svg") %>" alt="Out To C">
         <div id="new-voyage-buttons">
-            <div class="surround-border"><a <%= @user.token != nil ? "disabled" : "" %> class="voyage-btn" href="https://hackatime.hackclub.com/oauth/authorize?client_id=<%= ENV["HACKATIME_UID"] %>&redirect_uri=<%= CGI.escape(auth_hackatime_callback_url) %>&response_type=code&scope=read" id="link-hackatime">Link Hackatime</a></div>
+            <div class="surround-border"><a <%= @user.token != nil ? "disabled" : "" %> class="voyage-btn" href="https://hackatime.hackclub.com/oauth/authorize?client_id=<%= ENV["HACKATIME_UID"] %>&redirect_uri=<%= CGI.escape(auth_hackatime_callback_url) %>&response_type=code&scope=read+profile" id="link-hackatime">Link Hackatime</a></div>
             <div class="surround-border"><button <%= @user.token == nil ? "disabled" : "" %> class="voyage-btn" onclick="newVoyage();" id="new-voyage">New Voyage</button></div>
         </div>
     </div>
@@ -209,7 +209,7 @@
         <% end %>
         <% if @user.token == nil %>
         <div class="page" id="hackatime-panel">
-            <a href="https://hackatime.hackclub.com/oauth/authorize?client_id=<%= ENV["HACKATIME_UID"] %>&redirect_uri=<%= CGI.escape(auth_hackatime_callback_url) %>&response_type=code&scope=read" id="link-hackatime">Link Hackatime</a>
+            <a href="https://hackatime.hackclub.com/oauth/authorize?client_id=<%= ENV["HACKATIME_UID"] %>&redirect_uri=<%= CGI.escape(auth_hackatime_callback_url) %>&response_type=code&scope=read+profile" id="link-hackatime">Link Hackatime</a>
         </div>
         <% end %>
         <div id="cargo">
