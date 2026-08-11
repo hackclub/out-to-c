@@ -177,7 +177,10 @@
                     <label for=name>ZIP / Postal code: </label><br>
                     <input required autocomplete="off" name="zip" type="text">
                     
+                    <div class="two-button">
                     <button id="ship-pii-submit">Submit</button>
+                    <button type="button" onclick="document.getElementById('ship-pii-container').style.display='none';">Cancel</button>
+                    </div>
                 <% end %>
             </div>
         </div>

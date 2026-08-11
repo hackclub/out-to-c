@@ -58,6 +58,10 @@ class VoyageController < ApplicationController
       render json: { "error": "Voyage is not linked to any hackatime project" }
       return
     end
+    if @voyage.image_link == nil or @voyage.image_link.blank?
+      render json: { "error": "Voyage has no screenshot set!" }
+      return
+    end
     if @voyage.total_seconds / 60 / 60 < @voyage.last_island
       render json: { "error": "Voyage has less time tracked than required for the selected prices. Did you change the hackatime project to one with less time?" }
       return
