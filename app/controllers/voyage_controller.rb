@@ -85,10 +85,14 @@ class VoyageController < ApplicationController
         return
       end
     end
+    @voyage.ship_date = Time.now
+    date_range = ysws_start + " -> " + @voyage.ship_date.strftime("%Y-%m-%d")
     # send PII to airtable
     AirtableEntry.update(@voyage.airtable_entry, {
       "Email": @user.email,
       "GitHub Username": @user.github_username,
+      "Submitter Hackatime ID": @user.hackatime_id,
+      "Hackatime Project Name(s) and Date Range(s)": "#{@voyage.hackatime} - (#{date_range})",
       "First Name": params["first_name"],
       "Last Name": params["last_name"],
       "Birthday": params["birthday"],
@@ -106,7 +110,6 @@ class VoyageController < ApplicationController
     aid = ENV["REVIEWER_CHANNEL_ID"]
     id = slack_open_conversation(@user.uid)
 
-    @voyage.ship_date = Time.now
     @voyage.ship_status = 1
     @voyage.save
 

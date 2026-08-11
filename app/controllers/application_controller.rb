@@ -5,10 +5,9 @@ def return_islands
   return [6,12,26]
 end
 def ysws_start
-  date = "2026-08-02T22:00:00.000Z"
+  date = "2026-08-12"
   # TODO: REPLACE DATE BEFORE LAUNCH
-  date = "2026-07-07T22:00:00.000Z"
-
+  date = "2026-05-07"
   date
 end
 def get_hackatime_projects_with_token(token)
