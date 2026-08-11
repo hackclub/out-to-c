@@ -62,7 +62,7 @@
                 <label for=repo>Github Repository URL: </label><br>
                 <input autocomplete="off" name="repo" type="url"  value="<%= @voyage != nil && @voyage.repo != nil ? @voyage.repo : "" %>">
                 <br>
-                <label for=demo>Demo URL: </label><br>
+                <label for=demo>Demo URL [<span class="info-hover">?<span>Your project should have a demo experiencable by anyone. Ex: GitHub Releases page or a website where your project is web-playable</span></span>]: </label><br>
                 <input autocomplete="off" name="demo" type="url" value="<%= @voyage != nil && @voyage.demo != nil ? @voyage.demo : "" %>">
                 <br>
             </div>
