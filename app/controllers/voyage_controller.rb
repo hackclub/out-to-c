@@ -261,6 +261,8 @@ class VoyageController < ApplicationController
     # sync to airtable
     airtable_data = 
       {
+        "Email": @user.email,
+        "GitHub Username": @user.github_username,
         "Description": @voyage.desc,
         "Code URL": @voyage.repo,
         "Playable URL": @voyage.demo,
