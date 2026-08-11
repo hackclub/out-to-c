@@ -1268,7 +1268,11 @@ canvas {
     outline: 5px solid #9c6a3d;
     position: absolute;
     width: 600px;
-    left: calc(50% - 600px / 2);
-    top: 25px;
     z-index: 9980;
+    left: calc(50% - 600px / 2);
+    top: max(calc(50% - min(850px, 80%) / 2), 0px);
+
+    overflow: scroll;
+    height: 850px;
+    max-height: 80%;
 }
