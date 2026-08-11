@@ -59,8 +59,11 @@
             <input autocomplete="off" name="desc" type="text"  value="<%= @voyage != nil && @voyage.desc != nil ? @voyage.desc : "" %>">
             <br>
             <div class="input-show-on-voyage-create">
-                <label for=repo>Github Repository URL<span class="input-hide-on-voyage-create"> (optional)</span>: </label><br>
+                <label for=repo>Github Repository URL: </label><br>
                 <input autocomplete="off" name="repo" type="url"  value="<%= @voyage != nil && @voyage.repo != nil ? @voyage.repo : "" %>">
+                <br>
+                <label for=demo>Demo URL: </label><br>
+                <input autocomplete="off" name="demo" type="url" value="<%= @voyage != nil && @voyage.demo != nil ? @voyage.demo : "" %>">
                 <br>
             </div>
 

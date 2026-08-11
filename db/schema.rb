@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_10_221440) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_11_020754) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "hca_token"
@@ -25,6 +25,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_10_221440) do
   create_table "voyages", force: :cascade do |t|
     t.string "cargo"
     t.datetime "created_at", null: false
+    t.string "demo"
     t.string "desc"
     t.string "hackatime"
     t.float "hours"

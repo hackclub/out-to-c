@@ -179,6 +179,7 @@ class VoyageController < ApplicationController
       "name": params["name"],
       "total_seconds": time,
       "desc": params["desc"],
+      "demo": params["demo"],
       "repo": params["repo"],
       "hackatime": params["hackatime"],
       "ship_status": 0,
