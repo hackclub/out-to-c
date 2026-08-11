@@ -91,6 +91,7 @@ class ReviewerController < ApplicationController
             
             if @voyage.ship_status == 2
                 aid = slack_open_conversation(ENV["ADMIN_SLACK_ID"])
+                @voyage.approval_date = Time.now
             end
         end
 

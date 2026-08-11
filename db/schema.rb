@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_11_181310) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_11_192703) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email"
     t.string "github_username"
+    t.integer "hackatime_id"
     t.string "hca_token"
     t.string "name"
     t.string "pfp"
@@ -26,6 +27,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_11_181310) do
 
   create_table "voyages", force: :cascade do |t|
     t.string "airtable_entry"
+    t.date "approval_date"
     t.string "cargo"
     t.datetime "created_at", null: false
     t.string "demo"
@@ -40,6 +42,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_11_181310) do
     t.integer "owner"
     t.string "repo"
     t.string "reviewer_note"
+    t.date "ship_date"
     t.integer "ship_status"
     t.integer "total_seconds"
     t.datetime "updated_at", null: false

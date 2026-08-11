@@ -106,6 +106,7 @@ class VoyageController < ApplicationController
     aid = ENV["REVIEWER_CHANNEL_ID"]
     id = slack_open_conversation(@user.uid)
 
+    @voyage.ship_date = Time.now
     @voyage.ship_status = 1
     @voyage.save
 

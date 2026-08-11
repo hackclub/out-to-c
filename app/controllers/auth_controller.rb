@@ -169,6 +169,7 @@ class AuthController < ApplicationController
         github_username = user_data["github_username"]
         
         @user.github_username = github_username
+        @user.hackatime_id = user_data["id"]
         @user.token = token
         @user.save
         redirect_to root_path, notice: "Successfully linked Hackatime!"
