@@ -103,8 +103,6 @@ class VoyageController < ApplicationController
       "Country": params["country"],
       "State / Province": params["state"],
       "ZIP / Postal Code": params["zip"],
-      "Optional - Override Hours Spent": (@voyage.total_seconds / 60.0 / 60.0),
-      "Optional - Override Hours Spent Justification": "<unreviewed>",
     })
 
     # valid ship probably !

@@ -32,19 +32,6 @@
     <%= form_with(url: reviewer_submit_edit_path, id: "submit") do |form| %>
     <input type="hidden" name="id" value="<%= @voyage.id %>">
     <input type="hidden" name="updated" value="<%= @voyage.updated_at %>">
-
-    <label for="note">Justification: </label>
-    <textarea autocomplete="off" class="reviewer-textarea" type="text" id="note" name="justification" value=""><%= @voyage.justification %></textarea><br>
-    <p style="margin-bottom: 5px;" class="light"><u>You only have to provide a justification for approvals!</u> The justification is only internal and not shared with the user.<br>The justification should explain:</p>
-    <ul style="margin: 0;" class="light">
-    <li>What the project is/does.</li>
-    <li>How is the project experienced? Ex, is it a downloadable binary, something web-playable, etc?</li>
-    <li>How well the commit count supports the amount of approved hours.</li>
-    <li>Any additional notes.</li>
-    </ul>
-
-    <br>
-
     <label for="note">Reviewer Note: </label>
     <textarea autocomplete="off" class="reviewer-textarea" type="text" id="note" name="reviewer_note" value=""><%= @voyage.reviewer_note %></textarea><br>
     
@@ -55,6 +42,22 @@
         <p class="light">When you re-review a project, <u>no slack DMs</u> are sent. </p>
     <% end %>
     <br>
+
+    <hr>
+    <p>The following fields <u>are only required for approvals:</u></p>
+
+    <label for="justification">Specific Technical Features: </label>
+    <textarea autocomplete="off" class="reviewer-textarea" type="text" id="justification" name="justification" value=""><%= @voyage.justification %></textarea><br>
+    <p style="margin-bottom: 5px;" class="light">Here you should list specific technical details about the project that justify the time spent.<br>
+    A good example for a game:<br>
+    </p>
+    <pre class="light">"open world, saving, co-op multiplayer"</pre>
+    <br>
+    <label for="additional_justification">Additional Justification (optional): </label>
+    <textarea autocomplete="off" class="reviewer-textarea" type="text" id="additional_justification" name="additional_justification" value=""><%= @voyage.additional_justification %></textarea><br>
+    <p style="margin-bottom: 5px;" class="light">Optional more information to justify the project's approval. <br>
+    <br>
+
     <div style="display:flex; width: 100%">
         <% if @voyage.ship_status == 1 %>
         <button onclick="reviewerSubmit(false)" class="reviwer-button" style="border-color:red;">Reject</button>

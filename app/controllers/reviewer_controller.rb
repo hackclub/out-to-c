@@ -76,6 +76,7 @@ class ReviewerController < ApplicationController
         end
         @voyage.reviewer_note = params["reviewer_note"]
         @voyage.justification = params["justification"]
+        @voyage.additional_justification = params["additional_justification"]
         if params["approved"] == "true"
             @voyage.ship_status = 2
         elsif params["approved"] == "false"
@@ -99,7 +100,8 @@ class ReviewerController < ApplicationController
 
         if @voyage.ship_status == 2
             AirtableEntry.update(@voyage.airtable_entry, {
-                "Optional - Override Hours Spent Justification": @voyage.justification
+                "Specific Technical Features": @voyage.justification,
+                "Additional Justification": @voyage.additional_justification,
             })
         end
 

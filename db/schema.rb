@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_11_192703) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_11_200236) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email"
@@ -26,6 +26,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_11_192703) do
   end
 
   create_table "voyages", force: :cascade do |t|
+    t.string "additional_justification"
     t.string "airtable_entry"
     t.date "approval_date"
     t.string "cargo"

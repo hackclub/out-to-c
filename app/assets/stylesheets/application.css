@@ -714,7 +714,7 @@ form button:hover:not([disabled]) {
 .light {
     font-weight: lighter;
     font-size: 11px !important;
-    line-height: 13px;
+    line-height: 15px;
 }
 
 #hackatime-panel {
