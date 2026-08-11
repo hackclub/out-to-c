@@ -71,6 +71,12 @@ class VoyageController < ApplicationController
       render json: { "error": "Voyage airtable entry not found! Ask an admin for help!" }
       return
     end
+    for k in ["first_name","last_name","birthday","address_1","city","country","state","zip"]
+      if params[k] == nil or params[k].blank?
+        render json: { "error": "Missing key '#{k}'" }
+        return
+      end
+    end
     # send PII to airtable
     AirtableEntry.update(@voyage.airtable_entry, {
       "Email": @user.email,
