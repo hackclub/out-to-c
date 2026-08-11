@@ -86,13 +86,14 @@ class VoyageController < ApplicationController
       end
     end
     @voyage.ship_date = Time.now
-    date_range = ysws_start + " -> " + @voyage.ship_date.strftime("%Y-%m-%d")
+    start = Date.strptime(ysws_start, "%Y-%m-%d").strftime("%m/%d/%Y")
+    date_range = ysws_start + "-" + @voyage.ship_date.strftime("%m/%d/%Y")
     # send PII to airtable
     AirtableEntry.update(@voyage.airtable_entry, {
       "Email": @user.email,
       "GitHub Username": @user.github_username,
       "Submitter Hackatime ID": @user.hackatime_id,
-      "Hackatime Project Name(s) and Date Range(s)": "#{@voyage.hackatime} - (#{date_range})",
+      "Hackatime Project Name(s) and Date Range(s)": "#{@voyage.hackatime} #{date_range}",
       "First Name": params["first_name"],
       "Last Name": params["last_name"],
       "Birthday": params["birthday"],
