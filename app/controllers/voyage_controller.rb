@@ -220,6 +220,24 @@ class VoyageController < ApplicationController
     @user.save!
     session[:user_id] = @user
 
+    # sync to airtable
+    airtable_data = 
+      {
+        "Description": @voyage.desc,
+        "Code URL": @voyage.repo,
+        "Playable URL": @voyage.demo,
+      }
+    if @voyage.image_link
+      airtable_data[:Screenshot] = [{"url": @voyage.image_link}]
+    end
+    if @voyage.airtable_entry == nil or @voyage.airtable_entry.blank?
+      entry = AirtableEntry.create(airtable_data)
+      @voyage.airtable_entry = entry.id.to_s
+      @voyage.save!
+    else
+      AirtableEntry.update(@voyage.airtable_entry, airtable_data)
+    end
+
     get_next_island()
 
     fp = 0

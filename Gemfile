@@ -18,6 +18,7 @@ gem "jbuilder"
 gem "fastimage", "~> 2.4"
 
 gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem 'airrecord', git: 'https://github.com/sirupsen/airrecord.git', branch: 'master'
 
 gem "solid_cache"
 gem "solid_queue"

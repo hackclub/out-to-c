@@ -51,7 +51,7 @@
                 Screenshot [<span class="info-hover">?<span>The screenshot should showcase your project running.</span></span>]:
                 <img src="<%= @voyage != nil && @voyage.image_link != nil ? @voyage.image_link : "" %>" id="image-link-showcase" alt="Project screenshot. Click to edit!">
             </label>
-            <%= form.file_field :image_data, accept:"image/*", style:"display:none", onchange:"readURL(this);" %>
+            <%= form.file_field :image_data, accept:"image/*", style:"display:none", onchange:"readURL(this);", autocomplete:"off" %>
             <label for=name>Name: </label><br>
             <input autocomplete="off" name="name" type="text" value="<%= @voyage != nil && @voyage.name != nil ? @voyage.name : "" %>">
             <br>
