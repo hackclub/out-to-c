@@ -253,7 +253,6 @@ class VoyageController < ApplicationController
     else
       @voyage = Voyage.new(data)
     end
-    @voyage.save!
 
     # set user's voyage to this voyage!
     @user.voyage = @voyage.id
@@ -279,6 +278,9 @@ class VoyageController < ApplicationController
     else
       AirtableEntry.update(@voyage.airtable_entry, airtable_data)
     end
+
+    @voyage.save!
+    @user.save!
 
     get_next_island()
 
