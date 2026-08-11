@@ -33,7 +33,7 @@ class AdminController < ApplicationController
         @voyage = Voyage.find(id)
         @owner_id = @voyage.owner
         @owner = User.find(@owner_id)
-        get_hackatime_projects_with_token(@owner.token)
+        @projects = get_hackatime_projects_with_token(@owner.token)[:projects]
     end
 
     def submit_edit

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_11_162913) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_11_181310) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email"
@@ -35,6 +35,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_11_162913) do
     t.string "image_link"
     t.string "justification"
     t.integer "last_island"
+    t.integer "last_island_dm"
     t.string "name"
     t.integer "owner"
     t.string "repo"

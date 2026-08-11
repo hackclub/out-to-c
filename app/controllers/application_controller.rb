@@ -1,6 +1,61 @@
 require "net/http"
 require "json"
 
+def return_islands
+  return [6,12,26]
+end
+def ysws_start
+  date = "2026-08-02T22:00:00.000Z"
+  # TODO: REPLACE DATE BEFORE LAUNCH
+  date = "2026-07-07T22:00:00.000Z"
+
+  date
+end
+def get_hackatime_projects_with_token(token)
+  if token == nil
+    return {projects: [], invalid: false}
+  end
+
+  url = URI("https://hackatime.hackclub.com/api/v1/authenticated/projects?include_archived=false&projects=&since=&until=&until_date=&start="+ysws_start+"&end=&start_date=&end_date=")
+  req = Net::HTTP::Get.new(url)
+  req["Authorization"] = "Bearer " + token
+  res = Net::HTTP.start(url.hostname, url.port, use_ssl: url.scheme == "https") { |http|
+    http.request(req)
+  }
+  if not (res.kind_of? Net::HTTPSuccess)
+    return {projects: [], invalid: true}
+  end
+
+  data = JSON.parse(res.body)
+  return {projects: data["projects"], invalid: false}
+end
+def slack_open_conversation(user)
+  puts "opening convo with: " + user
+  if ENV["SLACK_BOT_TOKEN"] == nil || ENV["SLACK_BOT_TOKEN"].blank?
+    puts "error: no slack bot token set !!"
+    return
+  end
+  url = URI("https://slack.com/api/conversations.open")
+  body = { "users": user }
+  headers = { 'Content-Type': 'application/json', "Authorization": "Bearer " + ENV["SLACK_BOT_TOKEN"]  }
+  res = Net::HTTP.post(url, body.to_json, headers)
+  puts res.body
+  data = JSON.parse(res.body)
+  return data["channel"]["id"]
+end
+def slack_send_message_conversation(dm_id,text)
+  if ENV["SLACK_BOT_TOKEN"] == nil || ENV["SLACK_BOT_TOKEN"].blank?
+    puts "error: no slack bot token set !!"
+    return
+  end
+  url = URI("https://slack.com/api/chat.postMessage")
+  body = { "channel": dm_id, "text":text }
+  headers = { 'Content-Type': 'application/json', "Authorization": "Bearer " + ENV["SLACK_BOT_TOKEN"]  }
+  res = Net::HTTP.post(url, body.to_json, headers)
+  puts res.body
+  data = JSON.parse(res.body)
+end
+
 class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
@@ -9,8 +64,13 @@ class ApplicationController < ActionController::Base
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
 
+  def self.load_lib
+  end
 
   private
+    def get_islands
+      @islands = return_islands
+    end
     # checks that an uploaded file is an image,
     # and that it is not animated.
     # returns json response.
@@ -71,35 +131,6 @@ class ApplicationController < ActionController::Base
 
       image_link = root_url.to_s + "uploads/"+img_name
       return {"ok":image_link}
-    end
-    def slack_open_conversation(user)
-      puts "opening convo with: " + user
-      if ENV["SLACK_BOT_TOKEN"] == nil || ENV["SLACK_BOT_TOKEN"].blank?
-        puts "error: no slack bot token set !!"
-        return
-      end
-      url = URI("https://slack.com/api/conversations.open")
-      body = { "users": user }
-      headers = { 'Content-Type': 'application/json', "Authorization": "Bearer " + ENV["SLACK_BOT_TOKEN"]  }
-      res = Net::HTTP.post(url, body.to_json, headers)
-      puts res.body
-      data = JSON.parse(res.body)
-      return data["channel"]["id"]
-    end
-    def slack_send_message_conversation(dm_id,text)
-      if ENV["SLACK_BOT_TOKEN"] == nil || ENV["SLACK_BOT_TOKEN"].blank?
-        puts "error: no slack bot token set !!"
-        return
-      end
-      url = URI("https://slack.com/api/chat.postMessage")
-      body = { "channel": dm_id, "text":text }
-      headers = { 'Content-Type': 'application/json', "Authorization": "Bearer " + ENV["SLACK_BOT_TOKEN"]  }
-      res = Net::HTTP.post(url, body.to_json, headers)
-      puts res.body
-      data = JSON.parse(res.body)
-    end
-    def get_islands
-      @islands = [6,12,26]
     end
     def generate_hackatime_text()
       p1 = ((@voyage != nil && @voyage.hackatime != nil && @voyage.hackatime != "") ? @voyage.hackatime : "Not linked" )
@@ -178,13 +209,6 @@ class ApplicationController < ActionController::Base
         end
       end
     end
-    def ysws_start
-      date = "2026-08-02T22:00:00.000Z"
-      # TODO: REPLACE DATE BEFORE LAUNCH
-      date = "2026-07-07T22:00:00.000Z"
-
-      date
-    end
     def require_logged_in
       set_logged_in
       if not @loggedin
@@ -193,32 +217,12 @@ class ApplicationController < ActionController::Base
     end
     def get_hackatime_projects
       token = @user.token
-      get_hackatime_projects_with_token(token)
+      res = get_hackatime_projects_with_token(token)
+      @token_invalid = res[:invalid]
+      @projects = res[:projects]
       if @token_invalid
         @user.token = nil
         @user.save
       end
-    end
-    def get_hackatime_projects_with_token(token)
-      if token == nil
-        @projects = []
-        return
-      end
-
-      url = URI("https://hackatime.hackclub.com/api/v1/authenticated/projects?include_archived=false&projects=&since=&until=&until_date=&start="+ysws_start+"&end=&start_date=&end_date=")
-      req = Net::HTTP::Get.new(url)
-      req["Authorization"] = "Bearer " + token
-      res = Net::HTTP.start(url.hostname, url.port, use_ssl: url.scheme == "https") { |http|
-        http.request(req)
-      }
-      @token_invalid = false
-      if not (res.kind_of? Net::HTTPSuccess)
-        @token_invalid = true
-        @projects = []
-        return
-      end
-
-      data = JSON.parse(res.body)
-      @projects = data["projects"]
     end
 end
