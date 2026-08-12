@@ -209,6 +209,12 @@ class ApplicationController < ActionController::Base
       @loggedin = session[:user_id] != nil and session[:user_id]["uid"] != nil
       if @loggedin
         @user = User.find(session[:user_id]["id"])
+        if session[:user_id]["uid"] != @user.uid
+          session[:user_id] = nil
+          @loggedin = false
+          @user = nil
+          return
+        end
         if @user.voyage != nil
           @voyage = Voyage.find(@user.voyage)
         end
