@@ -1072,6 +1072,24 @@ h2 {
     height: calc(var(--w_factor) * 115);
 }
 
+#map-marker-4 {
+    left: 908px;
+    top: 99px;
+}
+
+#map-marker-4>div>div {
+    transform: translateY(-85px);
+}
+
+#map-marker-5 {
+    left: 1033px;
+    top: 321px;
+}
+
+#map-marker-5>div>div {
+    transform: translate(-65px, -140px);
+}
+
 .map-marker>div {
     width: calc(var(--w_factor) * 85);
     height: calc(var(--w_factor) * 73);
