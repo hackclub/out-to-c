@@ -100,8 +100,8 @@ class ReviewerController < ApplicationController
 
         if @voyage.ship_status == 2
             AirtableEntry.update(@voyage.airtable_entry, {
-                "Specific Technical Features": @voyage.justification,
-                "Additional Justification": @voyage.additional_justification,
+                "Justification - Specific Technical Features": @voyage.justification,
+                "Justification - Additional Justification": @voyage.additional_justification,
             })
         end
 

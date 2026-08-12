@@ -98,8 +98,8 @@ class VoyageController < ApplicationController
     AirtableEntry.update(@voyage.airtable_entry, {
       "Email": @user.email,
       "GitHub Username": @user.github_username,
-      "Submitter Hackatime ID": @user.hackatime_id,
-      "Hackatime Project Name(s) and Date Range(s)": "#{@voyage.hackatime} #{date_range}",
+      "Justification - Submitter Hackatime ID": @user.hackatime_id.to_s,
+      "Justification - Hackatime Project Name(s) + Date Range(s)": "#{@voyage.hackatime} #{date_range}",
       "First Name": params["first_name"],
       "Last Name": params["last_name"],
       "Birthday": params["birthday"],
