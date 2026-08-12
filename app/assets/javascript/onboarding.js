@@ -31,22 +31,39 @@ function onboardingNext() {
 
         onboardingTextContents.innerText = "Here you can see the time left until the next island!";
     } else if (onboardingIndex == 3) {
-        onboardingContainer.style.setProperty("--x", "50%");
-        onboardingContainer.style.setProperty("--y", "50%");
-        onboardingContainer.style.setProperty("--w", "0px");
-        onboardingContainer.style.setProperty("--h", "0px");
-        onboardingContainer.style.setProperty("--o", "-50%");
         if (alreadyFoundPrices) {
+            onboardingContainer.style.setProperty("--x", "50%");
+            onboardingContainer.style.setProperty("--y", "50%");
+            onboardingContainer.style.setProperty("--w", "0px");
+            onboardingContainer.style.setProperty("--h", "0px");
+            onboardingContainer.style.setProperty("--o", "-50%");
             onboardingTextContents.innerText = "I see you've already linked an existing hackatime project and already reached your first island!\nLet's check it out!";
         } else {
-            onboardingTextContents.innerText = "If you need any help getting started, feel free to ask in the #out-to-c channel on slack!";
+            onboardingContainer.style.setProperty("--o", "0px");
+            onboardingContainer.style.setProperty("--ox", "-430px");
+            onboardingContainer.style.setProperty("--x", "calc(100% - 75px)");
+            onboardingContainer.style.setProperty("--y", "90px");
+            onboardingContainer.style.setProperty("--w", "70px");
+            onboardingContainer.style.setProperty("--h", "67px");
+            onboardingTextContents.innerText = "If you need help getting started, you can click here to access the docs!";
         }
     } else if (onboardingIndex == 4) {
         if (alreadyFoundPrices) {
             loadPrices(alreadyFoundPrices);
             fadeIn(islandFound);
             islandFound.style.animationPlayState = "running";
+            onboardingContainer.style.display = "none";
         }
+        else {
+            onboardingContainer.style.setProperty("--x", "50%");
+            onboardingContainer.style.setProperty("--y", "50%");
+            onboardingContainer.style.setProperty("--w", "0px");
+            onboardingContainer.style.setProperty("--h", "0px");
+            onboardingContainer.style.setProperty("--o", "-50%");
+            onboardingContainer.style.setProperty("--ox", "0px");
+            onboardingTextContents.innerText = "Otherwise, feel free to ask for help in the #out-to-c channel (or just hang out!)";
+        }
+    } else {
         onboardingContainer.style.display = "none";
     }
 }

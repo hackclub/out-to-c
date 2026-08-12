@@ -1289,12 +1289,29 @@ details>div {
     padding-left: 20px;
 }
 
+#docs-btn {
+    background-color: #6e4c30;
+    border: 5px solid #9c6a3d;
+    position: absolute;
+    top: 95px;
+    right: 10px;
+    padding: 5px 16px;
+    font-size: 30px;
+    color: #ffd3ab;
+    text-decoration: none;
+}
+
+#docs-btn:hover {
+    filter: brightness(1.2) saturate(1.1);
+}
+
 #onboarding-container {
     --x: 50%;
     --y: 50%;
     --w: 0px;
     --h: 0px;
     --o: -50%;
+    --ox: 0px;
 }
 
 #onboarding-highlight {
@@ -1320,7 +1337,7 @@ details>div {
     border: 5px solid #9c6a3d;
     padding: 10px;
     color: white;
-    transform: translate(var(--o), var(--o));
+    transform: translate(calc(var(--o) + var(--ox)), var(--o));
     width: 300px;
 }
 

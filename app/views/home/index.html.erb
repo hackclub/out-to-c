@@ -84,6 +84,7 @@
     </div>
 
     <img id="pfp" src="<%= session[:user_id]["pfp"] %>">
+    <a href="/docs" target="_blank" id="docs-btn">?</a>
     <div id="cargo-slot-dragging-container"><img id="cargo-slot-dragging"></div>
     <div id="no-existing-voyage" <% if @voyage != nil %> style="display:none;"<% end %>>
         <img id="logo" style="width:450px;" src="<%= asset_path("graphics/logo.svg") %>" alt="Out To C">
