@@ -23,11 +23,12 @@ function onboardingNext() {
         onboardingContainer.style.setProperty("--h", "343px");
         onboardingTextContents.innerText = "Here you can view and edit your active Voyage's info!";
     } else if (onboardingIndex == 2) {
-        onboardingContainer.style.setProperty("--o", "-240px");
+        onboardingContainer.style.setProperty("--o", "-145px");
         onboardingContainer.style.setProperty("--x", "calc(50% - 650px / 2)");
         onboardingContainer.style.setProperty("--y", "calc(100% - 110px)");
         onboardingContainer.style.setProperty("--w", "650px");
         onboardingContainer.style.setProperty("--h", "110px");
+        onboardingContainer.style.setProperty("--ox", "-115px");
 
         onboardingTextContents.innerText = "Here you can see the time left until the next island!";
     } else if (onboardingIndex == 3) {
@@ -40,7 +41,7 @@ function onboardingNext() {
             onboardingTextContents.innerText = "I see you've already linked an existing hackatime project and already reached your first island!\nLet's check it out!";
         } else {
             onboardingContainer.style.setProperty("--o", "0px");
-            onboardingContainer.style.setProperty("--ox", "-430px");
+            onboardingContainer.style.setProperty("--ox", "-415px");
             onboardingContainer.style.setProperty("--x", "calc(100% - 75px)");
             onboardingContainer.style.setProperty("--y", "90px");
             onboardingContainer.style.setProperty("--w", "70px");
