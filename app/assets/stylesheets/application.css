@@ -1073,20 +1073,11 @@ h2 {
 }
 
 #map-marker-4 {
-    left: 908px;
-    top: 99px;
-}
-
-#map-marker-4>div>div {
-    transform: translateY(-85px);
-}
-
-#map-marker-5 {
     left: 1033px;
     top: 321px;
 }
 
-#map-marker-5>div>div {
+#map-marker-4>div>div {
     transform: translate(-65px, -140px);
 }
 

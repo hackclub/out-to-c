@@ -2,7 +2,7 @@ require "net/http"
 require "json"
 
 def return_islands
-  return [6,12,26,45,60]
+  return [6,12,26,50]
 end
 def ysws_start
   date = "2026-08-12"
@@ -198,8 +198,6 @@ class ApplicationController < ActionController::Base
           "pinetime":{"name":"Pinetime"},
         },
         
-        {},
-
         {
           "miyooflip":{"name": "Miyoo Mini Flip (V1 or V2)"},
           "steam":{"name": "Steam Dev Fee Grant"},
