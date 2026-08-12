@@ -705,6 +705,13 @@ form button:hover:not([disabled]) {
     color: black;
 }
 
+.guide-difficulty {
+    font-weight: lighter;
+    font-size: 11px !important;
+    line-height: 15px;
+    margin: 0;
+}
+
 .lightish {
     font-weight: lighter;
     font-size: 14px !important;
