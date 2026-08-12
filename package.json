@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "esbuild": "^0.27.7",
+    "esbuild": "^0.28.1",
     "three": "^0.183.2"
   },
   "scripts": {
