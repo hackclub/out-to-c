@@ -4,6 +4,6 @@
     "three": "^0.183.2"
   },
   "scripts": {
-    "build": "npx esbuild --bundle app/assets/javascript/main.js --format=esm --minify > app/assets/javascript/min.js"
+    "build": "npx esbuild --bundle app/assets/javascript/main.js --format=esm --minify > app/assets/javascript/min.js && bash -c 'bundle exec rake assets:precompile' "
   }
 }
