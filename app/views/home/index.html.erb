@@ -160,6 +160,11 @@
                     <span>This personal data is stored on a secure, remote database.</span>
                     <br>
                     <br>
+                    <% if @user.github_username == nil or @user.github_username.blank? %>
+                    <label for=name>GitHub username: </label><br>
+                    <input required autocomplete="off" name="github_username" type="text">
+                    <br>
+                    <% end %>
                     <label for=name>First Name: </label><br>
                     <input required autocomplete="off" name="first_name" type="text">
                     <br>

@@ -70,6 +70,12 @@ class VoyageController < ApplicationController
       render json: { "error": "Your user has no email set. Ask an admin for help!" }
       return
     end
+
+    if params["github_username"] != nil and not params["github_username"].blank?
+      @user.github_username = params["github_username"]
+      @user.save!
+    end
+    
     if @user.github_username == nil or @user.github_username.blank?
       render json: { "error": "Your user has no GitHub username set. Ask an admin for help!" }
       return
