@@ -1,6 +1,7 @@
 <script>
     // load user data for the JS side
     voyage = parseInt('<%= @voyage && @voyage.id %>') || null;
+    originalVoyageID = voyage;
     _travelDistance = (parseFloat('<%= @voyage && @voyage.total_seconds %>') / 60.0 / 60.0 || 0.0);
 
     _activeCameraStateIndex = voyage == null ? 0 : 2;

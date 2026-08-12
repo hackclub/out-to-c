@@ -401,9 +401,9 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
         voyageInfoHackatime.innerText = body["hackatime-text"];
         deleteVoyageBtn.style.display = "block";
 
-        if (voyage) {
+        if (!originalVoyageID) {
             startOnboarding(body["fp"]);
-            voyage = 1;
+            originalVoyageID = 1;
         } else {
             if (body["fp"]) {
                 loadPrices(body["fp"]);
