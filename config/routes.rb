@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get "reviewer" => "reviewer#index"
   get "reviewer/edit/:id" => "reviewer#edit"
   post "reviewer/submit_edit" => "reviewer#submit_edit"
-
+  
+  get "docs" => "home#docs"
   root "home#index"
 end

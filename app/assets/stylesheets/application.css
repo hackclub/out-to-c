@@ -1282,7 +1282,8 @@ canvas {
     max-height: 80%;
 }
 
-details>p {
+details>p,
+details>div {
     margin: 0 25px;
     border-left: 2px solid white;
     padding-left: 20px;
@@ -1339,4 +1340,25 @@ details>p {
 
 .onboarding-btn:hover {
     text-decoration: underline;
+}
+
+.docs-body {
+    background-color: #1e1914;
+    color: white;
+    min-height: 1000px;
+}
+
+.docs-container {
+    max-width: 800px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+.docs-body a {
+    color: #79a1ff;
+}
+
+q {
+    white-space: preserve;
 }

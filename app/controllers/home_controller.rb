@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
     before_action :set_logged_in
+    layout "docs", :only => [ :docs ]
+
     def index
       if not @loggedin
         render "guest"
@@ -10,6 +12,8 @@ class HomeController < ApplicationController
         get_next_island
         generate_desc_trimmed
       end
+    end
+    def docs
     end
     private
       def update_voyage_time
