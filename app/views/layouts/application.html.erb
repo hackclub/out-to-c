@@ -43,8 +43,10 @@
     <% end%>
   </head>
 
-  <body class="hidden">
-    <div id="loading"></div>
+  <body>
+    <div id="loading">
+      <span class="loader"></span>
+    </div>
     <div id="notice" <% if notice == nil %> style="display: none;"<% end %>><span><%= notice %></span><button onclick="this.parentElement.style.display = 'none';">X</button></div>
     <%= yield %>
     <script>

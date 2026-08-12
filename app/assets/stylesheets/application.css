@@ -46,8 +46,38 @@ body {
 }
 
 .hidden {
-    opacity: 0;
+    display: none;
 }
+
+.loader {
+    --color-1: #fff;
+    --size: 1.3px;
+
+    width: calc(48 * var(--size));
+    height: calc(48 * var(--size));
+    border-radius: 50%;
+    border-top: calc(3 * var(--size)) solid var(--color-1);
+    border-right: calc(3 * var(--size)) solid transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 
 #loading {
     position: absolute;
@@ -55,6 +85,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
+    min-height: 100vh;
     z-index: 9998;
     background-color: #0091F8;
     pointer-events: none;

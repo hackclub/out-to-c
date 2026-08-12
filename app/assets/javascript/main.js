@@ -241,4 +241,7 @@ window.addEventListener("resize", () => {
 });
 
 document.getElementById("loading").remove();
-document.body.classList.remove("hidden");
+let v = document.getElementById("varyingContents");
+if (v) {
+    v.classList.remove("hidden");
+}
