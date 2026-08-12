@@ -38,6 +38,7 @@ function onboardingNext() {
             onboardingContainer.style.setProperty("--w", "0px");
             onboardingContainer.style.setProperty("--h", "0px");
             onboardingContainer.style.setProperty("--o", "-50%");
+            onboardingContainer.style.setProperty("--ox", "0px");
             onboardingTextContents.innerText = "I see you've already linked an existing hackatime project and already reached your first island!\nLet's check it out!";
         } else {
             onboardingContainer.style.setProperty("--o", "0px");
