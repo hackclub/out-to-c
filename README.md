@@ -1,6 +1,6 @@
 # Out to C (backend server)
 
-This is the Ruby on Rails backend for the Hack Club YSWS [Out to C](https://out-to-c.dino.icu/)!
+This is the Ruby on Rails backend for the Hack Club YSWS [Out to C](https://out-to-c.hackclub.com/)!
 
 ## Running locally
 * Install Ruby on Rails (good luck).
