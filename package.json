@@ -1,6 +1,9 @@
 {
   "dependencies": {
-    "esbuild": "^0.27.4",
+    "esbuild": "^0.27.7",
     "three": "^0.183.2"
+  },
+  "scripts": {
+    "build": "npx esbuild --bundle app/assets/javascript/main.js --format=esm --minify > app/assets/javascript/min.js"
   }
 }
