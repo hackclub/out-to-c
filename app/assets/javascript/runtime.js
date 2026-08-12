@@ -400,11 +400,18 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
         voyageInfoRepo.href = body["repo_url"];
         voyageInfoHackatime.innerText = body["hackatime-text"];
         deleteVoyageBtn.style.display = "block";
-        if (body["fp"]) {
-            loadPrices(body["fp"]);
-            fadeIn(islandFound);
-            islandFound.style.animationPlayState = "running";
+
+        if (voyage) {
+            startOnboarding(body["fp"]);
+            voyage = 1;
+        } else {
+            if (body["fp"]) {
+                loadPrices(body["fp"]);
+                fadeIn(islandFound);
+                islandFound.style.animationPlayState = "running";
+            }
         }
+
         newVoyageTitle.innerText = "Edit Voyage";
         newVoyageSubmitBtn.innerText = "SAVE CHANGES";
         for (let element of document.getElementsByClassName("input-show-on-voyage-create")) {

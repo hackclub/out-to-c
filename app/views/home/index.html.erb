@@ -93,6 +93,14 @@
         </div>
     </div>
     <div id="active-voyage" <% if @voyage == nil or @voyage.ship_status != 0 %> style="display:none;"<% end %>>
+        <div id="onboarding-container" style="display:none">
+            <div id="onboarding-highlight"></div>
+            <div id="onboarding-text">
+                <p id="onboarding-text-contents">Welcome to Out to C!</p>
+                <hr>
+                <button id="onboarding-btn" onclick="onboardingNext();" class="light onboarding-btn">Continue</button>
+            </div>
+        </div>
         <div id="ship-container">
             <button onclick="tryShipVoyage()" id="ship-button">Ship Project</button>
         </div>
@@ -257,3 +265,5 @@
         <button onclick="toggleCargo()" id="cargo-button"><%= image_tag "graphics/cargo.png", :alt => "Cargo" %></button>
     </div>
 </div>
+
+<script src="<%= asset_path "onboarding.js" %>"></script>
