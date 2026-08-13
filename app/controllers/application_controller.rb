@@ -48,7 +48,7 @@ def slack_send_message_conversation(dm_id,text)
     return
   end
   url = URI("https://slack.com/api/chat.postMessage")
-  body = { "channel": dm_id, "text":text }
+  body = { "channel": dm_id, "text":text, "unfurl_media": false }
   headers = { 'Content-Type': 'application/json', "Authorization": "Bearer " + ENV["SLACK_BOT_TOKEN"]  }
   res = Net::HTTP.post(url, body.to_json, headers)
   puts res.body

@@ -112,7 +112,10 @@ class ReviewerController < ApplicationController
             end
 
             if @voyage.ship_status == 2
-                slack_send_message_conversation(id,":yayayayayay: Your project has been approved by <@#{@user.uid}> :yayayayayay:\n#{review_message}\nYou will be DMd by <@#{ENV["ADMIN_SLACK_ID"]}> shortly about fulfilment ! :sos-heidi-treasure::treasure-box:\n\n/yours truly--pirate orph'")
+                # generate NPS fillout form:
+                nps = ENV["NPS_FILLOUT_URL"] + "?id=" + @voyage.airtable_entry.to_s
+                slack_send_message_conversation(id,":yayayayayay: Your project has been approved by <@#{@user.uid}> :yayayayayay:\n#{review_message}\nYou will be DMd by <@#{ENV["ADMIN_SLACK_ID"]}> shortly about fulfilment ! :sos-heidi-treasure::treasure-box:\n\nIt would mean a lot to me if you took a second to fill out <#{nps}|this feedback form> !\n\n/yours truly--pirate orph'")
+
                 slack_send_message_conversation(aid,":exclamation:Project approved:exclamation::yay:\nFulfilment time! <@#{@owner.uid}> shipped '#{trim_length_fixed(@voyage.name,25)}' which was approved by <@#{@user.uid}>.\nCargo: `#{@voyage.cargo}`")
             elsif @voyage.ship_status == 0
                 slack_send_message_conversation(id,"Your project was rejected by <@#{@user.uid}> :<\n#{review_message}\nPlease make the changes specified and reship your project!\n\n/pirate orph'")
