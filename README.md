@@ -16,6 +16,7 @@ Hosted on Orchard.
     * Live Slack DM updates when you reach a new island
     * Shipping!
 * Docs page
+* Onboarding tutorial
 * Reviewer panel
     * When a project is shipped, a notfication is sent out on slack to reviewers.
     * Upon approval/rejection, the user is notified, along with a note from the reviewer.
