@@ -8,7 +8,7 @@ gem 'dotenv', '~> 3.2'
 # generated imports:
 gem "rails", "~> 8.1.2"
 gem "propshaft"
-gem "sqlite3", ">= 2.1"
+gem "pg", "~> 1.1"
 gem "puma", ">= 5.0"
 gem "importmap-rails"
 gem "turbo-rails"

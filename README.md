@@ -6,6 +6,7 @@ This is the Ruby on Rails backend for the Hack Club YSWS [Out to C](https://out-
 * Install Ruby on Rails (good luck).
 * Clone this repo and CD there
 * Use `bundle install`
+* Setup postgres (follow [this](https://mangohost.net/blog/how-to-set-up-ruby-on-rails-with-postgres/) guide)
 * Do `rails db:create db:migrate` to set up the database.
 * Set up the .env file! Copy the example file with `cp .env.example .env`, then open .env and follow the instructions there.
 * And then you can run the server with `rails s` and hope it works!!
