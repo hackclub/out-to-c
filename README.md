@@ -1,6 +1,26 @@
-# Out to C (backend server)
+# Out to C
 
-This is the Ruby on Rails backend for the Hack Club YSWS [Out to C](https://out-to-c.hackclub.com/)!
+<img src="public/banner.png" width=500>
+
+This is the Ruby on Rails server for [Out to C](https://out-to-c.hackclub.com/)!
+
+Hosted on Orchard.
+
+## Features
+
+* Hack Club Auth Login
+* Hackatime linking
+* Local Postgresql database for projects and user accounts
+    * Seperate remote airtable database for PII, with only write access
+* Project infrastructure
+    * Live Slack DM updates when you reach a new island
+    * Shipping!
+* Docs page
+* Reviewer panel
+    * When a project is shipped, a notfication is sent out on slack to reviewers.
+    * Upon approval/rejection, the user is notified, along with a note from the reviewer.
+    * Upon approvals, the user is notified and also receives a feedback form. An admin is also notified about fulfilment.
+* Admin panel
 
 ## Running locally
 * Install Ruby on Rails (good luck).
