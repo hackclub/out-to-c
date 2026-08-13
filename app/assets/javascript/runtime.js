@@ -157,12 +157,40 @@ globalThis.newVoyage = function () {
     fadeIn(newVoyageBack);
     fadeOut(logo);
 }
+
+function formDataToArray(fd) {
+    let a = [];
+
+    for (let pair of fd.entries()) {
+        const key = pair[0];
+        if (key == "image_data") {
+            continue;
+        }
+        a.push({ [key]: pair[1] })
+    }
+    return a;
+}
+
+let voyageChangesMade = false;
+let lastForm = formDataToArray(new FormData(document.forms["new-voyage-form"]));
+function hasVoyageChanged() {
+    if (voyageChangesMade) { return true; }
+    return JSON.stringify(lastForm) !== JSON.stringify(formDataToArray(new FormData(document.forms["new-voyage-form"])));
+}
+
 globalThis.backVoyage = function () {
     if (editingVoyage) {
-        editingVoyage = false;
-        fadeOut(newVoyageDiv);
-        fadeOut(newVoyageBack);
-        fadeIn(voyageInfo);
+        let goBack = () => {
+            editingVoyage = false;
+            fadeOut(newVoyageDiv);
+            fadeOut(newVoyageBack);
+            fadeIn(voyageInfo);
+        };
+        if (hasVoyageChanged()) {
+            showConfirmation("Are you sure you want to stop editing your Voyage?<br>You have unsaved changes!", goBack);
+        } else {
+            goBack();
+        }
         return;
     }
     inNewVoyage = false;
@@ -182,10 +210,13 @@ globalThis.toggleCargo = function () {
             selectedCargoSlot = null;
         }
     } else {
-        fadeIn(cargo);
         if (editingVoyage) {
+            if (hasVoyageChanged()) {
+                return;
+            }
             backVoyage();
         }
+        fadeIn(cargo);
     }
     cargoShown = !cargoShown;
 }
@@ -195,6 +226,7 @@ globalThis.toggleCargo = function () {
 // Retrieved 2026-03-12, License - CC BY-SA 4.0
 
 globalThis.readURL = function (input) {
+    voyageChangesMade = true;
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
@@ -382,6 +414,8 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
             showNotice("Error: " + body["error"]);
             return;
         }
+        voyageChangesMade = false;
+        lastForm = formDataToArray(new FormData(document.forms["new-voyage-form"]));
         inNewVoyage = false;
         voyage = parseInt(body["id"]);
         fadeOut(newVoyageDiv);
