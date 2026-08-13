@@ -63,7 +63,7 @@ function onboardingNext() {
             onboardingContainer.style.setProperty("--h", "0px");
             onboardingContainer.style.setProperty("--o", "-50%");
             onboardingContainer.style.setProperty("--ox", "0px");
-            onboardingTextContents.innerText = "Otherwise, feel free to ask for help in the #out-to-c channel (or just hang out!)";
+            onboardingTextContents.innerHTML = "Otherwise, feel free to hang out or ask for help in the <a target='_blank' class='channel-link' href='https://hackclub.enterprise.slack.com/archives/C0ANHQPT1S4'>#out-to-c</a> channel";
         }
     } else {
         onboardingContainer.style.display = "none";
