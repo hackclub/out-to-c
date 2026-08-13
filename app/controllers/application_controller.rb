@@ -6,8 +6,9 @@ def return_islands
 end
 def ysws_start
   date = "2026-08-12"
-  # TODO: REPLACE DATE BEFORE LAUNCH
-  date = "2026-05-07"
+  if ENV["START_DATE_OVERRIDE"] != nil and not ENV["START_DATE_OVERRIDE"].blank?
+    date = ENV["START_DATE_OVERRIDE"]  
+  end
   date
 end
 def get_hackatime_projects_with_token(token)
