@@ -578,6 +578,8 @@ form button:hover:not([disabled]) {
     z-index: 1;
     top: 50%;
     transform: translateY(-50%);
+    max-height: 90%;
+    overflow: scroll;
 }
 
 #new-voyage-back {
