@@ -27,4 +27,4 @@ app/assets/javascript/min.js
 node_modules
 
 # keep gitkeep !!
-!*/.gitkeep
+!*.gitkeep
