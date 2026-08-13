@@ -31,20 +31,13 @@
             <%= image_tag("graphics/card2.svg") %>
             <%= image_tag("graphics/card3.svg") %>
         </div>
-        <br>
-        <span class="center" style="display:block">(try hovering the islands:)</span>
         <div class="map-holder">
             <% for mi in 0..4-1 %>
             <div class="map-marker" id="map-marker-<%= mi+1 %>">
-                <div>
-                    <div>
-                    (Choose 1)
-                    <div class="spread spread<%= @prices[mi].length %>">
-                        <% for i in @prices[mi] %>
-                        <img src="<%= asset_path("prices/#{i[0]}.png") %>" title="<%= i[1][:name] %>">
-                        <% end %>
-                    </div>
-                    </div>
+                <div class="spread spread<%= @prices[mi].length %>">
+                    <% for i in @prices[mi] %>
+                    <img src="<%= asset_path("prices/#{i[0]}.png") %>" title="<%= i[1][:name] %>">
+                    <% end %>
                 </div>
             </div>
             <% end %>
@@ -82,7 +75,7 @@
         
         <details>
         <summary>What prices can I get?</summary>
-        <p>Try hovering the islands on the map above !!</p>
+        <p>Check out the map above !!</p>
         </details>
         
         <div style="height:100px"></div>

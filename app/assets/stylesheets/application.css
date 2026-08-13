@@ -991,28 +991,17 @@ h2 {
     height: 0;
 }
 
-.map-marker>div>div {
-    display: none;
-    width: 300px;
-    height: 200px;
-    margin-left: -112px;
-    transform: translateY(-140px);
-    background-color: #6e4c30;
-    border-radius: 10px;
-    border: 5px solid #9c6a3d;
-    padding: 5px;
-}
 
 .spread {
-    max-width: 100%;
+    transform: translate(calc(90px / 2 - 50%), calc(60px / 2 - 50% - 9px));
+    width: 218px;
     height: 120px;
     position: relative;
+    filter: drop-shadow(1px 1px 0 black) drop-shadow(-1px -1px 0 black) drop-shadow(0px 0px 16px white) drop-shadow(0px 0px 8px #0ccfc6) drop-shadow(0px 0px 4px #382eaf);
 }
 
 .spread>img {
-    width: 110px;
-    background-color: #4d3533;
-    border: 5px solid #10121C;
+    width: 85px;
     position: absolute;
     top: 0;
     transform: translateY(5px);
@@ -1025,32 +1014,35 @@ h2 {
 }
 
 .spread3>img:nth-child(1) {
-    left: calc(50% - 110px / 2);
+    left: calc(50% - 85px / 2);
     z-index: 1;
     transform: translateY(0);
 }
 
 .spread3>img:nth-child(2) {
     left: 0;
-    rotate: -5deg;
+    rotate: -8deg;
 }
 
 .spread3>img:nth-child(3) {
     right: 0;
-    rotate: 5deg;
+    rotate: 8deg;
 }
 
-
+.spread4 {
+    width: 220px;
+    transform: translate(calc(90px / 2 - 50% + 36px), calc(60px / 2 - 50% - -15px));
+}
 
 .spread4>img:nth-child(1) {
-    left: calc(50% - 110px / 2 + 30px);
+    left: calc(50% - 85px / 2 + 30px);
     z-index: 2;
     transform: translateY(0);
     rotate: 3deg;
 }
 
 .spread4>img:nth-child(2) {
-    left: calc(50% - 110px / 2 - 50px);
+    left: calc(50% - 110px / 2 - 7px);
     z-index: 1;
     transform: translateY(0);
     rotate: -3deg;
@@ -1100,11 +1092,6 @@ h2 {
     top: calc(var(--w_factor) * 131);
 }
 
-#map-marker-3>div {
-    width: calc(var(--w_factor) * 167);
-    height: calc(var(--w_factor) * 115);
-}
-
 #map-marker-4 {
     left: 1033px;
     top: 321px;
@@ -1112,12 +1099,6 @@ h2 {
 
 #map-marker-4>div>div {
     transform: translate(-65px, -140px);
-}
-
-.map-marker>div {
-    width: calc(var(--w_factor) * 85);
-    height: calc(var(--w_factor) * 73);
-    /* background-color: rgba(255, 255, 255, 0.178); */
 }
 
 #map {
