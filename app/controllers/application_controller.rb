@@ -208,7 +208,15 @@ class ApplicationController < ActionController::Base
     def set_logged_in
       @loggedin = session[:user_id] != nil and session[:user_id]["uid"] != nil
       if @loggedin
-        @user = User.find(session[:user_id]["id"])
+        begin
+          @user = User.find(session[:user_id]["id"])
+        rescue
+          session[:user_id] = nil
+          @loggedin = false
+          @user = nil
+          return
+        end
+        
         if session[:user_id]["uid"] != @user.uid
           session[:user_id] = nil
           @loggedin = false
