@@ -2,7 +2,7 @@ require "net/http"
 require "json"
 
 def return_islands
-  return [6,12,26,50]
+  return [5,12,26,50]
 end
 def ysws_start
   date = "2026-08-12"
@@ -181,16 +181,17 @@ class ApplicationController < ActionController::Base
     def get_prices
       @prices = [
         {
+          "pico8":{"name":"Pico-8"},
+          "pipico":{"name":"Pi Pico"},
+          "steam":{"name":"$15 Steam Gift Card"},
+          "cloudflare":{"name":"$15 Domain Grant"},
+        },
+      
+        {
           "blahaj":{"name":"Blåhaj"},
           "pinecil":{"name":"Pinecil"},
           "ch341a":{"name":"CH341A Programmer"},
           "cardputer":{"name":"Cardputer (Adv)"},
-        },
-      
-        {
-          "pico8":{"name":"Pico-8"},
-          "pipico":{"name":"Pi Pico"},
-          "cloudflare":{"name":"$12 Domain Grant"},
         },
       
         {

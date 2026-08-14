@@ -1080,12 +1080,12 @@ h2 {
 
 #map-marker-1 {
     left: calc(var(--w_factor) * 244);
-    top: calc(var(--w_factor) * 56);
+    top: calc(var(--w_factor) * 46);
 }
 
 #map-marker-2 {
-    left: calc(var(--w_factor) * 503);
-    top: calc(var(--w_factor) * 346);
+    left: calc(var(--w_factor) * 467);
+    top: calc(var(--w_factor) * 321);
 }
 
 #map-marker-3 {
