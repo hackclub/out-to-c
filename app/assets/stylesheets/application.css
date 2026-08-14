@@ -997,10 +997,11 @@ h2 {
     width: 218px;
     height: 120px;
     position: relative;
-    filter: drop-shadow(1px 1px 0 black) drop-shadow(-1px -1px 0 black) drop-shadow(0px 0px 16px white) drop-shadow(0px 0px 8px #0ccfc6) drop-shadow(0px 0px 4px #382eaf);
+    filter: drop-shadow(0px 0px 16px white) drop-shadow(0px 0px 8px #0ccfc6) drop-shadow(0px 0px 4px #382eaf);
 }
 
 .spread>img {
+    filter: drop-shadow(1px 1px 0 black) drop-shadow(-1px -1px 0 black);
     width: 85px;
     position: absolute;
     top: 0;
@@ -1054,7 +1055,7 @@ h2 {
 }
 
 .spread4>img:nth-child(3):hover {
-    left: -30px;
+    left: -10px;
 }
 
 .spread4>img:nth-child(4) {
@@ -1078,8 +1079,8 @@ h2 {
 }
 
 #map-marker-1 {
-    left: calc(var(--w_factor) * 280);
-    top: calc(var(--w_factor) * 76);
+    left: calc(var(--w_factor) * 244);
+    top: calc(var(--w_factor) * 56);
 }
 
 #map-marker-2 {
@@ -1093,7 +1094,7 @@ h2 {
 }
 
 #map-marker-4 {
-    left: 1033px;
+    left: 1100px;
     top: 321px;
 }
 

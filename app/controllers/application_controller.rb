@@ -184,6 +184,7 @@ class ApplicationController < ActionController::Base
           "blahaj":{"name":"Blåhaj"},
           "pinecil":{"name":"Pinecil"},
           "ch341a":{"name":"CH341A Programmer"},
+          "cardputer":{"name":"Cardputer (Adv)"},
         },
       
         {
@@ -195,14 +196,12 @@ class ApplicationController < ActionController::Base
         {
           "innioasis":{"name":"Innioasis Y1"},
           "tamagotchi":{"name":"Tamagotchi !!"},
-          "cardputer":{"name":"Cardputer (Adv)"},
           "pinetime":{"name":"Pinetime"},
+          "powkiddy":{"name":"Powkiddy V90"},
         },
         
         {
-          "miyooflip":{"name": "Miyoo Mini Flip (V1 or V2)"},
-          "steam":{"name": "Steam Dev Fee Grant"},
-          "aula":{"name": "Aula S75 Pro"},
+          "q":{"name": "Mystery"},
         }
       ]
     end
