@@ -10,8 +10,8 @@ function startOnboarding(foundPrices) {
     onboardingTextContents.innerText = "Welcome to Out of C!";
     onboardingContainer.style.display = "";
     onboardingIndex = 0;
+    minimap.style.pointerEvents = "none";
 }
-
 
 function onboardingNext() {
     onboardingIndex += 1;
@@ -32,6 +32,7 @@ function onboardingNext() {
 
         onboardingTextContents.innerText = "Here you can see the time left until the next island!";
     } else if (onboardingIndex == 3) {
+        minimap.style.pointerEvents = "";
         if (alreadyFoundPrices) {
             onboardingContainer.style.setProperty("--x", "50%");
             onboardingContainer.style.setProperty("--y", "50%");
