@@ -31,18 +31,7 @@
             <%= image_tag("graphics/card2.svg") %>
             <%= image_tag("graphics/card3.svg") %>
         </div>
-        <div class="map-holder">
-            <% for mi in 0..4-1 %>
-            <div class="map-marker" id="map-marker-<%= mi+1 %>">
-                <div class="spread spread<%= @prices[mi].length %>">
-                    <% for i in @prices[mi] %>
-                    <img src="<%= asset_path("prices/#{i[0]}.png") %>" title="<%= i[1][:name] %>">
-                    <% end %>
-                </div>
-            </div>
-            <% end %>
-            <%= image_tag "graphics/map.svg", id: "map" %>
-        </div>
+        <%= render "map" %>
         <h1>More information</h1>
         <p>There's islands with treasure that your ship reaches as you code. At each island, 
             you get to choose one out of several possible rewards, which is added to your ship's cargo.<br>

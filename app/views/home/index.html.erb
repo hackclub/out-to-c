@@ -119,7 +119,13 @@
                 <button id="edit-voyage" onclick="editVoyage()">Edit Details</button>
             </div>
         </div>
-        <div id="minimap" <%= @found_island ? "style=display:none" : "" %>>
+        <div id="openable-map-holder" style="display:none">
+            <div onclick="hideMap();" id="map-backdrop"></div>
+            <div id="openable-map">
+                <%= render "map" %>
+            </div>
+        </div>
+        <div onclick="toggleMap();" id="minimap" <%= @found_island ? "style=display:none" : "" %>>
             <%= image_tag "graphics/ship_icon.png",:id => "ship-icon" , :alt => "ship-icon" %>
             <%= image_tag "graphics/treasure_icon.png",:id => "treasure-icon" , :alt => "treasure-icon" %>
             <span id="minimap-text"><%= @voyage != nil ? (@next_island - @voyage.total_seconds / 60 / 60 + 0.5).to_i.to_s : "-" %> hours </span>

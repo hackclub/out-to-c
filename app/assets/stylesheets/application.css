@@ -166,7 +166,34 @@ form button:hover:not([disabled]) {
     filter: saturate(1.1) brightness(1.1);
 }
 
+#openable-map-holder {}
+
+#openable-map {
+    background-color: #6e4c30;
+    border: 5px solid #9c6a3d;
+    background-color: #1a185f;
+    border: 5px solid #288ce5;
+    width: 800px;
+    height: 492px;
+    position: absolute;
+    z-index: 6;
+    left: calc(50% - 800px / 2);
+    top: calc(50% - 492px / 2);
+}
+
+#map-backdrop {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000000b0;
+    position: absolute;
+    z-index: 5;
+    left: 0;
+    top: 0;
+}
+
 #minimap {
+    cursor: pointer;
     max-width: 600px;
     width: 100%;
     height: 64px;

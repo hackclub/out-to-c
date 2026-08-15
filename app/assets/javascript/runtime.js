@@ -35,6 +35,7 @@ let shippedVoyageScreen = document.getElementById("shipped-voyage");
 let shippedOrActiveVoyageScreen = document.getElementById("shipped-or-active-voyage");
 let prizeGot = document.getElementById("prize-got");
 let shipPiiBtn = document.getElementById("ship-pii-submit");
+let openableMapHolder = document.getElementById("openable-map-holder");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -85,6 +86,16 @@ function confirmConfirmation() {
 function cancelConfirmation() {
     fadeOut(confirmationContainer);
     confirmationOpen = false;
+}
+
+let mapOpen = false;
+function toggleMap() {
+    mapOpen = !mapOpen;
+    openableMapHolder.style.display = mapOpen ? "block" : "none";
+}
+function hideMap() {
+    mapOpen = false;
+    openableMapHolder.style.display = "none";
 }
 
 function tryDeleteVoyage() {

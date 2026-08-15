@@ -1,0 +1,12 @@
+<div class="map-holder">
+    <% for mi in 0..4-1 %>
+    <div class="map-marker" id="map-marker-<%= mi+1 %>">
+        <div class="spread spread<%= @prices[mi].length %>">
+            <% for i in @prices[mi] %>
+            <img src="<%= asset_path("prices/#{i[0]}.png") %>" title="<%= i[1][:name] %>">
+            <% end %>
+        </div>
+    </div>
+    <% end %>
+    <%= image_tag "graphics/map.svg", id: "map" %>
+</div>
