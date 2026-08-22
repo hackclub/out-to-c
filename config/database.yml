@@ -24,8 +24,10 @@ default: &default
 
 
 development:
-  <<: *default
-  database: out_to_c_development
+  adapter: sqlite3
+  max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  database: storage/development.sqlite3
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
