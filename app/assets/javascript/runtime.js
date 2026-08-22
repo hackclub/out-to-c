@@ -228,6 +228,9 @@ globalThis.toggleCargo = function () {
             selectedCargoSlot = null;
         }
     } else {
+        if (inNewVoyageAfterShip) {
+            backVoyage();
+        }
         if (editingVoyage) {
             if (hasVoyageChanged()) {
                 return;
@@ -420,6 +423,7 @@ let inNewVoyageAfterShip = false;
 globalThis.newVoyageAfterShip = function () {
     resetVoyageForm();
     editVoyage();
+    editingVoyage = false;
     inNewVoyageAfterShip = true;
     newVoyageAfterShipButton.style.display = "none";
     newVoyageTitle.innerText = "New Voyage";
