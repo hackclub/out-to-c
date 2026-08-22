@@ -31,6 +31,10 @@ def get_hackatime_projects_with_token(token)
 end
 def slack_open_conversation(user)
   puts "opening convo with: " + user
+  if ENV["DISABLE_SLACK_MESSAGES"] != nil and not ENV["DISABLE_SLACK_MESSAGES"].blank?
+    puts "slack DMs disabled."
+    return "0"
+  end
   if ENV["SLACK_BOT_TOKEN"] == nil || ENV["SLACK_BOT_TOKEN"].blank?
     puts "error: no slack bot token set !!"
     return
@@ -44,6 +48,10 @@ def slack_open_conversation(user)
   return data["channel"]["id"]
 end
 def slack_send_message_conversation(dm_id,text)
+  if ENV["DISABLE_SLACK_MESSAGES"] != nil and not ENV["DISABLE_SLACK_MESSAGES"].blank?
+    puts "slack DMs disabled."
+    return
+  end
   if ENV["SLACK_BOT_TOKEN"] == nil || ENV["SLACK_BOT_TOKEN"].blank?
     puts "error: no slack bot token set !!"
     return
