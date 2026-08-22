@@ -81,9 +81,11 @@ class VoyageController < ApplicationController
       return
     end
 
-    if @voyage.airtable_entry == nil or @voyage.airtable_entry.blank?
-      render json: { "error": "Voyage airtable entry not found! Ask an admin for help!" }
-      return
+    if ENV["DISABLE_AIRTABLE"] == nil or ENV["DISABLE_AIRTABLE"].blank?
+      if @voyage.airtable_entry == nil or @voyage.airtable_entry.blank?
+        render json: { "error": "Voyage airtable entry not found! Ask an admin for help!" }
+        return
+      end
     end
     for k in ["first_name","last_name","birthday","address_1","city","country","state","zip"]
       if params[k] == nil or params[k].blank?
@@ -94,22 +96,25 @@ class VoyageController < ApplicationController
     @voyage.ship_date = Time.now
     start = Date.strptime(ysws_start, "%Y-%m-%d").strftime("%m/%d/%Y")
     date_range = start + "-" + @voyage.ship_date.strftime("%m/%d/%Y")
-    # send PII to airtable
-    AirtableEntry.update(@voyage.airtable_entry, {
-      "Email": @user.email,
-      "GitHub Username": @user.github_username,
-      "Justification - Submitter Hackatime ID": @user.hackatime_id.to_s,
-      "Justification - Hackatime Project Name(s) + Date Range(s)": "#{@voyage.hackatime} #{date_range}",
-      "First Name": params["first_name"],
-      "Last Name": params["last_name"],
-      "Birthday": params["birthday"],
-      "Address (Line 1)": params["address_1"],
-      "Address (Line 2)": params["address_2"],
-      "City": params["city"],
-      "Country": params["country"],
-      "State / Province": params["state"],
-      "ZIP / Postal Code": params["zip"],
-    })
+
+    if ENV["DISABLE_AIRTABLE"] == nil or ENV["DISABLE_AIRTABLE"].blank?
+      # send PII to airtable
+      AirtableEntry.update(@voyage.airtable_entry, {
+        "Email": @user.email,
+        "GitHub Username": @user.github_username,
+        "Justification - Submitter Hackatime ID": @user.hackatime_id.to_s,
+        "Justification - Hackatime Project Name(s) + Date Range(s)": "#{@voyage.hackatime} #{date_range}",
+        "First Name": params["first_name"],
+        "Last Name": params["last_name"],
+        "Birthday": params["birthday"],
+        "Address (Line 1)": params["address_1"],
+        "Address (Line 2)": params["address_2"],
+        "City": params["city"],
+        "Country": params["country"],
+        "State / Province": params["state"],
+        "ZIP / Postal Code": params["zip"],
+      })
+    end
 
     # valid ship probably !
     aid = ENV["REVIEWER_CHANNEL_ID"]
@@ -277,12 +282,15 @@ class VoyageController < ApplicationController
     if @voyage.image_link
       airtable_data[:Screenshot] = [{"url": @voyage.image_link}]
     end
-    if @voyage.airtable_entry == nil or @voyage.airtable_entry.blank?
-      entry = AirtableEntry.create(airtable_data)
-      @voyage.airtable_entry = entry.id.to_s
-      @voyage.save!
-    else
-      AirtableEntry.update(@voyage.airtable_entry, airtable_data)
+
+    if ENV["DISABLE_AIRTABLE"] == nil or ENV["DISABLE_AIRTABLE"].blank?
+      if @voyage.airtable_entry == nil or @voyage.airtable_entry.blank?
+        entry = AirtableEntry.create(airtable_data)
+        @voyage.airtable_entry = entry.id.to_s
+        @voyage.save!
+      else
+        AirtableEntry.update(@voyage.airtable_entry, airtable_data)
+      end
     end
 
     @voyage.save!
