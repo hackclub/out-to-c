@@ -703,6 +703,12 @@ form button:hover:not([disabled]) {
     -ms-user-select: none;
 }
 
+.small-voyage-btn {
+    font-size: 22px;
+    padding: 6px 35px;
+    --angle: 40%;
+}
+
 .voyage-btn[disabled] {
     cursor: default;
     filter: brightness(0.7) contrast(0.7);

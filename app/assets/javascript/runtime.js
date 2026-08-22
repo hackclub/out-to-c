@@ -36,6 +36,7 @@ let shippedOrActiveVoyageScreen = document.getElementById("shipped-or-active-voy
 let prizeGot = document.getElementById("prize-got");
 let shipPiiBtn = document.getElementById("ship-pii-submit");
 let openableMapHolder = document.getElementById("openable-map-holder");
+let newVoyageAfterShipButton = document.getElementById("new-voyage-after-ship");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -190,6 +191,12 @@ function hasVoyageChanged() {
 }
 
 globalThis.backVoyage = function () {
+    if (inNewVoyageAfterShip) {
+        newVoyageAfterShipButton.style.display = "";
+        fadeOut(newVoyageDiv);
+        fadeOut(newVoyageBack);
+        return;
+    }
     if (editingVoyage) {
         let goBack = () => {
             editingVoyage = false;
@@ -396,6 +403,34 @@ document.body.addEventListener("mouseup", (_event) => {
     dragging = null;
     draggingCargoSlot.src = "";
 });
+
+function resetVoyageForm() {
+    for (let name of ["input", "select"]) {
+        var array = document.getElementsByTagName(name);
+        for (var i = 0, lng = array.length; i < lng; i++) {
+            if (array[i].name == "authenticity_token") {
+                continue;
+            }
+            array[i].value = '';
+        }
+    }
+}
+
+let inNewVoyageAfterShip = false;
+globalThis.newVoyageAfterShip = function () {
+    resetVoyageForm();
+    editVoyage();
+    inNewVoyageAfterShip = true;
+    newVoyageAfterShipButton.style.display = "none";
+    newVoyageTitle.innerText = "New Voyage";
+    newVoyageSubmitBtn.innerText = "CREATE VOYAGE";
+    for (let element of document.getElementsByClassName("input-show-on-voyage-create")) {
+        element.style.display = "none";
+    }
+    for (let element of document.getElementsByClassName("input-hide-on-voyage-create")) {
+        element.style.display = "unset";
+    }
+}
 
 let editingVoyage = false;
 globalThis.editVoyage = function () {
