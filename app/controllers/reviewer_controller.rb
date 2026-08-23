@@ -95,6 +95,17 @@ class ReviewerController < ApplicationController
                 @voyage.approval_date = Time.now
             end
         end
+        if @voyage.ship_status == 2
+            if @owner.seconds_offset == nil
+                @owner.seconds_offset = 0
+            end
+            if @owner.all_prizes == nil
+                @owner.all_prizes = ""
+            end
+            @owner.all_prizes = @owner.all_prizes + @voyage.cargo
+            @owner.seconds_offset += @voyage.total_seconds
+            @owner.save
+        end
 
         @voyage.save
 

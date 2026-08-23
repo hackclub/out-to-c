@@ -254,7 +254,14 @@
                     <%=
                     pcs = []
                     if @voyage != nil
-                        for pc in @voyage.cargo.split(",",-1)
+                        cargo = @user.all_prizes
+                        if cargo == nil
+                            cargo = ""
+                        end
+                        if @voyage.ship_status != 2
+                            cargo += @voyage.cargo
+                        end
+                        for pc in cargo.split(",",-1)
                             # find item details from @prices
                             for a in @prices
                                 g = a[pc.to_sym]

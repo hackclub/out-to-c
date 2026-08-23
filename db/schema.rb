@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_22_160302) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_23_164615) do
   create_table "users", force: :cascade do |t|
     t.string "all_prizes"
     t.datetime "created_at", null: false
@@ -22,6 +22,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_22_160302) do
     t.string "name"
     t.string "past_voyages"
     t.string "pfp"
+    t.integer "seconds_offset"
     t.string "token"
     t.string "uid"
     t.datetime "updated_at", null: false
