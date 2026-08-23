@@ -186,6 +186,10 @@ class VoyageController < ApplicationController
       # todo: back up old version?
 
       if @voyage.ship_status == 2
+        if @user.past_voyages == nil
+          @user.past_voyages = ""
+        end
+        @user.past_voyages = @user.past_voyages + @user.voyage.to_s + ","
         @user.voyage = 0
         @user.save
         @voyage = nil
