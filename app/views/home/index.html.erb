@@ -128,7 +128,13 @@
         <div onclick="toggleMap();" id="minimap" <%= @found_island ? "style=display:none" : "" %>>
             <%= image_tag "graphics/ship_icon.png",:id => "ship-icon" , :alt => "ship-icon" %>
             <%= image_tag "graphics/treasure_icon.png",:id => "treasure-icon" , :alt => "treasure-icon" %>
-            <span id="minimap-text"><%= @voyage != nil ? (@next_island - @voyage.total_seconds / 60 / 60 + 0.5).to_i.to_s : "-" %> hours </span>
+            <% 
+            offset = 0
+            if @user.seconds_offset != nil
+                offset = @user.seconds_offset
+            end
+            %>
+            <span id="minimap-text"><%= @voyage != nil ? (@next_island - (@voyage.total_seconds+offset) / 60 / 60 + 0.5).to_i.to_s : "-" %> hours </span>
         </div>
         <div id="island-found" style="<%= @found_island ? "display:unset; animation-play-state: running;" : "" %>">
             <div id="island-found-center">

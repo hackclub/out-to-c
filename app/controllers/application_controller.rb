@@ -181,7 +181,11 @@ class ApplicationController < ActionController::Base
       end
       @found_island = false
       @found_prices = []
-      if @voyage != nil and @voyage.total_seconds >= @next_island * 60 * 60
+      offset = 0
+      if @user.seconds_offset != nil
+        offset = @user.seconds_offset
+      end
+      if @voyage != nil and @voyage.total_seconds + offset >= @next_island * 60 * 60
         @found_island = true
         @found_prices = @prices[@island_indx]
       end

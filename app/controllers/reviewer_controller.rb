@@ -104,6 +104,7 @@ class ReviewerController < ApplicationController
             end
             @owner.all_prizes = @owner.all_prizes + @voyage.cargo
             @owner.seconds_offset += @voyage.total_seconds
+            @owner.last_island = @voyage.last_island
             @owner.save
         end
 

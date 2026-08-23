@@ -168,7 +168,11 @@ class VoyageController < ApplicationController
     end
 
 
-    render json: { "ok": 1, "price":details, "img": img, "next_island_remaining": @next_island - ( @voyage.total_seconds / 60 / 60), "fp": fp }
+    offset = 0
+    if @user.seconds_offset != nil
+      offset = @user.seconds_offset
+    end
+    render json: { "ok": 1, "price":details, "img": img, "next_island_remaining": @next_island - ( (@voyage.total_seconds+offset) / 60 / 60), "fp": fp }
   end
   def add_hour
     if @voyage.ship_status != 0
@@ -249,6 +253,11 @@ class VoyageController < ApplicationController
       image_link = upload_data[:ok]
     end
 
+    last_island = 0
+    if @user.last_island != nil
+      last_island = @user.last_island
+    end
+
     data = {
       "name": params["name"],
       "total_seconds": time,
@@ -262,7 +271,7 @@ class VoyageController < ApplicationController
       "image_link": image_link,
       "cargo": "",
       "owner": @user.id,
-      "last_island":0
+      "last_island":last_island
     }
     if @voyage != nil
       # keep voyage data
@@ -320,7 +329,11 @@ class VoyageController < ApplicationController
     generate_desc_trimmed()
     generate_hackatime_text()
 
-    render json: { "name": @voyage_name_trim, "fp":fp, "desc": @voyage_desc_trim, "repo": @voyage_repo_trim, "repo_url": @voyage.repo, "hackatime-text": @hackatime_text, "id": @voyage.id, "total_seconds": @voyage.total_seconds, "next_island_remaining": @next_island - ( @voyage.total_seconds / 60 / 60) }
+    offset = 0
+    if @user.seconds_offset != nil
+      offset = @user.seconds_offset
+    end
+    render json: { "name": @voyage_name_trim, "fp":fp, "desc": @voyage_desc_trim, "repo": @voyage_repo_trim, "repo_url": @voyage.repo, "hackatime-text": @hackatime_text, "id": @voyage.id, "total_seconds": @voyage.total_seconds, "next_island_remaining": @next_island - ( (@voyage.total_seconds + offset) / 60 / 60) }
   end
 
   private
