@@ -464,6 +464,10 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
             showNotice("Error: " + body["error"]);
             return;
         }
+        if (inNewVoyageAfterShip) {
+            location.reload();
+            return;
+        }
         voyageChangesMade = false;
         lastForm = formDataToArray(new FormData(document.forms["new-voyage-form"]));
         inNewVoyage = false;

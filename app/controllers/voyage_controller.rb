@@ -185,7 +185,11 @@ class VoyageController < ApplicationController
       # editing voyage !
       # todo: back up old version?
 
-      if @voyage.ship_status != 0
+      if @voyage.ship_status == 2
+        @user.voyage = 0
+        @user.save
+        @voyage = nil
+      elsif @voyage.ship_status != 0
         render json: { "error": "Shipped voyage can't be editted! Ship status: " + @voyage.ship_status.to_s }
         return
       end
