@@ -62,7 +62,12 @@ class VoyageController < ApplicationController
       render json: { "error": "Voyage has no screenshot set!" }
       return
     end
-    if @voyage.total_seconds / 60 / 60 < @voyage.last_island
+    
+    offset = 0
+    if @user.seconds_offset != nil
+      offset = @user.seconds_offset
+    end
+    if (@voyage.total_seconds+offset) / 60 / 60 < @voyage.last_island
       render json: { "error": "Voyage has less time tracked than required for the selected prices. Did you change the hackatime project to one with less time?" }
       return
     end
