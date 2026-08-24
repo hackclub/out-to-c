@@ -490,7 +490,9 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
         deleteVoyageBtn.style.display = "block";
 
         if (!originalVoyageID) {
-            startOnboarding(body["fp"]);
+            if (!hasPastVoyages) {
+                startOnboarding(body["fp"]);
+            }
             originalVoyageID = 1;
         } else {
             if (body["fp"]) {

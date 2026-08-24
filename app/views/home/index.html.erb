@@ -8,7 +8,9 @@
 
     prices = "<%= @voyage && @voyage.cargo %>";
 
-    shipStatus = <%= @voyage != nil ? @voyage.ship_status : 0%>
+    shipStatus = <%= @voyage != nil ? @voyage.ship_status : 0%>;
+
+    hasPastVoyages = <%= ( @user.past_voyages != nil && not(@user.past_voyages.blank?)) ? "true" : "false" %>;
 </script>
 
 <style>
