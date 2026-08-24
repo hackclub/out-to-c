@@ -28,6 +28,26 @@
     <img style="width:100%;max-height:600px;max-width: 900px;image-rendering:unset !important;" src="<%= @voyage.image_link %>">
 </div>
 
+<% if @owner.past_voyages != nil && not(@owner.past_voyages.blank?) && not(@owner.past_voyages.start_with?(@voyage.id.to_s + ",")) %>
+<div class="admin-edit">
+    <p>Approved Past Voyages:</p>
+    <%
+    for vi in @owner.past_voyages.split(",")
+    if vi.to_i == @voyage.id
+        break
+    end
+    %>
+
+    <div class="admin-voyage-entry">
+        <% v = Voyage.find(vi) %>
+        <a target="_blank" style="float:right" href="/reviewer/edit/<%= v.id %>">view</a>
+        <p><b><%= trim_length_fixed(v.name,55) %></b></p>
+        <pre><%= v.hackatime + " (" + (v.total_seconds / 60 / 60).to_i.to_s + "h)"%></pre>
+    </div>
+    <% end %>
+</div>
+<% end %>
+
 <div class="admin-edit">
     <%= form_with(url: reviewer_submit_edit_path, id: "submit") do |form| %>
     <input type="hidden" name="id" value="<%= @voyage.id %>">
