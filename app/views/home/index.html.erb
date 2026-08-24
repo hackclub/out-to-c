@@ -8,7 +8,9 @@
 
     prices = "<%= @voyage && @voyage.cargo %>";
 
-    shipStatus = <%= @voyage != nil ? @voyage.ship_status : 0%>
+    shipStatus = <%= @voyage != nil ? @voyage.ship_status : 0%>;
+
+    hasPastVoyages = <%= ( @user.past_voyages != nil && not(@user.past_voyages.blank?)) ? "true" : "false" %>;
 </script>
 
 <style>
@@ -128,7 +130,13 @@
         <div onclick="toggleMap();" id="minimap" <%= @found_island ? "style=display:none" : "" %>>
             <%= image_tag "graphics/ship_icon.png",:id => "ship-icon" , :alt => "ship-icon" %>
             <%= image_tag "graphics/treasure_icon.png",:id => "treasure-icon" , :alt => "treasure-icon" %>
-            <span id="minimap-text"><%= @voyage != nil ? (@next_island - @voyage.total_seconds / 60 / 60 + 0.5).to_i.to_s : "-" %> hours </span>
+            <% 
+            offset = 0
+            if @user.seconds_offset != nil
+                offset = @user.seconds_offset
+            end
+            %>
+            <span id="minimap-text"><%= @voyage != nil ? (@next_island - (@voyage.total_seconds+offset) / 60 / 60 + 0.5).to_i.to_s : "-" %> hours </span>
         </div>
         <div id="island-found" style="<%= @found_island ? "display:unset; animation-play-state: running;" : "" %>">
             <div id="island-found-center">
@@ -210,9 +218,20 @@
     <div id="shipped-voyage" <% if @voyage == nil or @voyage.ship_status == 0 %> style="display:none;"<% end %>>
         <h1>Voyage Shipped!</h1>
         <% if @voyage != nil && @voyage.ship_status == 2 %>
-        <h2>Approved! You should have been DMd about fulfilment now!</h2>
+        <h2>Project has been approved.</h2>
+        <p style="width:600px;max-width:100%;display:block;margin: 0 auto;">
+    Prize-fulfillment has not yet started, but you will receive a slack DM about fulfillment sometime before the end of the event.
+        <br>
+        You can start working on another project if you like.
+        </p>
+        <br>
+        <div class="surround-border"><button class="voyage-btn small-voyage-btn" onclick="newVoyageAfterShip();" id="new-voyage-after-ship">New Voyage</button></div>
         <% else %>
         <h2>Awaiting approval.</h2>
+        <p style="width:600px;max-width:100%;display:block;margin: 0 auto;">If you intend to ship another project,
+        you can start working on it and tracking hackatime hours already.<br>
+        You just can't link it to Out to C until this project is approved.
+        </p>
         <% end %>
     </div>
 
@@ -242,14 +261,19 @@
                 <div id="cargo-slots">
                     <%=
                     pcs = []
-                    if @voyage != nil
-                        for pc in @voyage.cargo.split(",",-1)
-                            # find item details from @prices
-                            for a in @prices
-                                g = a[pc.to_sym]
-                                if g != nil
-                                    pcs.append([pc,g[:name]])
-                                end
+                    cargo = @user.all_prizes
+                    if cargo == nil
+                        cargo = ""
+                    end
+                    if @voyage != nil && @voyage.ship_status != 2
+                        cargo += @voyage.cargo
+                    end
+                    for pc in cargo.split(",",-1)
+                        # find item details from @prices
+                        for a in @prices
+                            g = a[pc.to_sym]
+                            if g != nil
+                                pcs.append([pc,g[:name]])
                             end
                         end
                     end

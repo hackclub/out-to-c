@@ -10,15 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_11_200236) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_23_181200) do
   create_table "users", force: :cascade do |t|
+    t.string "all_prizes"
     t.datetime "created_at", null: false
     t.string "email"
+    t.string "fulfilled_prizes"
     t.string "github_username"
     t.integer "hackatime_id"
     t.string "hca_token"
+    t.integer "last_island"
     t.string "name"
+    t.string "past_voyages"
     t.string "pfp"
+    t.integer "seconds_offset"
     t.string "token"
     t.string "uid"
     t.datetime "updated_at", null: false

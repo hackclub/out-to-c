@@ -36,6 +36,7 @@ let shippedOrActiveVoyageScreen = document.getElementById("shipped-or-active-voy
 let prizeGot = document.getElementById("prize-got");
 let shipPiiBtn = document.getElementById("ship-pii-submit");
 let openableMapHolder = document.getElementById("openable-map-holder");
+let newVoyageAfterShipButton = document.getElementById("new-voyage-after-ship");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -190,6 +191,12 @@ function hasVoyageChanged() {
 }
 
 globalThis.backVoyage = function () {
+    if (inNewVoyageAfterShip) {
+        newVoyageAfterShipButton.style.display = "";
+        fadeOut(newVoyageDiv);
+        fadeOut(newVoyageBack);
+        return;
+    }
     if (editingVoyage) {
         let goBack = () => {
             editingVoyage = false;
@@ -221,6 +228,9 @@ globalThis.toggleCargo = function () {
             selectedCargoSlot = null;
         }
     } else {
+        if (inNewVoyageAfterShip) {
+            backVoyage();
+        }
         if (editingVoyage) {
             if (hasVoyageChanged()) {
                 return;
@@ -397,6 +407,36 @@ document.body.addEventListener("mouseup", (_event) => {
     draggingCargoSlot.src = "";
 });
 
+function resetVoyageForm() {
+    for (let name of ["input", "select"]) {
+        var array = document.getElementsByTagName(name);
+        for (var i = 0, lng = array.length; i < lng; i++) {
+            if (array[i].name == "authenticity_token") {
+                continue;
+            }
+            array[i].value = '';
+        }
+    }
+}
+
+let inNewVoyageAfterShip = false;
+globalThis.newVoyageAfterShip = function () {
+    resetVoyageForm();
+    editVoyage();
+    editingVoyage = false;
+    inNewVoyageAfterShip = true;
+    newVoyageAfterShipButton.style.display = "none";
+    newVoyageTitle.innerText = "New Voyage";
+    newVoyageSubmitBtn.innerText = "CREATE VOYAGE";
+    for (let element of document.getElementsByClassName("input-show-on-voyage-create")) {
+        element.style.display = "none";
+    }
+    for (let element of document.getElementsByClassName("input-hide-on-voyage-create")) {
+        element.style.display = "unset";
+    }
+    deleteVoyageBtn.style.display = "none";
+}
+
 let editingVoyage = false;
 globalThis.editVoyage = function () {
     if (cargoShown) {
@@ -425,6 +465,10 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
             showNotice("Error: " + body["error"]);
             return;
         }
+        if (inNewVoyageAfterShip) {
+            location.reload();
+            return;
+        }
         voyageChangesMade = false;
         lastForm = formDataToArray(new FormData(document.forms["new-voyage-form"]));
         inNewVoyage = false;
@@ -447,7 +491,9 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
         deleteVoyageBtn.style.display = "block";
 
         if (!originalVoyageID) {
-            startOnboarding(body["fp"]);
+            if (!hasPastVoyages) {
+                startOnboarding(body["fp"]);
+            }
             originalVoyageID = 1;
         } else {
             if (body["fp"]) {
