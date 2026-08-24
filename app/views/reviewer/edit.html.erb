@@ -29,7 +29,7 @@
 </div>
 
 <% if @owner.past_voyages != nil && not(@owner.past_voyages.blank?) && not(@owner.past_voyages.start_with?(@voyage.id.to_s + ",")) %>
-<div class="admin-edit">
+<div class="admin-edit" style="max-width:900px">
     <p>Approved Past Voyages:</p>
     <%
     for vi in @owner.past_voyages.split(",")

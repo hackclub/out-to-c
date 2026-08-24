@@ -434,6 +434,7 @@ globalThis.newVoyageAfterShip = function () {
     for (let element of document.getElementsByClassName("input-hide-on-voyage-create")) {
         element.style.display = "unset";
     }
+    deleteVoyageBtn.style.display = "none";
 }
 
 let editingVoyage = false;

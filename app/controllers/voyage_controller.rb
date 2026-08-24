@@ -199,7 +199,7 @@ class VoyageController < ApplicationController
           @user.past_voyages = ""
         end
         @user.past_voyages = @user.past_voyages + @user.voyage.to_s + ","
-        @user.voyage = 0
+        @user.voyage = nil
         @user.save
         @voyage = nil
       elsif @voyage.ship_status != 0
