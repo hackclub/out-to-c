@@ -259,21 +259,19 @@
                 <div id="cargo-slots">
                     <%=
                     pcs = []
-                    if @voyage != nil
-                        cargo = @user.all_prizes
-                        if cargo == nil
-                            cargo = ""
-                        end
-                        if @voyage.ship_status != 2
-                            cargo += @voyage.cargo
-                        end
-                        for pc in cargo.split(",",-1)
-                            # find item details from @prices
-                            for a in @prices
-                                g = a[pc.to_sym]
-                                if g != nil
-                                    pcs.append([pc,g[:name]])
-                                end
+                    cargo = @user.all_prizes
+                    if cargo == nil
+                        cargo = ""
+                    end
+                    if @voyage != nil && @voyage.ship_status != 2
+                        cargo += @voyage.cargo
+                    end
+                    for pc in cargo.split(",",-1)
+                        # find item details from @prices
+                        for a in @prices
+                            g = a[pc.to_sym]
+                            if g != nil
+                                pcs.append([pc,g[:name]])
                             end
                         end
                     end
