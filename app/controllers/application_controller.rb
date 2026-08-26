@@ -2,7 +2,7 @@ require "net/http"
 require "json"
 
 def return_islands
-  return [5,12,26,50]
+  return [5,12,26,50,65]
 end
 def ysws_start
   date = "2026-08-12"
@@ -214,7 +214,10 @@ class ApplicationController < ActionController::Base
         },
         
         {
-          "q":{"name": "Mystery"},
+          "aula":{"name": "Aula S75 Pro"},
+          "polaroid":{"name": "Polaroid Go Gen 3"},
+          "ear3a":{"name": "Nothing Ear 3a"},
+          "rpi5":{"name": "Pi 5 (2GB)"},
         }
       ]
     end

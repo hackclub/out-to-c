@@ -1125,16 +1125,47 @@ h2 {
 }
 
 #map-marker-4 {
-    left: 1100px;
-    top: 321px;
+    left: calc(var(--w_factor) * 1014);
+    top: calc(var(--w_factor) * 289);
 }
 
 #map-marker-4>div>div {
     transform: translate(-65px, -140px);
 }
 
+#map-marker-5 {
+    left: calc(var(--w_factor) * 1135);
+    top: calc(var(--w_factor) * 86);
+}
+
+#map-marker-5>div {
+    width: calc(var(--w_factor) * 195);
+    height: calc(var(--w_factor) * 80);
+}
+
+#map-marker-5 p {
+    margin: 0;
+    color: white;
+}
+
+#map-marker-5:not(:hover)>div>div {
+    display: none;
+}
+
+#map-marker-5>div>div {
+    opacity: 1;
+    width: 140px;
+    height: 30px;
+    display: block;
+    margin: 0 auto;
+    transform: translateY(calc(var(--w_factor) * 13));
+    background-color: #6e4c30;
+    outline: 5px solid #9c6a3d;
+    padding: 2px;
+}
+
 #map {
-    width: calc(1200 * var(--w_factor));
+    width: calc(1400 * var(--w_factor));
     display: block;
 }
 
