@@ -139,31 +139,38 @@
             <span id="minimap-text"><%= @voyage != nil ? (@next_island - (@voyage.total_seconds+offset) / 60 / 60 + 0.5).to_i.to_s : "-" %> hours </span>
         </div>
         <div id="island-found" style="<%= @found_island ? "display:unset; animation-play-state: running;" : "" %>">
-            <div id="island-found-center">
-                <link rel="preload" as="image" href="<%= image_url("graphics/treasure_chest_open.png")  %>" fetchpriority="high">
-                <%= image_tag "graphics/island_found.png",:id => "island-found-image" , :alt => "Island" %>
-                <button onclick="selectTreasure()" id="island-found-chest"></button>
+            <div id="merchant-found-content" class="island-found-center">
+                <%= image_tag "graphics/merchant_found.png",:id => "merchant-found-image" , :class => "island-found-image" , :alt => "Merchant" %>
             </div>
-            <div id="treasure-select-container">
-                <div id="treasure-select">
-                    <h1>Treasure Chest</h1>
-                    <span>Select 1 item to receive.</span>
-                    <br>
-                    
-                    <%= 
-                    fp = JSON.parse(@found_prices.to_json)
-                    fp.each_with_index do | x, i |
-                        x[1]["src"] = image_url("prices/"+x[0].to_s+".png")
-                    end
+        
+            
+            <div id="island-found-content">
+                <div class="island-found-center">
+                    <link rel="preload" as="image" href="<%= image_url("graphics/treasure_chest_open.png")  %>" fetchpriority="high">
+                    <%= image_tag "graphics/island_found.png",:id => "island-found-image" , :class => "island-found-image" , :alt => "Island" %>
+                    <button onclick="selectTreasure()" id="island-found-chest"></button>
+                </div>
+                <div id="treasure-select-container">
+                    <div id="treasure-select">
+                        <h1>Treasure Chest</h1>
+                        <span>Select 1 item to receive.</span>
+                        <br>
+                        
+                        <%= 
+                        fp = JSON.parse(@found_prices.to_json)
+                        fp.each_with_index do | x, i |
+                            x[1]["src"] = image_url("prices/"+x[0].to_s+".png")
+                        end
 
-                    ActiveSupport::SafeBuffer.new("<script>found_prices="+fp.to_json+"</script>")
-                    %>
-                    <div id="prices-buttons">
-                    </div>
-                    <button id="price-submit-btn" onclick="finalizePriceSelection();" class="confirm-btn">Confirm</button>
-                    <%= form_with(url: voyage_price_path, id: "price-form") do |form| end %>
+                        ActiveSupport::SafeBuffer.new("<script>found_prices="+fp.to_json+"</script>")
+                        %>
+                        <div id="prices-buttons">
+                        </div>
+                        <button id="price-submit-btn" onclick="finalizePriceSelection();" class="confirm-btn">Confirm</button>
+                        <%= form_with(url: voyage_price_path, id: "price-form") do |form| end %>
                     </div>
                 </div>
+            </div>
         </div>
         <div id="prize-got" style="display:none;">
         </div>

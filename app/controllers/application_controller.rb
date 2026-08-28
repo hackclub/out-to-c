@@ -218,6 +218,10 @@ class ApplicationController < ActionController::Base
           "polaroid":{"name": "Polaroid Go Gen 3"},
           "ear3a":{"name": "Nothing Ear 3a"},
           "rpi5":{"name": "Pi 5 (2GB)"},
+        },
+        
+        {
+          "merchant":{"name": "Merchant ship"},
         }
       ]
     end

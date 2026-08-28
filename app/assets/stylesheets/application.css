@@ -317,7 +317,7 @@ form button:hover:not([disabled]) {
     animation-play-state: paused;
 }
 
-#island-found-center {
+.island-found-center {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -374,7 +374,7 @@ form button:hover:not([disabled]) {
     animation-play-state: paused;
 }
 
-#island-found-image {
+.island-found-image {
     width: 100%;
     pointer-events: none;
     user-drag: none;

@@ -9,6 +9,8 @@ let deleteVoyageBtn = document.getElementById("delete-voyage-button");
 let logo = document.getElementById("logo");
 let cargo = document.getElementById("cargo");
 let treasureSelect = document.getElementById("treasure-select");
+let merchantFoundContent = document.getElementById("merchant-found-content");
+let islandFoundContent = document.getElementById("island-found-content");
 let islandFound = document.getElementById("island-found");
 let newVoyageButtons = document.getElementById("new-voyage-buttons");
 let priceForm = document.getElementById("price-form");
@@ -518,6 +520,13 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
 });
 
 function loadPrices(found_prices) {
+    if (found_prices["merchant"]) {
+        merchantFoundContent.style.display = "unset";
+        islandFoundContent.style.display = "none";
+    } else {
+        merchantFoundContent.style.display = "none";
+        islandFoundContent.style.display = "unset";
+    }
     while (pricesButtons.children[0]) {
         pricesButtons.children[0].remove();
     }
