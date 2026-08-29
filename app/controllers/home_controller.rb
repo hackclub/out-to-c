@@ -11,6 +11,7 @@ class HomeController < ApplicationController
         generate_hackatime_text
         get_next_island
         generate_desc_trimmed
+        get_merchant_trades
       end
     end
     def docs

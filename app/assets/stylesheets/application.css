@@ -318,6 +318,34 @@ form button:hover:not([disabled]) {
     }
 }
 
+.merchant-trade {
+    border: 5px solid #10121C;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.merchant-item {
+    border: 5px solid #9c6a3d;
+    display: inline-block;
+    min-width: 210px;
+}
+
+.merchant-item>p {
+    text-align: center;
+    margin: 0;
+}
+
+.merchant-arrow {
+    transform: translateY(-25px);
+}
+
+.merchant-item>img {
+    width: 120px;
+    aspect-ratio: 1;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
 #merchant-container {
     --w: min(100vw, 1150px);
     --h: min(100vh, 700px);

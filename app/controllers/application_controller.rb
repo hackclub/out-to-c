@@ -222,8 +222,22 @@ class ApplicationController < ActionController::Base
         
         {
           "merchant":{"name": "Merchant ship"},
+          "round2":{"name":"Pebble Round 2"},
+          "rgsp":{"name":"Anbernic RG SP"},
+          "polaroidflip":{"name":"Polaroid Flip"},
+          "headphonea":{"name":"Nothing Headpone (a)"},
+          "rpi5extra":{"name":"Rpi 5 (8GB)"},
         }
       ]
+    end
+    def get_merchant_trades
+      @merchant_trades = {
+        "pinetime":"round2",
+        "powkiddy":"rgsp",
+        "polaroid":"polaroidflip",
+        "ear3a":"headphonea",
+        "rpi5":"rpi5extra"
+      }
     end
     def set_logged_in
       @loggedin = session[:user_id] != nil and session[:user_id]["uid"] != nil

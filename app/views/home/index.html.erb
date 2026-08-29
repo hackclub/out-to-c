@@ -144,30 +144,30 @@
                 <div id="merchant-container">
                     <h1>Merchant | Upgrade an item</h1><br>
                     <div id="merchant-items">
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
-                        <p>wa</p>
+                        <% for trade in @merchant_trades %>
+                            <%
+                                for i in @prices
+                                    for j in i
+                                        if j[0] == trade[0]
+                                            name = j[1][:name]
+                                        elsif j[0].to_s == trade[1]
+                                            name2 = j[1][:name]
+                                        end
+                                    end
+                                end
+                            %>
+                            <div class="merchant-trade">
+                                <div class="merchant-item">
+                                    <img src="<%= asset_path("prices/#{trade[0].to_s}.png") %>">
+                                    <p><%= name %><p>
+                                </div>
+                                <%= image_tag "graphics/arrow.png", :class => "merchant-arrow" %>
+                                <div class="merchant-item">
+                                    <img src="<%= asset_path("prices/#{trade[1]}.png") %>">
+                                    <p><%= name2 %><p>
+                                </div>
+                            </div>
+                        <% end %>
                     </div>
                 </div>
             </div>
