@@ -156,7 +156,7 @@
                                     end
                                 end
                             %>
-                            <div class="merchant-trade">
+                            <div class="merchant-trade" onclick="selectMerchantTrade(this)">
                                 <div class="merchant-item">
                                     <img src="<%= asset_path("prices/#{trade[0].to_s}.png") %>">
                                     <p><%= name %><p>

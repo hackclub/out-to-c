@@ -107,6 +107,15 @@ function tryDeleteVoyage() {
     });
 }
 
+let selectedTrade = null;
+globalThis.selectMerchantTrade = function (element) {
+    if (selectedTrade) {
+        selectedTrade.classList.remove("selected-trade");
+    }
+    selectedTrade = element;
+    element.classList.add("selected-trade");
+}
+
 function tryShipVoyage() {
     if (cargoShown) { toggleCargo(); }
     showConfirmation(

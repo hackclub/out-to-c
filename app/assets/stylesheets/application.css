@@ -318,10 +318,16 @@ form button:hover:not([disabled]) {
     }
 }
 
+.selected-trade {
+    filter: saturate(1.1) brightness(1.4) contrast(0.96);
+}
+
 .merchant-trade {
     border: 5px solid #10121C;
     padding: 10px;
     margin-bottom: 15px;
+    background-color: #5e3f26;
+    cursor: pointer;
 }
 
 .merchant-item {
@@ -337,6 +343,7 @@ form button:hover:not([disabled]) {
 
 .merchant-arrow {
     transform: translateY(-25px);
+    margin: 0 20px;
 }
 
 .merchant-item>img {
