@@ -49,6 +49,8 @@ for (let element of document.getElementsByTagName("*")) {
     }
 }
 
+let gainedPrize = false;
+
 function showNotice(text) {
     notice.children[0].innerText = text;
     notice.style.display = "unset";
@@ -353,6 +355,7 @@ globalThis.finalizePriceSelection = function () {
             showNotice("Error: " + body["error"]);
             return;
         }
+        gainedPrize = true;
         fadeOut(islandFound);
         fadeIn(minimap);
         minimapText.innerText = body["next_island_remaining"] + " hours";
@@ -561,6 +564,9 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
 
 function loadPrices(found_prices) {
     if (found_prices["merchant"]) {
+        if (gainedPrize) {
+            location.reload();
+        }
         merchantFoundContent.style.display = "unset";
         islandFoundContent.style.display = "none";
     } else {
