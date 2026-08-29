@@ -142,7 +142,7 @@
             <div id="merchant-found-content" class="island-found-center">
                 <%= image_tag "graphics/merchant_found.png",:id => "merchant-found-image" , :class => "island-found-image" , :alt => "Merchant" %>
                 <div id="merchant-container">
-                    <h1>Merchant | Upgrade an item</h1><br>
+                    <h1 style="margin-top:10px;">Merchant | Upgrade an item[<span class="info-hover">?<span>Trade with the merchant to upgrade one of your prizes to a similar item of higher value.</span></span>]</h1><br>
                     <div id="merchant-items">
                         <% for trade in @merchant_trades %>
                             <%
