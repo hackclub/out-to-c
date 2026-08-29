@@ -304,6 +304,42 @@ form button:hover:not([disabled]) {
     filter: drop-shadow(4px 4px 5px black) drop-shadow(0 0 50px #f9c700);
 }
 
+@keyframes merchant-fade {
+    0% {
+        opacity: 0;
+    }
+
+    80% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+#merchant-container {
+    --w: min(100vw, 1150px);
+    --h: min(100vh, 700px);
+    width: var(--w);
+    height: var(--h);
+    animation: merchant-fade 2s linear;
+    background-color: #6e4c30;
+    outline: 5px solid #9c6a3d;
+    position: absolute;
+    top: calc(50% - var(--h) / 2);
+    left: max(0px, calc(50% - var(--w) / 2));
+    color: white;
+}
+
+#merchant-items {
+    width: calc(100% - 15px);
+    height: calc(100% - 80px);
+    margin: 0 auto;
+    background-color: #5e3f26;
+    overflow-y: scroll;
+}
+
 #island-found {
     z-index: 4;
     display: none;
