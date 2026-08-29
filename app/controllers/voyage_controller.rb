@@ -140,6 +140,36 @@ class VoyageController < ApplicationController
     render json: { "ok": "yay" }
   end
 
+  def merchant
+    if params["selection"] == nil or params["selection"].blank?
+      render json: { "error": "No selection" }
+      return
+    end
+    
+    selection = params["selection"]
+
+    in_user = false # @user.all_prizes.include?(selection+",")
+    in_cargo = @voyage.cargo.include?(selection+",")
+    if not in_user and not in_cargo
+      render json: { "error": "This trade is unavailable!" }
+      return
+    end
+
+    get_merchant_trades
+    result = @merchant_trades[selection.to_sym]
+    if result == nil or result.blank?
+      render json: { "error": "This trade is unavailable! 2" }
+      return
+    end
+
+    get_next_island
+    @voyage.cargo = @voyage.cargo.sub(selection+",", result+",")
+    @voyage.last_island = @next_island
+    @voyage.save!
+    get_next_island
+    render json: { "ok": 1 }
+  end
+
   def price
     if @voyage.ship_status != 0
       render json: { "error": "Voyage is shipped, no prices can be claimed at this point. Ask for support in #out-to-c. Ship status: " + @voyage.ship_status.to_s }

@@ -304,6 +304,97 @@ form button:hover:not([disabled]) {
     filter: drop-shadow(4px 4px 5px black) drop-shadow(0 0 50px #f9c700);
 }
 
+@keyframes merchant-fade {
+    0% {
+        opacity: 0;
+    }
+
+    80% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.selected-trade {
+    filter: saturate(1.1) brightness(1.4) contrast(0.96);
+}
+
+.merchant-trade {
+    border: 5px solid #10121C;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #5e3f26;
+    cursor: pointer;
+}
+
+.merchant-trade-unavailable {
+    cursor: default;
+    filter: brightness(0.5) contrast(0.9) grayscale(0.5);
+}
+
+.merchant-item {
+    border: 5px solid #9c6a3d;
+    display: inline-block;
+    min-width: 210px;
+}
+
+.merchant-item>p {
+    text-align: center;
+    margin: 0;
+}
+
+.merchant-arrow {
+    transform: translateY(-25px);
+    margin: 0 20px;
+}
+
+.merchant-item>img {
+    width: 120px;
+    aspect-ratio: 1;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+#merchant-container {
+    --w: min(100vw, 1150px);
+    --h: min(100vh, 700px);
+    width: var(--w);
+    height: var(--h);
+    animation: merchant-fade 2s linear;
+    background-color: #6e4c30;
+    outline: 5px solid #9c6a3d;
+    position: absolute;
+    top: calc(50% - var(--h) / 2);
+    left: max(0px, calc(50% - var(--w) / 2));
+    color: white;
+}
+
+#merchant-items {
+    width: calc(100% - 15px);
+    height: calc(100% - 80px);
+    margin: 0 auto;
+    background-color: #5e3f26;
+    overflow-y: scroll;
+}
+
+#confirm-merchant {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: #399739;
+    border: 2px solid #78e56c;
+    color: white;
+    padding: 2px 15px;
+    width: fit-content;
+}
+
+#confirm-merchant:hover {
+    filter: saturate(1.1) brightness(1.1);
+}
+
 #island-found {
     z-index: 4;
     display: none;
@@ -317,7 +408,7 @@ form button:hover:not([disabled]) {
     animation-play-state: paused;
 }
 
-#island-found-center {
+.island-found-center {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -374,7 +465,7 @@ form button:hover:not([disabled]) {
     animation-play-state: paused;
 }
 
-#island-found-image {
+.island-found-image {
     width: 100%;
     pointer-events: none;
     user-drag: none;

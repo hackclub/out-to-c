@@ -9,6 +9,8 @@ let deleteVoyageBtn = document.getElementById("delete-voyage-button");
 let logo = document.getElementById("logo");
 let cargo = document.getElementById("cargo");
 let treasureSelect = document.getElementById("treasure-select");
+let merchantFoundContent = document.getElementById("merchant-found-content");
+let islandFoundContent = document.getElementById("island-found-content");
 let islandFound = document.getElementById("island-found");
 let newVoyageButtons = document.getElementById("new-voyage-buttons");
 let priceForm = document.getElementById("price-form");
@@ -37,6 +39,8 @@ let prizeGot = document.getElementById("prize-got");
 let shipPiiBtn = document.getElementById("ship-pii-submit");
 let openableMapHolder = document.getElementById("openable-map-holder");
 let newVoyageAfterShipButton = document.getElementById("new-voyage-after-ship");
+let confirmMerchant = document.getElementById("confirm-merchant");
+let confirmMerchantForm = document.getElementById("confirm-merchant-form");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -44,6 +48,8 @@ for (let element of document.getElementsByTagName("*")) {
         elementsState[element.id] = (getComputedStyle(element).display != "none");
     }
 }
+
+let gainedPrize = false;
 
 function showNotice(text) {
     notice.children[0].innerText = text;
@@ -104,6 +110,44 @@ function tryDeleteVoyage() {
         deleteVoyageForm.submit();
     });
 }
+
+let selectedTrade = null;
+
+globalThis.selectMerchantTrade = function (element) {
+    if (selectedTrade) {
+        selectedTrade.classList.remove("selected-trade");
+    }
+    confirmMerchant.style.display = "";
+    selectedTrade = element;
+    element.classList.add("selected-trade");
+}
+
+confirmMerchantForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!selectedTrade) { return; }
+    confirmMerchant.setAttribute("disabled", "");
+    let data = new FormData(event.target);
+    data.append("selection", selectedTrade.getAttribute("tradeValue"));
+    fetch(event.target.action, {
+        method: 'POST',
+        body: data
+    }).then((response) => {
+        confirmMerchant.removeAttribute("disabled");
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    }).then((body) => {
+        if (body["error"]) {
+            showNotice("Error: " + body["error"]);
+            return;
+        }
+        location.reload();
+    }).catch((error) => {
+        showNotice("Error: Not success :(");
+        console.error(error);
+    });
+});
 
 function tryShipVoyage() {
     if (cargoShown) { toggleCargo(); }
@@ -311,6 +355,7 @@ globalThis.finalizePriceSelection = function () {
             showNotice("Error: " + body["error"]);
             return;
         }
+        gainedPrize = true;
         fadeOut(islandFound);
         fadeIn(minimap);
         minimapText.innerText = body["next_island_remaining"] + " hours";
@@ -518,6 +563,16 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
 });
 
 function loadPrices(found_prices) {
+    if (found_prices["merchant"]) {
+        if (gainedPrize) {
+            location.reload();
+        }
+        merchantFoundContent.style.display = "unset";
+        islandFoundContent.style.display = "none";
+    } else {
+        merchantFoundContent.style.display = "none";
+        islandFoundContent.style.display = "unset";
+    }
     while (pricesButtons.children[0]) {
         pricesButtons.children[0].remove();
     }

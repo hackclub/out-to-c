@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post "voyage/delete_force" => "voyage#delete_force"
   post "voyage/add_hour" => "voyage#add_hour"
   post "voyage/price" => "voyage#price"
+  post "voyage/merchant" => "voyage#merchant"
   post "voyage/ship" => "voyage#ship"
 
   get "admin" => "admin#index"

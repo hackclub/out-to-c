@@ -139,31 +139,82 @@
             <span id="minimap-text"><%= @voyage != nil ? (@next_island - (@voyage.total_seconds+offset) / 60 / 60 + 0.5).to_i.to_s : "-" %> hours </span>
         </div>
         <div id="island-found" style="<%= @found_island ? "display:unset; animation-play-state: running;" : "" %>">
-            <div id="island-found-center">
-                <link rel="preload" as="image" href="<%= image_url("graphics/treasure_chest_open.png")  %>" fetchpriority="high">
-                <%= image_tag "graphics/island_found.png",:id => "island-found-image" , :alt => "Island" %>
-                <button onclick="selectTreasure()" id="island-found-chest"></button>
-            </div>
-            <div id="treasure-select-container">
-                <div id="treasure-select">
-                    <h1>Treasure Chest</h1>
-                    <span>Select 1 item to receive.</span>
-                    <br>
-                    
-                    <%= 
-                    fp = JSON.parse(@found_prices.to_json)
-                    fp.each_with_index do | x, i |
-                        x[1]["src"] = image_url("prices/"+x[0].to_s+".png")
-                    end
-
-                    ActiveSupport::SafeBuffer.new("<script>found_prices="+fp.to_json+"</script>")
-                    %>
-                    <div id="prices-buttons">
+            <div id="merchant-found-content" class="island-found-center">
+                <%= image_tag "graphics/merchant_found.png",:id => "merchant-found-image" , :class => "island-found-image" , :alt => "Merchant" %>
+                <div id="merchant-container">
+                    <h1 style="margin-top:10px;">Merchant | Upgrade an item[<span class="info-hover">?<span>Trade with the merchant to upgrade one of your prizes to a similar item of higher value.</span></span>]</h1><br>
+                    <div id="merchant-items">
+                        <% for available in [true,false] %>
+                            <% 
+                                if @voyage == nil
+                                    break
+                                end
+                            %>
+                            <% for trade in @merchant_trades %>
+                                <%
+                                    a1 = (@voyage.cargo.include?(trade[0].to_s + ","))
+                                    a2 = false # (@user.all_prizes.include?(trade[0].to_s + ","))
+                                    a = a1 or a2
+                                    if a != available
+                                        next
+                                    end
+                                    for i in @prices
+                                        for j in i
+                                            if j[0] == trade[0]
+                                                name = j[1][:name]
+                                            elsif j[0].to_s == trade[1]
+                                                name2 = j[1][:name]
+                                            end
+                                        end
+                                    end
+                                %>
+                                <div class="merchant-trade <%= available ? "" : "merchant-trade-unavailable" %>" tradeValue="<%= trade[0].to_s %>" onclick="<%= available ? "selectMerchantTrade(this)" : "" %>">
+                                    <div class="merchant-item">
+                                        <img src="<%= asset_path("prices/#{trade[0].to_s}.png") %>">
+                                        <p><%= name %><p>
+                                    </div>
+                                    <%= image_tag "graphics/arrow.png", :class => "merchant-arrow" %>
+                                    <div class="merchant-item">
+                                        <img src="<%= asset_path("prices/#{trade[1]}.png") %>">
+                                        <p><%= name2 %><p>
+                                    </div>
+                                </div>
+                            <% end %>
+                        <% end %>
                     </div>
-                    <button id="price-submit-btn" onclick="finalizePriceSelection();" class="confirm-btn">Confirm</button>
-                    <%= form_with(url: voyage_price_path, id: "price-form") do |form| end %>
+                    <%= form_with(url: voyage_merchant_path, id: "confirm-merchant-form") do |form| %>
+                        <button style="display:none;" id="confirm-merchant">Confirm Selection</button>
+                    <% end %>
+                </div>
+            </div>
+            
+            <div id="island-found-content">
+                <div class="island-found-center">
+                    <link rel="preload" as="image" href="<%= image_url("graphics/treasure_chest_open.png")  %>" fetchpriority="high">
+                    <%= image_tag "graphics/island_found.png",:id => "island-found-image" , :class => "island-found-image" , :alt => "Island" %>
+                    <button onclick="selectTreasure()" id="island-found-chest"></button>
+                </div>
+                <div id="treasure-select-container">
+                    <div id="treasure-select">
+                        <h1>Treasure Chest</h1>
+                        <span>Select 1 item to receive.</span>
+                        <br>
+                        
+                        <%= 
+                        fp = JSON.parse(@found_prices.to_json)
+                        fp.each_with_index do | x, i |
+                            x[1]["src"] = image_url("prices/"+x[0].to_s+".png")
+                        end
+
+                        ActiveSupport::SafeBuffer.new("<script>found_prices="+fp.to_json+"</script>")
+                        %>
+                        <div id="prices-buttons">
+                        </div>
+                        <button id="price-submit-btn" onclick="finalizePriceSelection();" class="confirm-btn">Confirm</button>
+                        <%= form_with(url: voyage_price_path, id: "price-form") do |form| end %>
                     </div>
                 </div>
+            </div>
         </div>
         <div id="prize-got" style="display:none;">
         </div>
