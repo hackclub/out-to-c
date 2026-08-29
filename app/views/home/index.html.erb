@@ -148,7 +148,7 @@
                             <% for trade in @merchant_trades %>
                                 <%
                                     a1 = (@voyage.cargo.include?(trade[0].to_s + ","))
-                                    a2 = (@user.all_prizes.include?(trade[0].to_s + ","))
+                                    a2 = false # (@user.all_prizes.include?(trade[0].to_s + ","))
                                     a = a1 or a2
                                     if a != available
                                         next
@@ -163,7 +163,7 @@
                                         end
                                     end
                                 %>
-                                <div class="merchant-trade <%= available ? "" : "merchant-trade-unavailable" %>" onclick="<%= available ? "selectMerchantTrade(this)" : "" %>">
+                                <div class="merchant-trade <%= available ? "" : "merchant-trade-unavailable" %>" tradeValue="<%= trade[0].to_s %>" onclick="<%= available ? "selectMerchantTrade(this)" : "" %>">
                                     <div class="merchant-item">
                                         <img src="<%= asset_path("prices/#{trade[0].to_s}.png") %>">
                                         <p><%= name %><p>
@@ -177,7 +177,9 @@
                             <% end %>
                         <% end %>
                     </div>
-                    <button style="display:none;" id="confirm-merchant" onclick="confirmMerchant()">Confirm Selection</button>
+                    <%= form_with(url: voyage_merchant_path, id: "confirm-merchant-form") do |form| %>
+                        <button style="display:none;" id="confirm-merchant">Confirm Selection</button>
+                    <% end %>
                 </div>
             </div>
             

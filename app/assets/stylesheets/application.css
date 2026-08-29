@@ -388,6 +388,11 @@ form button:hover:not([disabled]) {
     border: 2px solid #78e56c;
     color: white;
     padding: 2px 15px;
+    width: fit-content;
+}
+
+#confirm-merchant:hover {
+    filter: saturate(1.1) brightness(1.1);
 }
 
 #island-found {

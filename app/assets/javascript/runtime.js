@@ -40,6 +40,7 @@ let shipPiiBtn = document.getElementById("ship-pii-submit");
 let openableMapHolder = document.getElementById("openable-map-holder");
 let newVoyageAfterShipButton = document.getElementById("new-voyage-after-ship");
 let confirmMerchant = document.getElementById("confirm-merchant");
+let confirmMerchantForm = document.getElementById("confirm-merchant-form");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -109,9 +110,6 @@ function tryDeleteVoyage() {
 }
 
 let selectedTrade = null;
-globalThis.confirmMerchant = function () {
-    if (!selectedTrade) { return; }
-}
 
 globalThis.selectMerchantTrade = function (element) {
     if (selectedTrade) {
@@ -121,6 +119,33 @@ globalThis.selectMerchantTrade = function (element) {
     selectedTrade = element;
     element.classList.add("selected-trade");
 }
+
+confirmMerchantForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!selectedTrade) { return; }
+    confirmMerchant.setAttribute("disabled", "");
+    let data = new FormData(event.target);
+    data.append("selection", selectedTrade.getAttribute("tradeValue"));
+    fetch(event.target.action, {
+        method: 'POST',
+        body: data
+    }).then((response) => {
+        confirmMerchant.removeAttribute("disabled");
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    }).then((body) => {
+        if (body["error"]) {
+            showNotice("Error: " + body["error"]);
+            return;
+        }
+        location.reload();
+    }).catch((error) => {
+        showNotice("Error: Not success :(");
+        console.error(error);
+    });
+});
 
 function tryShipVoyage() {
     if (cargoShown) { toggleCargo(); }
