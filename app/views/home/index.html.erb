@@ -145,6 +145,11 @@
                     <h1 style="margin-top:10px;">Merchant | Upgrade an item[<span class="info-hover">?<span>Trade with the merchant to upgrade one of your prizes to a similar item of higher value.</span></span>]</h1><br>
                     <div id="merchant-items">
                         <% for available in [true,false] %>
+                            <% 
+                                if @voyage == nil
+                                    break
+                                end
+                            %>
                             <% for trade in @merchant_trades %>
                                 <%
                                     a1 = (@voyage.cargo.include?(trade[0].to_s + ","))
