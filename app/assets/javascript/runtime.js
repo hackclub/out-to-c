@@ -39,6 +39,7 @@ let prizeGot = document.getElementById("prize-got");
 let shipPiiBtn = document.getElementById("ship-pii-submit");
 let openableMapHolder = document.getElementById("openable-map-holder");
 let newVoyageAfterShipButton = document.getElementById("new-voyage-after-ship");
+let confirmMerchant = document.getElementById("confirm-merchant");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -108,10 +109,15 @@ function tryDeleteVoyage() {
 }
 
 let selectedTrade = null;
+globalThis.confirmMerchant = function () {
+    if (!selectedTrade) { return; }
+}
+
 globalThis.selectMerchantTrade = function (element) {
     if (selectedTrade) {
         selectedTrade.classList.remove("selected-trade");
     }
+    confirmMerchant.style.display = "";
     selectedTrade = element;
     element.classList.add("selected-trade");
 }
