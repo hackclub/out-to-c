@@ -159,8 +159,8 @@ function tryShipVoyage() {
         Requirements for shipping:
         <ul style="margin:0">
             <li>Valid project name, description and repository</li>
-            <li>README.md file which explains your project and how to use it</li>
-            <li>A project made with C/C++</li>
+            <li>README.md file which explains your project, how to use it, and if AI was used</li>
+            <li>A project made with C/C++/C#</li>
         </ul>
         </span>`, () => { document.getElementById("ship-pii-container").style.display = "" });
 }
