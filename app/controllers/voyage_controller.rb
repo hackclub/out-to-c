@@ -368,7 +368,7 @@ class VoyageController < ApplicationController
     if @user.seconds_offset != nil
       offset = @user.seconds_offset
     end
-    render json: { "name": @voyage_name_trim, "fp":fp, "desc": @voyage_desc_trim, "repo": @voyage_repo_trim, "repo_url": @voyage.repo, "hackatime-text": @hackatime_text, "id": @voyage.id, "total_seconds": @voyage.total_seconds, "next_island_remaining": @next_island - ( (@voyage.total_seconds + offset) / 60 / 60) }
+    render json: { "name": @voyage_name_trim, "fp":fp, "desc": @voyage_desc_trim, "repo": @voyage_repo_trim, "repo_url": @voyage.repo, "hackatime-text": @hackatime_text, "id": @voyage.id, "total_seconds": @voyage.total_seconds, "total_seconds_offset": @voyage.total_seconds+offset, "next_island_remaining": @next_island - ( (@voyage.total_seconds + offset) / 60 / 60) }
   end
 
   private

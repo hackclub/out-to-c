@@ -526,7 +526,7 @@ document.forms['new-voyage-form'].addEventListener('submit', (event) => {
         if (editingVoyage) {
             fadeIn(voyageInfo);
         }
-        setTravelDistance(body["total_seconds"] / 60.0 / 60.0);
+        setTravelDistance(body["total_seconds_offset"] / 60.0 / 60.0);
         minimapText.innerText = body["next_island_remaining"] + " hours";
         voyageInfoName.innerText = body["name"];
         voyageInfoDesc.innerText = body["desc"];
