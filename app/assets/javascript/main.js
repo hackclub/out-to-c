@@ -19,7 +19,47 @@ function getCameraState(index) {
     }
 }
 
-globalThis.setTravelDistance = (v) => { travelDistance = v; setCameraState(2); water.position.x = waterOriginX + travelDistance; };
+let map = document.getElementById("map");
+let mapHolder = document.getElementById("map-holder");
+let shipMapMarker = document.getElementById("ship-map-marker");
+function getMapPath(index) {
+    return map.getSVGDocument().getElementById("map-path-" + index);
+}
+
+globalThis.setMapShipTravel = (v) => {
+    if (islandHours.length == 0) {
+        return;
+    }
+    let nextStop = null;
+    let lastStop = 0;
+    for (let island of islandHours) {
+        if (island > v) {
+            nextStop = island;
+            break;
+        }
+        lastStop = island;
+    }
+    let percentTravel;
+    if (nextStop == null) {
+        nextStop = lastStop;
+        percentTravel = 1.0;
+    } else {
+        percentTravel = (v - lastStop) / (nextStop - lastStop);
+    }
+    let mapPath = getMapPath(nextStop);
+    let length = mapPath.getTotalLength();
+    let position = mapPath.getPointAtLength(percentTravel * length);
+    shipMapMarker.style.left = position.x + "px";
+    shipMapMarker.style.top = position.y + "px";
+    mapHolder.scrollLeft = position.x - mapHolder.clientWidth / 2.0;
+};
+
+globalThis.setTravelDistance = (v) => {
+    travelDistance = v;
+    setCameraState(2);
+    water.position.x = waterOriginX + travelDistance;
+    setMapShipTravel(v);
+};
 
 let disableStartLerp = typeof (_disableStartLerp) == "boolean" && _disableStartLerp == true;
 
@@ -245,3 +285,5 @@ let v = document.getElementById("varyingContents");
 if (v) {
     v.classList.remove("hidden");
 }
+
+setMapShipTravel(travelDistance);

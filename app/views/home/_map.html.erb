@@ -1,4 +1,4 @@
-<div class="map-holder">
+<div id="map-holder">
     <% for mi in 0..4-1 %>
     <div class="map-marker" id="map-marker-<%= mi+1 %>">
         <div class="spread spread<%= @prices[mi].length %>">
@@ -15,5 +15,11 @@
             </div>
         </div>
     </div>
-    <%= image_tag "graphics/map.svg", id: "map" %>
+    <% if @loggedin %>
+    <div id="ship-map-marker">
+        <%= image_tag "graphics/ship_icon.png" %>
+        <p>You are here</p>
+    </div>
+    <% end %>
+    <object id="map" data="<%= asset_path "graphics/map.svg" %>"></object>
 </div>

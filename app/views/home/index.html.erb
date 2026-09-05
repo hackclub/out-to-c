@@ -2,11 +2,20 @@
     // load user data for the JS side
     voyage = parseInt('<%= @voyage && @voyage.id %>') || null;
     originalVoyageID = voyage;
-    _travelDistance = (parseFloat('<%= @voyage && @voyage.total_seconds %>') / 60.0 / 60.0 || 0.0);
+    
+    <%
+    offset = 0
+    if @user != nil && @user.seconds_offset != nil
+        offset = @user.seconds_offset
+    end
+    %>
+    _travelDistance = <%= @voyage != nil ? (@voyage.total_seconds+offset) / 60.0 / 60.0 : 0 %>;
 
     _activeCameraStateIndex = voyage == null ? 0 : 2;
 
     prices = "<%= @voyage && @voyage.cargo %>";
+
+    islandHours = <%= @islands %>;
 
     shipStatus = <%= @voyage != nil ? @voyage.ship_status : 0%>;
 
@@ -121,7 +130,7 @@
                 <button id="edit-voyage" onclick="editVoyage()">Edit Details</button>
             </div>
         </div>
-        <div id="openable-map-holder" style="display:none">
+        <div id="openable-map-holder">
             <div onclick="hideMap();" id="map-backdrop"></div>
             <div id="openable-map">
                 <%= render "map" %>

@@ -179,6 +179,18 @@ form button:hover:not([disabled]) {
     top: calc(50% - 492px / 2);
 }
 
+#openable-map-holder {
+    display: block;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.openable-map-holder-open {
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
+
+
 #map-backdrop {
     width: 100vw;
     height: 100vh;
@@ -1092,7 +1104,7 @@ h2 {
     display: block;
 }
 
-.map-holder {
+#map-holder {
     scrollbar-color: rgb(19, 0, 128) rgba(0, 0, 0, 0.247);
     overflow-x: auto;
     margin-left: auto;
@@ -1567,4 +1579,31 @@ details>div {
 
 q {
     white-space: preserve;
+}
+
+#ship-map-marker {
+    position: relative;
+    width: 0;
+    height: 0;
+}
+
+#ship-map-marker>img {
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0px 0px 10px #ffff00b0) drop-shadow(0px 0px 5px white) drop-shadow(0px 0px 5px #ffffff7a);
+}
+
+#ship-map-marker>p {
+    position: absolute;
+    display: none;
+    width: 140px;
+    color: white;
+    background-color: #6e4c30;
+    outline: 5px solid #9c6a3d;
+    text-align: center;
+    top: -15px;
+    transform: translate(-50%, -50%);
+}
+
+#ship-map-marker:hover>p {
+    display: block;
 }

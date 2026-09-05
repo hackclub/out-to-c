@@ -98,11 +98,11 @@ function cancelConfirmation() {
 let mapOpen = false;
 function toggleMap() {
     mapOpen = !mapOpen;
-    openableMapHolder.style.display = mapOpen ? "block" : "none";
+    openableMapHolder.className = mapOpen ? "openable-map-holder-open" : "";
 }
 function hideMap() {
     mapOpen = false;
-    openableMapHolder.style.display = "none";
+    openableMapHolder.className = "";
 }
 
 function tryDeleteVoyage() {
