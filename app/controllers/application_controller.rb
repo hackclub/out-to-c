@@ -2,7 +2,7 @@ require "net/http"
 require "json"
 
 def return_islands
-  return [5,12,26,50,65]
+  return [5,12,26,50,65,999]
 end
 def ysws_start
   date = "2026-08-12"
@@ -227,7 +227,9 @@ class ApplicationController < ActionController::Base
           "polaroidflip":{"name":"Polaroid Flip"},
           "headphonea":{"name":"Nothing Headpone (a)"},
           "rpi5extra":{"name":"Rpi 5 (8GB)"},
-        }
+        },
+
+        {"electronicsgrant":{"name":"$40 Electronics"}}
       ]
     end
     def get_merchant_trades
