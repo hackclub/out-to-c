@@ -105,6 +105,9 @@ function cancelConfirmation() {
 let mapOpen = false;
 function toggleMap() {
     mapOpen = !mapOpen;
+    if (mapOpen) {
+        setMapShipTravel(travelDistance);
+    }
     openableMapHolder.className = mapOpen ? "openable-map-holder-open" : "";
 }
 function hideMap() {
