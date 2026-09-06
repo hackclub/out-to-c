@@ -141,8 +141,23 @@ class VoyageController < ApplicationController
   end
 
   def merchant
+    if @voyage.ship_status != 0
+      render json: { "error": "Voyage is shipped, no prices can be claimed at this point. Ask for support in #out-to-c. Ship status: " + @voyage.ship_status.to_s }
+      return
+    end
+    get_next_island
+    if not @found_island
+      render json: { "error": "You cant claim this item, @found_island not found" }
+      return
+    end
     if params["selection"] == nil or params["selection"].blank?
       render json: { "error": "No selection" }
+      return
+    end
+
+    
+    if not @found_prices.has_key?(:merchant)
+      render json: { "error": "You shouldn't be able to trade with the merchant right now?" }
       return
     end
     
