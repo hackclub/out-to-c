@@ -186,6 +186,11 @@ class VoyageController < ApplicationController
       return
     end
 
+    if @found_prices.has_key?(:merchant)
+      render json: { "error": "Merchant trade broke? " }
+      return
+    end
+
     details = [price, @found_prices[price.to_sym][:name]]
     img = ActionController::Base.helpers.asset_path("prices/"+ price + ".png")
     @voyage.last_island = @next_island
