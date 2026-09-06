@@ -209,6 +209,7 @@ document.addEventListener("keydown", (event) => {
     if (event.code == "Escape") {
         if (confirmationOpen) { cancelConfirmation(); }
         else if (piiFormOpen) { hidePiiForm(); }
+        else if (mapOpen) { hideMap(); }
         else if (inNewVoyage || editingVoyage) { backVoyage(); }
         else if (cargoShown) { toggleCargo(); }
         else if (getComputedStyle(notice).display != "none") { hideNotice(); }
