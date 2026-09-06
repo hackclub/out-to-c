@@ -41,6 +41,7 @@ let openableMapHolder = document.getElementById("openable-map-holder");
 let newVoyageAfterShipButton = document.getElementById("new-voyage-after-ship");
 let confirmMerchant = document.getElementById("confirm-merchant");
 let confirmMerchantForm = document.getElementById("confirm-merchant-form");
+let shipPiiContainer = document.getElementById("ship-pii-container");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -50,6 +51,12 @@ for (let element of document.getElementsByTagName("*")) {
 }
 
 let gainedPrize = false;
+
+let piiFormOpen = false;
+function hidePiiForm() {
+    piiFormOpen = false;
+    shipPiiContainer.style.display = "none";
+}
 
 function showNotice(text) {
     notice.children[0].innerText = text;
@@ -98,6 +105,9 @@ function cancelConfirmation() {
 let mapOpen = false;
 function toggleMap() {
     mapOpen = !mapOpen;
+    if (mapOpen) {
+        setMapShipTravel(travelDistance);
+    }
     openableMapHolder.className = mapOpen ? "openable-map-holder-open" : "";
 }
 function hideMap() {
@@ -162,7 +172,7 @@ function tryShipVoyage() {
             <li>README.md file which explains your project, how to use it, and if AI was used</li>
             <li>A project made with C/C++/C#</li>
         </ul>
-        </span>`, () => { document.getElementById("ship-pii-container").style.display = "" });
+        </span>`, () => { piiFormOpen = true; shipPiiContainer.style.display = "" });
 }
 
 document.forms['ship-pii-form'].addEventListener('submit', (event) => {
@@ -198,6 +208,8 @@ function selectTreasure() {
 document.addEventListener("keydown", (event) => {
     if (event.code == "Escape") {
         if (confirmationOpen) { cancelConfirmation(); }
+        else if (piiFormOpen) { hidePiiForm(); }
+        else if (mapOpen) { hideMap(); }
         else if (inNewVoyage || editingVoyage) { backVoyage(); }
         else if (cargoShown) { toggleCargo(); }
         else if (getComputedStyle(notice).display != "none") { hideNotice(); }

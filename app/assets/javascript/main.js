@@ -19,9 +19,17 @@ function getCameraState(index) {
     }
 }
 
-let map = document.getElementById("map");
-let mapHolder = document.getElementById("map-holder");
-let shipMapMarker = document.getElementById("ship-map-marker");
+let map;
+let mapHolder;
+let shipMapMarker;
+
+function getMapElements() {
+    map = document.getElementById("map");
+    mapHolder = document.getElementById("map-holder");
+    shipMapMarker = document.getElementById("ship-map-marker");
+}
+getMapElements();
+
 function getMapPath(index) {
     return map.getSVGDocument().getElementById("map-path-" + index);
 }
@@ -30,6 +38,7 @@ globalThis.setMapShipTravel = (v) => {
     if (islandHours.length == 0) {
         return;
     }
+    getMapElements();
     let nextStop = null;
     let lastStop = 0;
     for (let island of islandHours) {
