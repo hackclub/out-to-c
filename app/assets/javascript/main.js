@@ -49,7 +49,7 @@ globalThis.setMapShipTravel = (v) => {
         lastStop = island;
     }
     let percentTravel;
-    if (nextStop == null) {
+    if (nextStop == null || nextStop == 999) {
         nextStop = lastStop;
         percentTravel = 1.0;
     } else {
