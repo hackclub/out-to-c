@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get "admin/reload_reviewer_list" => "admin#reload_reviewer_list"
   get "admin/edit/:id", to: "admin#edit"
   get "admin/raw/:id", to: "admin#raw"
+  get "admin/raw_user/:id", to: "admin#raw_user"
   post "admin/submit_edit", to: "admin#submit_edit"
 
   get "reviewer" => "reviewer#index"

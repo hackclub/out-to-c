@@ -7,7 +7,7 @@
     <% for u in @users %>
         <div class="admin-user-entry">
             <p style="float:right"><%= u.id %></p>
-            <p><%= u.name %></p>
+            <a href="/admin/raw_user/<%= u.id %>"><%= u.name %></a><br>
             <img src="<%= u.pfp %>">
             <span style="position:absolute;right:5px;bottom:5px;width:fit-content;"><%= u.voyage %></span>
         </div>
