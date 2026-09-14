@@ -74,6 +74,7 @@ class ReviewerController < ApplicationController
 
     def fraud_approve
         @voyage = Voyage.find(params["id"])
+        @voyage.fraud_suspected = false
         @voyage.fraud_approved = true
         @voyage.fraud_approved_by = @user.uid
         @voyage.save!
