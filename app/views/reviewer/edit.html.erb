@@ -3,7 +3,7 @@
 <h1><%= @reviewing ? "" : "Fraud " %>Reviewer Panel</h1>
 
 <hr>
-<a href="/reviewer">Go back</a>
+<a href="/<%= @reviewing ? "reviewer" : "fraud" %>">Go back</a>
 <div class="admin-edit">
     <h1 style="margin-top:0;"><%= @voyage.name %></h1>
     
@@ -31,7 +31,7 @@
     <span><img style="width:40px;aspect-ratio:1;border-radius:25px;" src="<%= @owner.pfp %>"> made by @<%= @owner.name %> <pre style="display: inline;">(@<%= @owner.uid %>)</pre></span><br><br>
     
     <p>Fraud Approved Status: <%= @voyage.fraud_approved %></p>
-    <span>Fraud Approved by: <pre style="display:inline">@<%= @voyage.fraud_approved_by %></pre></span>
+    <span>Fraud Approved by: <pre style="display:inline">@<%= @voyage.fraud_approved_by %></pre></span><br>
 
 
     <% if @reviewing %>
