@@ -75,7 +75,10 @@ class ReviewerController < ApplicationController
     def fraud_approve
         @voyage = Voyage.find(params["id"])
         @voyage.fraud_approved = true
+        @voyage.fraud_approved_by = @user.uid
         @voyage.save!
+        aid = slack_open_conversation(ENV["ADMIN_SLACK_ID"])
+        slack_send_message_conversation(aid,"`#{@voyage.name}` was Fraud Approved by <@#{@user.uid}>\n<#{reviewer_url+"/edit/"+@voyage.id.to_s}|Review>")
         redirect_to fraud_path
     end
 
