@@ -23,8 +23,10 @@ Rails.application.routes.draw do
   get "admin/raw_user/:id", to: "admin#raw_user"
   post "admin/submit_edit", to: "admin#submit_edit"
 
+  get "fraud" => "reviewer#fraud"
   get "reviewer" => "reviewer#index"
   get "reviewer/edit/:id" => "reviewer#edit"
+  get "fraud/edit/:id" => "reviewer#fraud_edit"
   post "reviewer/submit_edit" => "reviewer#submit_edit"
   
   get "docs" => "home#docs"

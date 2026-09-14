@@ -1,6 +1,6 @@
 <% content_for :title, "Reviewer Panel | Out to C" %>
 
-<h1>Reviewer Panel</h1>
+<h1><%= @reviewing ? "" : "Fraud " %>Reviewer Panel</h1>
 
 <hr>
 <a href="/reviewer">Go back</a>
@@ -27,8 +27,13 @@
     <br>
     <span><img style="width:40px;aspect-ratio:1;border-radius:25px;" src="<%= @owner.pfp %>"> made by @<%= @owner.name %> <pre style="display: inline;">(@<%= @owner.uid %>)</pre></span><br><br>
 
+
+    <% if @reviewing %>
     <img style="width:100%;max-height:600px;max-width: 900px;image-rendering:unset !important;" src="<%= @voyage.image_link %>">
+    <% end %>
 </div>
+
+<% if @reviewing %>
 
 <% if @owner.past_voyages != nil && not(@owner.past_voyages.blank?) && not(@owner.past_voyages.start_with?(@voyage.id.to_s + ",")) %>
 <div class="admin-edit" style="max-width:900px">
@@ -94,5 +99,11 @@
     </div>
     <% end %>
 </div>
+<% else %>
+
+<div class="admin-edit" style="max-width:900px">
+<p>You can mark projects as fraud approved here. If a project seems to be fraud or time inflated, instead contact @iris.</p>
+</div>
+<% end %>
 <br>
 <script src="<%= asset_path "reviewer.js" %>"></script>

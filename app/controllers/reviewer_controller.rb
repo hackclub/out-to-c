@@ -27,6 +27,38 @@ class ReviewerController < ApplicationController
             ["Awaiting Approval",@awaiting_approval,"a-awaiting",true],
             ["Approved Ships",@shipped,"a-shipped",false],
         ]
+        @fraud_or_reviewer = "reviewer"
+    end
+    
+    def fraud
+        @all_voyages = Voyage.all
+        # @unshipped = []
+        @suspected = []
+        @not_approved = []
+        @approved = []
+        @users = User.all
+
+        for v in @all_voyages
+            if v.ship_status == 0
+                # @unshipped.append(v)
+            elsif v.ship_status == 2
+                if v.fraud_approved == true
+                    @approved.append(v)
+                elsif v.fraud_suspected == true
+                    @suspected.append(v)
+                else
+                    @not_approved.append(v)
+                end
+            end
+        end
+
+        @sections = [
+            ["Suspected fraud / time inflation",@suspected,"a-suspected",true],
+            ["Awaiting fraud approval",@not_approved,"a-awaiting",true],
+            ["Fraud approved",@approved,"a-shipped",false],
+        ]
+        @fraud_or_reviewer = "fraud"
+        render "index"
     end
 
     def edit
@@ -36,7 +68,14 @@ class ReviewerController < ApplicationController
             redirect_to reviewer_path
             return
         end
+        @reviewing = true
         @owner = User.find(@voyage.owner)
+    end
+
+    def fraud_edit
+        edit()
+        @reviewing = false
+        render "edit"
     end
 
     def submit_edit

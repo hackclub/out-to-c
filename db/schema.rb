@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_23_181200) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_14_150134) do
   create_table "users", force: :cascade do |t|
     t.string "all_prizes"
     t.datetime "created_at", null: false
@@ -38,6 +38,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_23_181200) do
     t.datetime "created_at", null: false
     t.string "demo"
     t.string "desc"
+    t.boolean "fraud_approved"
+    t.boolean "fraud_suspected"
     t.string "hackatime"
     t.float "hours"
     t.string "image_link"
