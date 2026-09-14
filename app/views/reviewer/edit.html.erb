@@ -13,6 +13,8 @@
 
     <p><%= @owner.email %></p>
 
+
+    <% if @reviewing %>
     <div style="width:100%;height: 55px;">
         <label for="cargo-input">Cargo: </label>
         <div class="reviewer-price">
@@ -21,6 +23,7 @@
         <% end %>
         </div>
     </div>
+    <% end %>
     
     <a target="_blank" class="reviewer-link-btn" href="<%= @voyage.demo %>">Demo</a>
     <a target="_blank" class="reviewer-link-btn" href="<%= @voyage.repo %>">Repository</a><br>
