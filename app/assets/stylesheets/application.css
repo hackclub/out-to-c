@@ -1422,7 +1422,7 @@ canvas {
 }
 
 .reviwer-button:hover {
-    filter: brightness(1.6) saturate(1.6);
+    filter: brightness(1.6) saturate(1.6) !important;
 }
 
 .reviewer-price>img {
