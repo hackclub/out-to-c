@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get "reviewer" => "reviewer#index"
   get "reviewer/edit/:id" => "reviewer#edit"
   get "fraud/edit/:id" => "reviewer#fraud_edit"
+  post "fraud/approve" => "reviewer#fraud_approve"
   post "reviewer/submit_edit" => "reviewer#submit_edit"
   
   get "docs" => "home#docs"

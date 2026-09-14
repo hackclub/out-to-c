@@ -106,6 +106,13 @@
 
 <div class="admin-edit" style="max-width:900px">
 <p>You can mark projects as fraud approved here. If a project seems to be fraud or time inflated, instead contact @iris.</p>
+
+<%= form_with(url: fraud_approve_path) do |form| %>
+    <input type="hidden" name="id" value="<%= @voyage.id %>">
+    <button type="submit" class="reviwer-button" style="border-color:#5376ff; max-width: 250px; margin: 0 auto; display: block;">
+        Mark as Approved
+    </button>
+<% end %>
 </div>
 <% end %>
 <br>

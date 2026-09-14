@@ -72,6 +72,13 @@ class ReviewerController < ApplicationController
         @owner = User.find(@voyage.owner)
     end
 
+    def fraud_approve
+        @voyage = Voyage.find(params["id"])
+        @voyage.fraud_approved = true
+        @voyage.save!
+        redirect_to fraud_path
+    end
+
     def fraud_edit
         edit()
         @reviewing = false
