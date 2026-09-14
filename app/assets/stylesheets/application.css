@@ -1353,6 +1353,10 @@ canvas {
     border-color: #fd901d;
 }
 
+.a-suspected {
+    border-color: red;
+}
+
 /* .a-unshipped {} */
 
 .a-shipped {

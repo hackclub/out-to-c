@@ -16,7 +16,7 @@ class ReviewerController < ApplicationController
         for v in @all_voyages
             if v.ship_status == 0
                 # @unshipped.append(v)
-            elsif v.ship_status == 1
+            elsif v.ship_status == 1 and v.fraud_suspected != true
                 @awaiting_approval.append(v)
             elsif v.ship_status == 2
                 @shipped.append(v)
@@ -41,13 +41,15 @@ class ReviewerController < ApplicationController
         for v in @all_voyages
             if v.ship_status == 0
                 # @unshipped.append(v)
-            elsif v.ship_status == 2
-                if v.fraud_approved == true
-                    @approved.append(v)
-                elsif v.fraud_suspected == true
+            else
+                if v.fraud_suspected == true
                     @suspected.append(v)
-                else
-                    @not_approved.append(v)
+                elsif v.ship_status == 2
+                    if v.fraud_approved == true
+                        @approved.append(v)
+                    else
+                        @not_approved.append(v)
+                    end
                 end
             end
         end
@@ -70,6 +72,14 @@ class ReviewerController < ApplicationController
         end
         @reviewing = true
         @owner = User.find(@voyage.owner)
+    end
+
+    def mark_suspected
+        @voyage = Voyage.find(params["id"])
+        @voyage.fraud_suspected = true
+        @voyage.fraud_approved = false
+        @voyage.save
+        redirect_to reviewer_path
     end
 
     def fraud_approve

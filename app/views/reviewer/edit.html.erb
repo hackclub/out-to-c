@@ -100,6 +100,12 @@
             <% end %>
         </button>
     </div>
+    
+    <% end %>
+    <%= form_with(url: reviewer_mark_suspected_path, id: "fraud_form") do |form| %>
+    <input type="hidden" name="id" value="<%= @voyage.id %>">
+    <label for="mark-fraud-btn" style="font-size: 12px; margin-top:15px; text-decoration: underline;color:red; cursor:pointer;">Mark as suspected fraud.</label><br>
+    <input id="mark-fraud-btn" type="submit" hidden>
     <% end %>
 </div>
 <% else %>
