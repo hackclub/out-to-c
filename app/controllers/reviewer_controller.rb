@@ -87,6 +87,15 @@ class ReviewerController < ApplicationController
         @voyage.fraud_suspected = false
         @voyage.fraud_approved = true
         @voyage.fraud_approved_by = @user.uid
+
+        approved_justification = "\nFraud Approved by #{@user.name} (@#{@user.uid})"
+        if not (@voyage.additional_justification.include? approved_justification)
+            @voyage.additional_justification = @voyage.additional_justification + approved_justification
+            if ENV["DISABLE_AIRTABLE"] == nil or ENV["DISABLE_AIRTABLE"].blank?
+                AirtableEntry.update(@voyage.airtable_entry, {"Justification - Additional Justification":@voyage.additional_justification})
+            end
+        end
+
         @voyage.save!
         aid = slack_open_conversation(ENV["ADMIN_SLACK_ID"])
         slack_send_message_conversation(aid,"`#{@voyage.name}` was Fraud Approved by <@#{@user.uid}>\n<#{reviewer_url+"/edit/"+@voyage.id.to_s}|Review>")
