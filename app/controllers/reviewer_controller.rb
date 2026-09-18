@@ -175,7 +175,7 @@ class ReviewerController < ApplicationController
                 AirtableEntry.update(@voyage.airtable_entry, {
                     "Justification - Specific Technical Features": @voyage.justification,
                     "Justification - Additional Justification": @voyage.additional_justification,
-                    "Optional - Override Hours Spent": @voyage.total_seconds / 60 / 60,
+                    "Optional - Override Hours Spent": @voyage.total_seconds / 60.0 / 60.0,
                 })
             end
         end
