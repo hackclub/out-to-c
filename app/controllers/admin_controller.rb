@@ -47,7 +47,7 @@ class AdminController < ApplicationController
             end
             for vi in all_voyages.split(",")
                 v = Voyage.find(vi)
-                if v.fraud_approved != true
+                if v.ship_status != 2 or v.fraud_approved != true
                     next
                 end
             end

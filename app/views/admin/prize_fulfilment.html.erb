@@ -22,6 +22,30 @@
                         </div>
                     </div>
                     <pre style="width:100%; display:block;margin:0;"><%= u.all_prizes %></pre>
+
+                    <%
+                    all_voyages = ""
+                    if u.past_voyages != nil
+                        all_voyages += u.past_voyages
+                    end
+                    if u.voyage != nil
+                        all_voyages += u.voyage.to_s
+                    end
+                    %>
+
+                    <% for vi in all_voyages.split(",") 
+                        v = Voyage.find(vi) 
+                        if v.ship_status != 2
+                            next
+                        end
+                        airtable_entry = v.airtable_entry
+                        if airtable_entry == nil
+                            # only when .env DISABLE_AIRTABLE="1"
+                            airtable_entry = "missingentry"
+                        end
+                        %>
+                        <a href="<%= ENV["AIRTABLE_PROJECT_URL_BASE"] + airtable_entry %>"><%= trim_length_fixed(v.name,10) %></a>,
+                    <% end %>
                     
                     <%= form_with(url: admin_prize_fulfilment_save_path, class: "prize-fulfilment-submit") do |form| %>
                     <input type="hidden" name="id" value="<%= u.id %>">
