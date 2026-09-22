@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
     before_action :set_logged_in
     before_action :admin_check
-    
+
     helper_method :trim_length_fixed
 
     layout "admin"
@@ -47,11 +47,16 @@ class AdminController < ApplicationController
             if u.voyage != nil
                 all_voyages += u.voyage.to_s
             end
+            valid_voyages = 0
             for vi in all_voyages.split(",")
                 v = Voyage.find(vi)
                 if v.ship_status != 2 or v.fraud_approved != true
                     next
                 end
+                valid_voyages += 1
+            end
+            if valid_voyages == 0
+                next
             end
 
             if u.fulfilled_prizes == nil or u.fulfilled_prizes.blank?
