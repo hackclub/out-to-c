@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   get "admin/raw_user/:id", to: "admin#raw_user"
   post "admin/submit_edit", to: "admin#submit_edit"
 
+  get "prize_fulfilment" => "admin#prize_fulfilment"
+  post "admin/prize_fulfilment_save", to: "admin#prize_fulfilment_save"
+
   get "fraud" => "reviewer#fraud"
   get "reviewer" => "reviewer#index"
   get "reviewer/edit/:id" => "reviewer#edit"

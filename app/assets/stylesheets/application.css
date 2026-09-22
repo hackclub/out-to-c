@@ -1349,6 +1349,23 @@ canvas {
     margin-right: 15px;
 }
 
+.prize-fulfilment {
+    min-width: 550px !important;
+}
+
+/* .prize-fulfilment-submit {} */
+
+.prize-fulfilment-submit input {
+    font: inherit;
+    background-color: #161616 !important;
+    border: 3px solid #303030 !important;
+    color: white;
+}
+
+.prize-fulfilment-submit input:focus {
+    outline: none !important;
+}
+
 .a-awaiting {
     border-color: #fd901d;
 }

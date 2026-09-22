@@ -28,6 +28,38 @@ class AdminController < ApplicationController
         ]
     end
 
+    def prize_fulfilment
+        @partial = []
+        @awaiting_fulfilment = []
+        @fulfilled = []
+        @users = User.all
+
+        for u in User.all
+            if u.all_prizes == nil or u.all_prizes.blank?
+                next
+            end
+            if u.fulfilled_prizes == nil or u.fulfilled_prizes.blank?
+                @awaiting_fulfilment.append(u)
+            elsif u.fulfilled_prizes == u.all_prizes
+                @fulfilled.append(u)
+            else
+                @partial.append(u)
+            end
+        end
+
+        @sections = [
+            ["Awaiting Fulfilment",@awaiting_fulfilment,"a-awaiting"],
+            ["Partial fulfilment",@partial,"a-awaiting"],
+            ["Fulfilled",@fulfilled,"a-shipped"],
+        ]
+    end
+
+    def prize_fulfilment_save
+        @user = User.find(params["id"])
+        @user.fulfilled_prizes = params["text"]
+        @user.save
+    end
+
     def edit
         id = params["id"]
         @voyage = Voyage.find(id)

@@ -1,0 +1,38 @@
+<% content_for :title, "Prize Fulfilment | Out to C" %>
+<style>body {background-color:#12122b !important}</style>
+<h1>Prize Fulfilment</h1>
+
+<div id="admin-voyages">
+    <% for section in @sections %>
+        <h2><%= section[0] %>:</h2>
+        <div class="admin-voyage-list">
+            <% for u in section[1] %>
+                <div class="admin-user-entry prize-fulfilment">
+                    <p style="float:right"><%= u.id %></p>
+                    <a href="/admin/raw_user/<%= u.id %>"><%= u.name %></a><br>
+                    
+                    <div style="display:flex;">
+                        <img src="<%= u.pfp %>" width=100>
+                        <div style="width:100%;height: 55px;">
+                            <div class="reviewer-price">
+                            <% for p in u.all_prizes.split(",") %>
+                            <%= image_tag "prices/"+p+".png" %>
+                            <% end %>
+                            </div>
+                        </div>
+                    </div>
+                    <pre style="width:100%; display:block;margin:0;"><%= u.all_prizes %></pre>
+                    
+                    <%= form_with(url: admin_prize_fulfilment_save_path, class: "prize-fulfilment-submit") do |form| %>
+                    <input type="hidden" name="id" value="<%= u.id %>">
+                    <div style="display:flex;">
+                    <input name="text" type="text" placeholder="No fulfilled prizes.." value="<%= u.fulfilled_prizes %>">
+                    <input type="submit" value="Save">
+                    </div>
+                    <% end %>
+                </div>
+            <% end%>
+        </div>
+    <% end%>
+</div>
+<hr>
