@@ -1,6 +1,8 @@
 class AdminController < ApplicationController
     before_action :set_logged_in
     before_action :admin_check
+    
+    helper_method :trim_length_fixed
 
     layout "admin"
 
