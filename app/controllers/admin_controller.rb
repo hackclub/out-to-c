@@ -38,6 +38,20 @@ class AdminController < ApplicationController
             if u.all_prizes == nil or u.all_prizes.blank?
                 next
             end
+            all_voyages = ""
+            if u.past_voyages != nil
+                all_voyages += u.past_voyages
+            end
+            if u.voyage != nil
+                all_voyages += u.voyage.to_s
+            end
+            for vi in all_voyages.split(",")
+                v = Voyage.find(vi)
+                if v.fraud_approved != true
+                    next
+                end
+            end
+
             if u.fulfilled_prizes == nil or u.fulfilled_prizes.blank?
                 @awaiting_fulfilment.append(u)
             elsif u.fulfilled_prizes == u.all_prizes
