@@ -77,7 +77,7 @@ class ReviewerController < ApplicationController
             projects: [@voyage.hackatime],
             repo: @voyage.repo,
             start: ysws_start(),
-            end: @voyage.ship_date.to_s
+            end: (@voyage.ship_date+1).to_s
         }
         uri = URI.parse(ENV["CHARM_BASE_URL"]+"create_session?s="+session.to_json.to_s)
         res = Net::HTTP.get(uri)
