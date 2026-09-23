@@ -34,12 +34,16 @@ class AdminController < ApplicationController
         @partial = []
         @awaiting_fulfilment = []
         @fulfilled = []
-        @users = User.all
-
-        for u in User.all
-            if u.all_prizes == nil or u.all_prizes.blank?
-                next
+        @users = User.where.not(:all_prizes => ["",nil]).to_a.sort_by do |u|
+            first = u.past_voyages
+            if first == nil or first.blank?
+                first = u.voyage.to_s + ","
             end
+            i = first.split(",")[0]
+            Voyage.find(i).ship_date
+        end
+
+        for u in @users
             all_voyages = ""
             if u.past_voyages != nil
                 all_voyages += u.past_voyages
