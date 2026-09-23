@@ -36,6 +36,8 @@
 
     <% if @reviewing %>
     <img style="width:100%;max-height:600px;max-width: 900px;image-rendering:unset !important;" src="<%= @voyage.image_link %>">
+    <a href="/reviewer/charm/<%= @voyage.id %>">Charm</a>
+    <br><br>
     <% end %>
 </div>
 

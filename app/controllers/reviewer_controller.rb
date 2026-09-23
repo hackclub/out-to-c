@@ -63,6 +63,28 @@ class ReviewerController < ApplicationController
         render "index"
     end
 
+    def charm
+        id = params["id"]
+        @voyage = Voyage.find(id)
+        if @voyage.ship_status == 0
+            redirect_to reviewer_path
+            return
+        end
+        @owner = User.find(@voyage.owner)
+        
+        session = {
+            token: @owner.token,
+            projects: [@voyage.hackatime],
+            repo: @voyage.repo,
+            start: ysws_start(),
+            end: @voyage.ship_date.to_s
+        }
+        uri = URI.parse(ENV["CHARM_BASE_URL"]+"create_session?s="+session.to_json.to_s)
+        res = Net::HTTP.get(uri)
+        data = JSON.parse(res)
+        redirect_to data["link"], allow_other_host: true
+    end
+
     def edit
         id = params["id"]
         @voyage = Voyage.find(id)
