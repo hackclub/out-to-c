@@ -44,7 +44,7 @@
                             airtable_entry = "missingentry"
                         end
                         %>
-                        <a href="<%= ENV["AIRTABLE_PROJECT_URL_BASE"] + airtable_entry %>"><%= trim_length_fixed(v.name,10) %></a>,
+                        <a href="<%= ENV["AIRTABLE_PROJECT_URL_BASE"] + airtable_entry %>" style="<%= (v.fraud_approved != true) ? "color:red" : "" %>"><%= trim_length_fixed(v.name,10) %></a>,
                     <% end %>
                     
                     <%= form_with(url: admin_prize_fulfilment_save_path, class: "prize-fulfilment-submit") do |form| %>
