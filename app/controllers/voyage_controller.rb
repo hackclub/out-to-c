@@ -50,6 +50,10 @@ class VoyageController < ApplicationController
       render json: { "error": "Voyage description is empty" }
       return
     end
+    if @voyage.demo == nil or @voyage.demo.blank?
+      render json: { "error": "Voyage demo URL is empty" }
+      return
+    end
     if @voyage.repo == nil or @voyage.repo.blank?
       render json: { "error": "Voyage repository is unset" }
       return
