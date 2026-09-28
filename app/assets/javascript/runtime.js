@@ -159,6 +159,10 @@ confirmMerchantForm.addEventListener('submit', (event) => {
     });
 });
 
+function showPIIForm() {
+    piiFormOpen = true; shipPiiContainer.style.display = "";
+}
+
 function tryShipVoyage() {
     if (cargoShown) { toggleCargo(); }
     showConfirmation(
@@ -172,7 +176,21 @@ function tryShipVoyage() {
             <li>README.md file which explains your project, how to use it, and if AI was used</li>
             <li>A project made with C/C++/C#</li>
         </ul>
-        </span>`, () => { piiFormOpen = true; shipPiiContainer.style.display = "" });
+        </span>`, () => {
+        if (hasBeenShipped) {
+            showConfirmation(
+                `<p>Since this is a reship, you don't need to provide your shipping information again.</p>
+                <a onclick="cancelConfirmation();showPIIForm();" style="color: #3aacff;text-decoration:underline;cursor:pointer;">Click here to edit your shipping information</a>
+                <p>Otherwise, simply click continue to reship this project.</p>
+                `
+                , () => {
+                    showPIIForm();
+                });
+
+        } else {
+            showPIIForm();
+        }
+    });
 }
 
 document.forms['ship-pii-form'].addEventListener('submit', (event) => {

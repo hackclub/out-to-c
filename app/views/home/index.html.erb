@@ -20,6 +20,8 @@
     shipStatus = <%= @voyage != nil ? @voyage.ship_status : 0%>;
 
     hasPastVoyages = <%= ( @user.past_voyages != nil && not(@user.past_voyages.blank?)) ? "true" : "false" %>;
+
+    hasBeenShipped = <%= @voyage != nil ? (@voyage.has_been_shipped == true ? true : false) : false %>
 </script>
 
 <style>
