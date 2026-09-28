@@ -22,6 +22,7 @@
     hasPastVoyages = <%= ( @user.past_voyages != nil && not(@user.past_voyages.blank?)) ? "true" : "false" %>;
 
     hasBeenShipped = <%= @voyage != nil ? (@voyage.has_been_shipped == true ? true : false) : false %>
+    lastReviewerNote = `<%= @voyage != nil ? (@voyage.reviewer_note) : "" %>`;
 </script>
 
 <style>
