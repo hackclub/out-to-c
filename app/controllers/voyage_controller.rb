@@ -129,6 +129,7 @@ class VoyageController < ApplicationController
     aid = ENV["REVIEWER_CHANNEL_ID"]
     id = slack_open_conversation(@user.uid)
 
+    @voyage.has_been_shipped = true
     @voyage.ship_status = 1
     @voyage.save
 
