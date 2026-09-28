@@ -42,6 +42,8 @@ let newVoyageAfterShipButton = document.getElementById("new-voyage-after-ship");
 let confirmMerchant = document.getElementById("confirm-merchant");
 let confirmMerchantForm = document.getElementById("confirm-merchant-form");
 let shipPiiContainer = document.getElementById("ship-pii-container");
+let skipPiiForm = document.getElementById("skip-pii-form");
+let skipPiiBtn = document.getElementById("skip-pii-btn");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -189,7 +191,7 @@ function tryShipVoyage() {
                 <pre style="border-left: 2px solid white;padding-left: 15px;margin-bottom: 25px;">${lastReviewerNote}</pre>
                 `
                 , () => {
-                    showPIIForm();
+                    skipPiiBtn.click();
                 });
 
         } else {
@@ -198,7 +200,7 @@ function tryShipVoyage() {
     });
 }
 
-document.forms['ship-pii-form'].addEventListener('submit', (event) => {
+function handleShipFormSubmit(event) {
     event.preventDefault();
     shipPiiBtn.setAttribute("disabled", "");
     fetch(event.target.action, {
@@ -222,7 +224,10 @@ document.forms['ship-pii-form'].addEventListener('submit', (event) => {
         showNotice("Error: Not success :(");
         console.error(error);
     });
-});
+}
+
+document.forms['ship-pii-form'].addEventListener('submit', handleShipFormSubmit);
+document.forms['skip-pii-form'].addEventListener('submit', handleShipFormSubmit);
 
 function selectTreasure() {
     treasureSelect.classList.add("treasure-select-fade");

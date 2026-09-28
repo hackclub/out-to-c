@@ -277,6 +277,12 @@
             </div>
         </div>
     </div>
+
+    
+    <%= form_with(url: voyage_ship_path, id: "skip-pii-form", ) do |form| %>
+        <input name="skip" hidden value="true">
+        <input type="submit" id="skip-pii-btn" hidden>
+    <% end %>
     
     <div id="shipped-voyage" <% if @voyage == nil or @voyage.ship_status == 0 %> style="display:none;"<% end %>>
         <h1>Voyage Shipped!</h1>
