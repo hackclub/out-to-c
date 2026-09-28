@@ -177,11 +177,16 @@ function tryShipVoyage() {
             <li>A project made with C/C++/C#</li>
         </ul>
         </span>`, () => {
-        if (hasBeenShipped) {
+        if (true || hasBeenShipped) {
             showConfirmation(
-                `<p>Since this is a reship, you don't need to provide your shipping information again.</p>
-                <a onclick="cancelConfirmation();showPIIForm();" style="color: #3aacff;text-decoration:underline;cursor:pointer;">Click here to edit your shipping information</a>
-                <p>Otherwise, simply click continue to reship this project.</p>
+                `<h2>Reship</h2>
+                <p>Since this is a reship, you don't need to provide your shipping information again.
+                <br>
+                You can still edit it if you wish to.</p>
+                <a onclick="cancelConfirmation();showPIIForm();" style="color: #16189c;text-decoration:underline;cursor:pointer;">Click here to edit your shipping information</a>
+                <br>
+                <p>Make sure you have completed all changes requested in the reviewer note<br>(sent to you on slack):</p>
+                <pre style="border-left: 2px solid white;padding-left: 15px;margin-bottom: 25px;">Please add Demo URL and also do whatever</pre>
                 `
                 , () => {
                     showPIIForm();
