@@ -80,26 +80,33 @@ class VoyageController < ApplicationController
       return
     end
 
-    if params["github_username"] != nil and not params["github_username"].blank?
-      @user.github_username = params["github_username"]
-      @user.save!
-    end
-    
-    if @user.github_username == nil or @user.github_username.blank?
-      render json: { "error": "Your user has no GitHub username set. Ask an admin for help!" }
-      return
+    skip_pii = false
+    if @voyage.has_been_shipped
+      skip_pii = params["skip"] == "true"
     end
 
-    if ENV["DISABLE_AIRTABLE"] == nil or ENV["DISABLE_AIRTABLE"].blank?
-      if @voyage.airtable_entry == nil or @voyage.airtable_entry.blank?
-        render json: { "error": "Voyage airtable entry not found! Ask an admin for help!" }
+    if not skip_pii
+      if params["github_username"] != nil and not params["github_username"].blank?
+        @user.github_username = params["github_username"]
+        @user.save!
+      end
+      
+      if @user.github_username == nil or @user.github_username.blank?
+        render json: { "error": "Your user has no GitHub username set. Ask an admin for help!" }
         return
       end
-    end
-    for k in ["first_name","last_name","birthday","address_1","city","country","state","zip"]
-      if params[k] == nil or params[k].blank?
-        render json: { "error": "Missing key '#{k}'" }
-        return
+
+      if ENV["DISABLE_AIRTABLE"] == nil or ENV["DISABLE_AIRTABLE"].blank?
+        if @voyage.airtable_entry == nil or @voyage.airtable_entry.blank?
+          render json: { "error": "Voyage airtable entry not found! Ask an admin for help!" }
+          return
+        end
+      end
+      for k in ["first_name","last_name","birthday","address_1","city","country","state","zip"]
+        if params[k] == nil or params[k].blank?
+          render json: { "error": "Missing key '#{k}'" }
+          return
+        end
       end
     end
     @voyage.ship_date = Time.now
@@ -107,28 +114,38 @@ class VoyageController < ApplicationController
     date_range = start + "-" + @voyage.ship_date.strftime("%m/%d/%Y")
 
     if ENV["DISABLE_AIRTABLE"] == nil or ENV["DISABLE_AIRTABLE"].blank?
-      # send PII to airtable
-      AirtableEntry.update(@voyage.airtable_entry, {
-        "Email": @user.email,
-        "GitHub Username": @user.github_username,
-        "Justification - Submitter Hackatime ID": @user.hackatime_id.to_s,
-        "Justification - Hackatime Project Name(s) + Date Range(s)": "#{@voyage.hackatime} #{date_range}",
-        "First Name": params["first_name"],
-        "Last Name": params["last_name"],
-        "Birthday": params["birthday"],
-        "Address (Line 1)": params["address_1"],
-        "Address (Line 2)": params["address_2"],
-        "City": params["city"],
-        "Country": params["country"],
-        "State / Province": params["state"],
-        "ZIP / Postal Code": params["zip"],
-      })
+      if not skip_pii
+        # send PII to airtable
+        AirtableEntry.update(@voyage.airtable_entry, {
+          "Email": @user.email,
+          "GitHub Username": @user.github_username,
+          "Justification - Submitter Hackatime ID": @user.hackatime_id.to_s,
+          "Justification - Hackatime Project Name(s) + Date Range(s)": "#{@voyage.hackatime} #{date_range}",
+          "First Name": params["first_name"],
+          "Last Name": params["last_name"],
+          "Birthday": params["birthday"],
+          "Address (Line 1)": params["address_1"],
+          "Address (Line 2)": params["address_2"],
+          "City": params["city"],
+          "Country": params["country"],
+          "State / Province": params["state"],
+          "ZIP / Postal Code": params["zip"],
+        })
+      else
+        AirtableEntry.update(@voyage.airtable_entry, {
+          "Email": @user.email,
+          "GitHub Username": @user.github_username,
+          "Justification - Submitter Hackatime ID": @user.hackatime_id.to_s,
+          "Justification - Hackatime Project Name(s) + Date Range(s)": "#{@voyage.hackatime} #{date_range}",
+        })
+      end
     end
 
     # valid ship probably !
     aid = ENV["REVIEWER_CHANNEL_ID"]
     id = slack_open_conversation(@user.uid)
 
+    @voyage.has_been_shipped = true
     @voyage.ship_status = 1
     @voyage.save
 

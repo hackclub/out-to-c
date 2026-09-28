@@ -42,6 +42,8 @@ let newVoyageAfterShipButton = document.getElementById("new-voyage-after-ship");
 let confirmMerchant = document.getElementById("confirm-merchant");
 let confirmMerchantForm = document.getElementById("confirm-merchant-form");
 let shipPiiContainer = document.getElementById("ship-pii-container");
+let skipPiiForm = document.getElementById("skip-pii-form");
+let skipPiiBtn = document.getElementById("skip-pii-btn");
 
 let elementsState = {};
 for (let element of document.getElementsByTagName("*")) {
@@ -159,6 +161,10 @@ confirmMerchantForm.addEventListener('submit', (event) => {
     });
 });
 
+function showPIIForm() {
+    piiFormOpen = true; shipPiiContainer.style.display = "";
+}
+
 function tryShipVoyage() {
     if (cargoShown) { toggleCargo(); }
     showConfirmation(
@@ -172,10 +178,29 @@ function tryShipVoyage() {
             <li>README.md file which explains your project, how to use it, and if AI was used</li>
             <li>A project made with C/C++/C#</li>
         </ul>
-        </span>`, () => { piiFormOpen = true; shipPiiContainer.style.display = "" });
+        </span>`, () => {
+        if (hasBeenShipped) {
+            showConfirmation(
+                `<h2>Reship</h2>
+                <p>Since this is a reship, you don't need to provide your shipping information again.
+                <br>
+                You can still edit it if you wish to.</p>
+                <a onclick="cancelConfirmation();showPIIForm();" style="color: #16189c;text-decoration:underline;cursor:pointer;">Click here to edit your shipping information</a>
+                <br>
+                <p>Make sure you have completed all changes requested in the reviewer note<br>(sent to you on slack):</p>
+                <pre style="border-left: 2px solid white;padding-left: 15px;margin-bottom: 25px;">${lastReviewerNote}</pre>
+                `
+                , () => {
+                    skipPiiBtn.click();
+                });
+
+        } else {
+            showPIIForm();
+        }
+    });
 }
 
-document.forms['ship-pii-form'].addEventListener('submit', (event) => {
+function handleShipFormSubmit(event) {
     event.preventDefault();
     shipPiiBtn.setAttribute("disabled", "");
     fetch(event.target.action, {
@@ -199,7 +224,10 @@ document.forms['ship-pii-form'].addEventListener('submit', (event) => {
         showNotice("Error: Not success :(");
         console.error(error);
     });
-});
+}
+
+document.forms['ship-pii-form'].addEventListener('submit', handleShipFormSubmit);
+document.forms['skip-pii-form'].addEventListener('submit', handleShipFormSubmit);
 
 function selectTreasure() {
     treasureSelect.classList.add("treasure-select-fade");
