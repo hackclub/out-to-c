@@ -66,6 +66,10 @@ class VoyageController < ApplicationController
       render json: { "error": "Voyage has no screenshot set!" }
       return
     end
+    if @voyage.total_seconds == nil or @voyage.total_seconds < 5*60*60
+      render json: { "error": "You can't submit a project with less than 5 hours" }
+      return
+    end
     
     offset = 0
     if @user.seconds_offset != nil
