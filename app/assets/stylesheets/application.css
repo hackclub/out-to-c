@@ -1628,3 +1628,29 @@ q {
 #ship-map-marker:hover>p {
     display: block;
 }
+
+#warning-banner-container {
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+    position: absolute;
+}
+
+#warning-banner {
+    background-image: url("graphics/banner.png");
+    width: 100%;
+    position: absolute;
+    top: 370px;
+    left: 0;
+    text-align: center;
+    padding: 12px;
+    rotate: -3deg;
+}
+
+#warning-banner>span {
+    color: white;
+    rotate: 3deg;
+    display: inline-block;
+    filter: drop-shadow(1px 1px 0 black) drop-shadow(-1px -1px 0 black) drop-shadow(0 0 1px black) drop-shadow(0 0 4px black);
+    font-weight: bold;
+}
