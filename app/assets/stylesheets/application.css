@@ -1634,6 +1634,7 @@ q {
     overflow: hidden;
     height: 100%;
     position: absolute;
+    pointer-events: none;
 }
 
 #warning-banner {
